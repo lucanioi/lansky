@@ -4,7 +4,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 15 } %>
   username: <%= ENV['LANSKY_API_DB_USER'] %>
   password: <%= ENV['LANSKY_API_DB_PASSWORD'] %>
-  host: <%= ENV['BADIAPI_DB_HOST'] %>
+  host: <%= ENV['LANSKY_DB_HOST'] %>
 
 development:
   <<: *default
