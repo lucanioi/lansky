@@ -50,6 +50,9 @@ group :development, :test do
 
   # for ENV var management
   gem 'dotenv-rails'
+
+  # debugging
+  gem 'pry'
 end
 
 group :development do
