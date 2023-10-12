@@ -1,5 +1,7 @@
 module SpendingCategories
-  class FindOrCreate < ApplicationService
+  class FindOrCreate
+    include Service
+
     attr_reader :name
 
     def initialize(name:)

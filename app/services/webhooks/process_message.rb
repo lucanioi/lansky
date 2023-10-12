@@ -2,8 +2,9 @@ module Webhooks
   class ProcessMessage
     include Service
 
-    SET_BUDGET = /set budget/
-    GET_BUDGET = /get budget|^budget /
+    SET_BUDGET = /^set budget/
+    GET_BUDGET = /^get budget|^budget /
+    TRIGGER_ERROR = /^trigger error/
 
     def call
       command = parse_command
@@ -16,9 +17,10 @@ module Webhooks
     private
 
     def parse_command
-      case message
+      case message.strip
       when SET_BUDGET then Chatbot::Commands::SetBudget.new(message)
       when GET_BUDGET then Chatbot::Commands::GetBudget.new(message)
+      when TRIGGER_ERROR then (raise 'error triggered')
       end
     end
 
