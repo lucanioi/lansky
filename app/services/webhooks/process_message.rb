@@ -16,7 +16,7 @@ module Webhooks
 
     def parse_command
       case message
-      when SET_BUDGET then ChatBot::Commands::SetBudget.new(message)
+      when SET_BUDGET then Chatbot::Commands::SetBudget.new(message)
       end
     end
 

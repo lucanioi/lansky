@@ -29,11 +29,11 @@ RSpec.describe 'Twilio Webhooks', type: :request do
     it 'responds with a message echoing the body in TwiML format' do
       make_request
 
-      expect(response.body).to eq(format_twiml('Budget for October set to €1,000.'))
+      expect(response.body).to eq(format_twiml('Budget for October set to €1,000'))
 
       # make_request('budget this month')
 
-      # expect(response.body).to eq(format_twiml('Your budget for October is €1,000.'))
+      # expect(response.body).to eq(format_twiml('Your budget for October is €1,000'))
     end
   end
 

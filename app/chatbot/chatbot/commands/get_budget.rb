@@ -1,29 +1,34 @@
-module ChatBot
+module Chatbot
   module Commands
-    class SetBudget < BaseCommand
+    class GetBudget < BaseCommand
       attr_reader :message, :params
-      delegate :month, :amount_in_cents, to: :params
+      delegate :month, to: :params
 
       def initialize(message)
         @message = message
-        @params = ChatBot::Commands::Parameters::SetBudget.new(message)
+        @params = Chatbot::Parsers::GetBudget.new(message)
       end
 
       def execute
-        result = Budgets::Upsert.call(amount_in_cents:, period_start:, period_end:)
+        result = Budgets::Find.call(period_start: period_start, period_end: period_end)
 
-        return reply(result.value) if result.success?
+        raise result.error if result.failure?
+        return not_found_reply if result.value.nil?
 
-        raise result.error
+        reply(result.value)
       end
 
       private
 
+      def not_found_reply
+        "No budget set for #{Date::MONTHNAMES[period_start.month]}"
+      end
+
       def reply(budget)
         month = Date::MONTHNAMES[budget.period_start.month]
-        formatted_amount = ::ChatBot::MoneyHelper.format_euros(budget.amount_in_cents)
+        formatted_amount = ::Chatbot::MoneyHelper.format_euros(budget.amount_in_cents)
 
-        "Budget for #{month} set to #{formatted_amount}"
+        "Budget for #{month} is #{formatted_amount}"
       end
 
       def period_start

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChatBot::Commands::SetBudget do
+RSpec.describe Chatbot::Commands::SetBudget do
   it_behaves_like 'command', {
     'this month' => {
       input: 'set budget this month 1000',
