@@ -4,12 +4,16 @@ RSpec.describe 'Webhooks', type: :request do
   describe 'POST /twilio' do
     let(:valid_params) do
       {
-        'Body' => 'Hello from the Irish countryside!',
+        'Body' => body,
         'From' => '+1234567890',
       }
     end
+    let(:body) { 'Hello from the Irish countryside!' }
+    # let(:service_result) { Service::Result.new(value: "You said: \"#{body}\"") }
 
     before do
+      # allow(ChatBot::ProcessMessage).to receive(:call).with(body: body) { service_result }
+
       post '/webhooks/twilio', params: valid_params
     end
 
@@ -21,7 +25,7 @@ RSpec.describe 'Webhooks', type: :request do
       expected_response = <<~XML
         <?xml version="1.0" encoding="UTF-8"?>
         <Response>
-        <Message>You said: "hello from the irish countryside!"</Message>
+        <Message>This is what you said: "#{body}"</Message>
         </Response>
       XML
 
