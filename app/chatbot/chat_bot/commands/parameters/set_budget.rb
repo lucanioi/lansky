@@ -29,11 +29,13 @@ module ChatBot
         end
 
         def extract_month
-          VALID_MONTHS.find { |month| argument.downcase.include?(month.downcase) }
+          VALID_MONTHS.find do |month|
+            argument.downcase.include?(month.downcase)
+          end || (raise 'invalid month')
         end
 
         def extract_amount
-          ::ChatBot::MoneyHelper.extract_amount(argument)
+          ::ChatBot::MoneyHelper.extract_amount(argument) || (raise 'invalid amount')
         end
       end
     end

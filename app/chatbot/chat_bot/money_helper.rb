@@ -17,7 +17,7 @@ module ChatBot
     def extract_amount(string)
       m = string.match(MONEY_MATCHER)
 
-      return '' unless m
+      return unless m
 
       parse_to_cents(m[0])
     end
