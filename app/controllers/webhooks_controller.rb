@@ -1,6 +1,6 @@
 class WebhooksController < ApplicationController
   def twilio
-    result = ChatBot::ProcessMessage.call(body: params['Body'])
+    result = Webhooks::ProcessMessage.call(message: params['Body'])
 
     body = result.success? ? result.value : result.error.message
 

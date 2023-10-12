@@ -7,7 +7,8 @@ module Service
     end
 
     def self.call(*args)
-      Result.new(value: new(*args).call)
+      result = new(*args).call
+      result.is_a?(Result) ? result : Result.new(value: result)
     rescue StandardError => e
       Result.new(error: e)
     end
