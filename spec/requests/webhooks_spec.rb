@@ -22,14 +22,7 @@ RSpec.describe 'Webhooks', type: :request do
     end
 
     it 'responds with a message echoing the body in TwiML format' do
-      expected_response = <<~XML
-        <?xml version="1.0" encoding="UTF-8"?>
-        <Response>
-        <Message>This is what you said: "#{body}"</Message>
-        </Response>
-      XML
-
-      expect(response.body).to eq(expected_response)
+      expect(response.body).to eq(format_twiml("This is what you said: \"#{body}\""))
     end
   end
 end
