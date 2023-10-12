@@ -19,8 +19,18 @@ module Chatbot
 
       private
 
+      def reply(spending)
+        formatted_amount = format(spending.amount_in_cents)
+
+        "Spent #{formatted_amount} on #{spending.category.name}"
+      end
+
       def category
         SpendingCategories::FindOrCreate.call(name: category_name)
+      end
+
+      def format(amount)
+        ::Chatbot::MoneyHelper.format_euros_with_cents(amount)
       end
     end
   end

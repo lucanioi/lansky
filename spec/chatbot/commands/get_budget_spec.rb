@@ -22,6 +22,10 @@ RSpec.describe Chatbot::Commands::GetBudget do
     'next month' => {
       input: 'get budget next month',
       output: 'No budget set for November',
-    }
+    },
+    'abbreviated' => {
+      input: 'budget october',
+      output: 'Budget for October is €1,000',
+    },
   }
 end

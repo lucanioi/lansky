@@ -4,7 +4,7 @@
 #   it_behaves_like 'command', {
 #     'basic' => {
 #       input: 'spent 10.32 food',
-#       output: 'Budget for October set to €1,000',
+#       output: 'Spent €1,000',
 #     },
 #   }
 
