@@ -10,7 +10,7 @@ module ChatBot
       end
 
       def execute
-        result = Budgets::Create.call(amount_in_cents:, period_start:, period_end:)
+        result = Budgets::Upsert.call(amount_in_cents:, period_start:, period_end:)
 
         return reply(result.value) if result.success?
 

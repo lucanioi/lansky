@@ -67,5 +67,20 @@ RSpec.describe ChatBot::Commands::SetBudget do
         expect(Budget.last.period_end).to eq(Date.new(Date.today.year + 1, 1, 31))
       end
     end
+
+    context 'when budget already exists for the month' do
+      let!(:budget) do
+        create :budget,
+                period_start: Date.today.beginning_of_month,
+                period_end: Date.today.end_of_month,
+                amount_in_cents: 500_00
+      end
+
+      it 'updates the budget' do
+        expect { result }
+          .to change { budget.reload.amount_in_cents }
+            .from(budget.amount_in_cents).to(1000_00)
+      end
+    end
   end
 end
