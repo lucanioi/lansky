@@ -3,7 +3,7 @@ module ChatBot
     include Service
 
     def call
-      "This is what you said: \"#{@body}\""
+      'no comprendo'
     end
 
     attr_accessor :body
