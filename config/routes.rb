@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   Rails.application.routes.draw do
     get '/test', to: 'test#heehaw'
+
+    post '/webhooks/twilio', to: 'webhooks#twilio'
   end
 end
