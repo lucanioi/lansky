@@ -15,5 +15,5 @@ test:
   database: lansky_test
 
 production:
-  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: lansky_production
