@@ -13,7 +13,7 @@ module Chatbot
       attr_reader :message
 
       def extract
-        @month = extract_month
+        @category_name = extract_category_name
         @amount_in_cents = extract_amount
       end
 
@@ -22,17 +22,15 @@ module Chatbot
       end
 
       def argument
-        message.delete_prefix('set budget ')
+        message.delete_prefix('spent ')
       end
 
-      def extract_month
-        VALID_MONTHS.find do |month|
-          argument.downcase.include?(month.downcase)
-        end || (raise 'invalid month')
+      def extract_category_name
+        argument.split(' ')[1..-1].join(' ').presence || 'uncategorized'
       end
 
       def extract_amount
-        ::Chatbot::MoneyHelper.extract_amount(argument) || (raise 'invalid amount')
+        ::Chatbot::MoneyHelper.parse_amount(argument) || (raise 'invalid amount')
       end
     end
   end

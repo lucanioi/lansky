@@ -34,7 +34,8 @@ module Chatbot
       end
 
       def extract_amount
-        ::Chatbot::MoneyHelper.extract_amount(argument) || (raise 'invalid amount')
+        amount = argument.split(' ')[-1].strip
+        ::Chatbot::MoneyHelper.parse_amount(amount) || (raise 'invalid amount')
       end
     end
   end

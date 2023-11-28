@@ -1,6 +1,6 @@
 module Chatbot
   module MoneyHelper
-    MONEY_MATCHER = /\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$/
+    MONEY_MATCHER = /^(€|$)?\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$/
 
     module_function
 
@@ -22,7 +22,7 @@ module Chatbot
       money_string.gsub('€', '').gsub(',', '').to_f * 100
     end
 
-    def extract_amount(string)
+    def parse_amount(string)
       m = string.match(MONEY_MATCHER)
 
       return unless m
