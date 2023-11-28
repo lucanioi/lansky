@@ -1,0 +1,2 @@
+- "spent" command
+- enable different currencies
