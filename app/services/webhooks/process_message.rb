@@ -13,7 +13,7 @@ module Webhooks
 
       return Service::Result.new(value: 'no comprendo') if command.nil?
 
-      command.new(user: user, message: message).execute
+      command.new(user:, message:).execute
     end
 
     private
