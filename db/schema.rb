@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_12_012205) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_082034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_012205) do
     t.integer "amount_in_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "spent_at"
     t.index ["spending_category_id"], name: "index_spendings_on_spending_category_id"
   end
 

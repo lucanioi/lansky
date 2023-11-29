@@ -26,11 +26,12 @@ module Chatbot
       end
 
       def extract_category_name
-        argument.split(' ')[1..-1].join(' ').presence || 'uncategorized'
+        argument.split(' ')[1..-1].join(' ').presence
       end
 
       def extract_amount
-        ::Chatbot::MoneyHelper.parse_amount(argument) || (raise 'invalid amount')
+        amount = argument.split(' ')[0]
+        ::Chatbot::MoneyHelper.parse_amount(amount) || (raise 'invalid amount')
       end
     end
   end

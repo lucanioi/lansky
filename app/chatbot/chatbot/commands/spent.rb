@@ -10,7 +10,7 @@ module Chatbot
       end
 
       def execute
-        result = Spending::Create.call(category:, amount_in_cents:)
+        result = Spendings::Create.call(category:, amount_in_cents:)
 
         return reply(result.value) if result.success?
 
@@ -22,11 +22,18 @@ module Chatbot
       def reply(spending)
         formatted_amount = format(spending.amount_in_cents)
 
-        "Spent #{formatted_amount} on #{spending.category.name}"
+        "Spent #{formatted_amount} #{category_description}"
+      end
+
+      def category_description
+        return "(uncategorized)" if category.uncategorized?
+
+        "on #{category.name}"
       end
 
       def category
-        SpendingCategories::FindOrCreate.call(name: category_name)
+        @category ||=
+          SpendingCategories::FindOrCreate.call(name: category_name).value
       end
 
       def format(amount)

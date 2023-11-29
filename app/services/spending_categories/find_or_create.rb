@@ -2,12 +2,6 @@ module SpendingCategories
   class FindOrCreate
     include Service
 
-    attr_reader :name
-
-    def initialize(name:)
-      @name = normalize(name)
-    end
-
     def call
       find_or_create
     end
@@ -15,11 +9,15 @@ module SpendingCategories
     private
 
     def find_or_create
-      SpendingCategory.find_or_create_by(name: name)
+      SpendingCategory.find_or_create_by(name: normalized_name)
     end
 
-    def normalize(name)
+    def normalized_name
+      return SpendingCategory::UNCATEGORIZED unless name
+
       name.downcase.strip
     end
+
+    attr_accessor :name
   end
 end
