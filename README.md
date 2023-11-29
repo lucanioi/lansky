@@ -6,7 +6,7 @@ Helps track monthly spending
 
 Currently the Twilio sandbox is being used. To use the sandbox, you must be a verified number. To verify your number, send a text to +1 (415) 523-8886 on Whatsapp with the message "join wheat-biggest".
 
-### Supported Commands
+### Supported Operations
 
 - `set budget <month> <amount>`: Sets the budget for the given month to the given amount
 - `get budget <month>`: Gets the budget for the given month. `budget` is an alias for `get budget`

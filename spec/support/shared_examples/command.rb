@@ -1,4 +1,4 @@
-RSpec.shared_examples 'command tester' do |test_case|
+RSpec.shared_examples 'operation tester' do |test_case|
   let(:message) { test_case[:input] }
 
   it 'returns the correct response' do
@@ -10,14 +10,14 @@ RSpec.shared_examples 'command tester' do |test_case|
   end
 end
 
-RSpec.shared_examples 'command' do |test_cases|
+RSpec.shared_examples 'operation' do |test_cases|
   describe 'execute' do
     let(:user) { create :user }
     let(:result) { described_class.new(user:, message:).execute }
 
     test_cases.each do |name, test_case|
       context name do
-        it_behaves_like 'command tester', test_case
+        it_behaves_like 'operation tester', test_case
       end
     end
   end

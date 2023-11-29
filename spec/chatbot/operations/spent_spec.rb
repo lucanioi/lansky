@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Chatbot::Commands::Spent do
-  it_behaves_like 'command', {
+RSpec.describe Chatbot::Operations::Spent do
+  it_behaves_like 'operation', {
     'basic' => {
       input: 'spent 10.32 food',
       output: 'Spent €10.32 on food',

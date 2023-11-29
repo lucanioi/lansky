@@ -1,6 +1,6 @@
 module Chatbot
-  module Commands
-    class GetBudget < BaseCommand
+  module Operations
+    class GetBudget < BaseOperation
       params :month
 
       def execute

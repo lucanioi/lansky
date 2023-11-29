@@ -1,6 +1,6 @@
 module Chatbot
-  module Commands
-    class SetBudget < BaseCommand
+  module Operations
+    class SetBudget < BaseOperation
       params :month, :amount_in_cents
 
       def execute

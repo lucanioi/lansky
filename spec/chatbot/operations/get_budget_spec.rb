@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Chatbot::Commands::GetBudget do
+RSpec.describe Chatbot::Operations::GetBudget do
   before do
     Timecop.freeze(Date.new(2023, 10, 12))
 
@@ -11,7 +11,7 @@ RSpec.describe Chatbot::Commands::GetBudget do
             user:
   end
 
-  it_behaves_like 'command', {
+  it_behaves_like 'operation', {
     'basic' => {
       input: 'get budget october',
       output: 'Budget for October is €1,000',

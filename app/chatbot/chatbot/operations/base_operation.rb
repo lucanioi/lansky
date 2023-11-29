@@ -1,8 +1,8 @@
 # require_relative '../helpers/money_helper'
 
 module Chatbot
-  module Commands
-    class BaseCommand
+  module Operations
+    class BaseOperation
       attr_reader :user, :message
 
       def initialize(user:, message:)
@@ -19,9 +19,9 @@ module Chatbot
       end
 
       def params
-        command_name = self.class.name.demodulize
+        operation_name = self.class.name.demodulize
 
-        @params ||= Chatbot::Params.const_get(command_name).new(message)
+        @params ||= Chatbot::Params.const_get(operation_name).new(message)
       end
     end
   end

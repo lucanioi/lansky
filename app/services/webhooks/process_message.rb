@@ -9,20 +9,20 @@ module Webhooks
     TRIGGER_ERROR = /^trigger error/
 
     def call
-      command = parse_command
+      operation = parse_operation
 
-      return Service::Result.new(value: 'no comprendo') if command.nil?
+      return Service::Result.new(value: 'no comprendo') if operation.nil?
 
-      command.new(user:, message: normalized_message).execute
+      operation.new(user:, message: normalized_message).execute
     end
 
     private
 
-    def parse_command
+    def parse_operation
       case normalized_message
-      when SET_BUDGET then Chatbot::Commands::SetBudget
-      when GET_BUDGET then Chatbot::Commands::GetBudget
-      when SPENT      then Chatbot::Commands::Spent
+      when SET_BUDGET then Chatbot::Operations::SetBudget
+      when GET_BUDGET then Chatbot::Operations::GetBudget
+      when SPENT      then Chatbot::Operations::Spent
       when TRIGGER_ERROR then (raise 'error triggered')
       end
     end

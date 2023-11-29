@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Chatbot::Commands::SetBudget do
+RSpec.describe Chatbot::Operations::SetBudget do
   before do
     Timecop.freeze(Date.new(2023, 10, 12))
   end
 
-  it_behaves_like 'command', {
+  it_behaves_like 'operation', {
     'this month' => {
       input: 'set budget this month 1000',
       output: 'Budget for October set to €1,000',

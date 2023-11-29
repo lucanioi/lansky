@@ -1,6 +1,6 @@
 module Chatbot
-  module Commands
-    class Spent < BaseCommand
+  module Operations
+    class Spent < BaseOperation
       params :amount_in_cents, :category_name
 
       def execute

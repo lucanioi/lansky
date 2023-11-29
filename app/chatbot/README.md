@@ -1,15 +1,16 @@
-### Command Class Convention
-
+### Operation Class Convention
+`Operations` refer to all queries and commands that are availble to the user
+through the Chatbot.
 
 ```ruby
-# There's some metaprogramming going on with command and params. For every new
-# command, a corresponding params class should be created with the same class
+# There's some metaprogramming going on with operation and params. For every new
+# operation, a corresponding params class should be created with the same class
 # name like below:
 
 module Chatbot
-  module Commands
-    class SomeCommand < BaseCommand
-      # there should be a declaration of params available in the command
+  module Operations
+    class SomeOperation < BaseOperation
+      # there should be a declaration of params available in the operation
       params :month, :amount_in_cents
 
       def execute
@@ -25,9 +26,9 @@ end
 
 module Chatbot
   module Params
-    class SomeCommand < BaseParams
+    class SomeOperation < BaseParams
       # The corresponding params object should expose an interface that match
-      # the parameters declared with the `params` keyword in the command class
+      # the parameters declared with the `params` keyword in the operation class
 
       def month
         # attribute accessor `message` is available in classes that inherit
@@ -43,9 +44,9 @@ module Chatbot
 end
 
 # the usage is as follows:
-Chatbot::Commands::SomeCommand.new(
+Chatbot::Operations::SomeOperation.new(
   user: user,
-  message: 'some command 1000 euros whatever'
+  message: 'some operation 1000 euros whatever'
 ).execute
 # => Returns a string reply
 ```
