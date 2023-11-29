@@ -38,7 +38,7 @@ RSpec.describe 'Twilio Webhooks', type: :request do
   end
 
   describe 'registering spending' do
-    let(:message) { 'spent 20 food' }
+    let(:message) { 'Spent 20 food' }
 
     it 'responds with a message echoing the body in TwiML format' do
       make_request

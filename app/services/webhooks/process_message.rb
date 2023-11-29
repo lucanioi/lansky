@@ -13,13 +13,13 @@ module Webhooks
 
       return Service::Result.new(value: 'no comprendo') if command.nil?
 
-      command.new(user:, message:).execute
+      command.new(user:, message: normalized_message).execute
     end
 
     private
 
     def parse_command
-      case message.strip
+      case normalized_message
       when SET_BUDGET then Chatbot::Commands::SetBudget
       when GET_BUDGET then Chatbot::Commands::GetBudget
       when SPENT      then Chatbot::Commands::Spent
@@ -29,6 +29,10 @@ module Webhooks
 
     def user
       Users::FindOrCreate.call(phone: phone_number).value
+    end
+
+    def normalized_message
+      message.downcase.strip
     end
 
     attr_accessor :message, :phone_number
