@@ -1,23 +1,17 @@
 module Chatbot
   module Params
-    class SetBudget
-      attr_reader :month, :amount_in_cents
-
+    class SetBudget < BaseParams
       VALID_MONTHS = Date::MONTHNAMES.compact + ['this month', 'next month']
 
-      def initialize(message)
-        @message = message
-        extract
+      def month
+        @month ||= extract_month
+      end
+
+      def amount_in_cents
+        @amount_in_cents ||= extract_amount
       end
 
       private
-
-      attr_reader :message
-
-      def extract
-        @month = extract_month
-        @amount_in_cents = extract_amount
-      end
 
       def period_end
         period_start.end_of_month

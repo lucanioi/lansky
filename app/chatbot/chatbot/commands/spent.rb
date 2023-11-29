@@ -1,14 +1,7 @@
 module Chatbot
   module Commands
     class Spent < BaseCommand
-      attr_reader :user, :message, :params
-      delegate :amount_in_cents, :category_name, to: :params
-
-      def initialize(user:, message:)
-        @user = user
-        @message = message
-        @params = Chatbot::Params::Spent.new(message)
-      end
+      params :amount_in_cents, :category_name
 
       def execute
         result = Spendings::Create.call(category:, amount_in_cents:, user:)

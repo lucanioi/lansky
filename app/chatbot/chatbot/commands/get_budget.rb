@@ -1,14 +1,7 @@
 module Chatbot
   module Commands
     class GetBudget < BaseCommand
-      attr_reader :user, :message, :params
-      delegate :month, to: :params
-
-      def initialize(user:, message:)
-        @user = user
-        @message = message
-        @params = Chatbot::Params::GetBudget.new(message)
-      end
+      params :month
 
       def execute
         result = Budgets::Find.call(

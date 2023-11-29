@@ -1,21 +1,15 @@
 module Chatbot
   module Params
-    class Spent
-      attr_reader :category_name, :amount_in_cents
+    class Spent < BaseParams
+      def category_name
+        @category_name ||= extract_category_name
+      end
 
-      def initialize(message)
-        @message = message
-        extract
+      def amount_in_cents
+        @amount_in_cents ||= extract_amount
       end
 
       private
-
-      attr_reader :message
-
-      def extract
-        @category_name = extract_category_name
-        @amount_in_cents = extract_amount
-      end
 
       def period_end
         period_start.end_of_month
