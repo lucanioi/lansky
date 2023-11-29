@@ -1,16 +1,21 @@
 module Chatbot
   module Commands
     class GetBudget < BaseCommand
-      attr_reader :message, :params
+      attr_reader :user, :message, :params
       delegate :month, to: :params
 
-      def initialize(message)
+      def initialize(user:, message:)
+        @user = user
         @message = message
-        @params = Chatbot::Parsers::GetBudget.new(message)
+        @params = Chatbot::Params::GetBudget.new(message)
       end
 
       def execute
-        result = Budgets::Find.call(period_start: period_start, period_end: period_end)
+        result = Budgets::Find.call(
+          period_start: period_start,
+          period_end: period_end,
+          user: user
+        )
 
         raise result.error if result.failure?
         return not_found_reply if result.value.nil?

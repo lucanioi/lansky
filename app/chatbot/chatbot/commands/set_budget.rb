@@ -1,16 +1,17 @@
 module Chatbot
   module Commands
     class SetBudget < BaseCommand
-      attr_reader :message, :params
+      attr_reader :user, :message, :params
       delegate :month, :amount_in_cents, to: :params
 
-      def initialize(message)
+      def initialize(user:, message:)
+        @user = user
         @message = message
-        @params = Chatbot::Parsers::SetBudget.new(message)
+        @params = Chatbot::Params::SetBudget.new(message)
       end
 
       def execute
-        result = Budgets::Upsert.call(amount_in_cents:, period_start:, period_end:)
+        result = Budgets::Upsert.call(amount_in_cents:, period_start:, period_end:, user:)
 
         return reply(result.value) if result.success?
 

@@ -1,6 +1,9 @@
 class WebhooksController < ApplicationController
   def twilio
-    result = Webhooks::ProcessMessage.call(message: params['Body'])
+    result = Webhooks::ProcessMessage.call(
+      message: params['Body'],
+      phone_number: params['From']
+    )
 
     body = result.success? ? result.value : result.error.message
 

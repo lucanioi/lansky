@@ -1,5 +1,5 @@
 module Chatbot
-  module Parsers
+  module Params
     class Spent
       attr_reader :category_name, :amount_in_cents
 

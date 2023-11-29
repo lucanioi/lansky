@@ -7,7 +7,8 @@ RSpec.describe Chatbot::Commands::GetBudget do
     create :budget,
             period_start: Date.new(2023, 10, 1),
             period_end: Date.new(2023, 10, 31),
-            amount_in_cents: 1000_00
+            amount_in_cents: 1000_00,
+            user:
   end
 
   it_behaves_like 'command', {

@@ -12,7 +12,8 @@ end
 
 RSpec.shared_examples 'command' do |test_cases|
   describe 'execute' do
-    let(:result) { described_class.new(message).execute }
+    let(:user) { create :user }
+    let(:result) { described_class.new(user:, message:).execute }
 
     test_cases.each do |name, test_case|
       context name do

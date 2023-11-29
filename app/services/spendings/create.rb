@@ -15,10 +15,11 @@ module Spendings
       @spending ||= Spending.new(
         category: category,
         amount_in_cents: amount_in_cents,
-        spent_at: DateTime.current
+        spent_at: DateTime.current,
+        user: user
       )
     end
 
-    attr_accessor :category, :amount_in_cents
+    attr_accessor :category, :amount_in_cents, :user
   end
 end
