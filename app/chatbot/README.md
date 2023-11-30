@@ -15,7 +15,7 @@ module Chatbot
 
       def execute
         # month and amount_in_cents, as declared above, become available as
-        # methods in this class.
+        # methods in this class. `user` is also available in the instance.
         #
         # the `execute` method must return a string as a reply to be
         # shown to the end user.
@@ -31,7 +31,7 @@ module Chatbot
       # the parameters declared with the `params` keyword in the operation class
 
       def month
-        # attribute accessor `message` is available in classes that inherit
+        # attribute reader `message` is available in classes that inherit
         # from BaseParams
         @month ||= extract_month(message)
       end

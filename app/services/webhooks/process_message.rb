@@ -5,6 +5,7 @@ module Webhooks
     SET_BUDGET = /^set budget/
     GET_BUDGET = /^get budget|^budget /
     SPENT      = /^spent/
+    STATUS     = /^status/
 
     TRIGGER_ERROR = /^trigger error/
 
@@ -23,6 +24,7 @@ module Webhooks
       when SET_BUDGET then Chatbot::Operations::SetBudget
       when GET_BUDGET then Chatbot::Operations::GetBudget
       when SPENT      then Chatbot::Operations::Spent
+      when STATUS     then Chatbot::Operations::Status
       when TRIGGER_ERROR then (raise 'error triggered')
       end
     end
