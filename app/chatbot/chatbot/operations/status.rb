@@ -38,7 +38,7 @@ module Chatbot
         amount_left = format_money(status.amount_left_for_period)
         amount_per_day = format_money(status.amount_left_per_day)
 
-        "You have #{amount_left} left for #{period_name}. " \
+        "You have #{amount_left} left for #{period_name}.\n" \
         "That's #{amount_per_day} per day for the rest of the month."
       end
 
