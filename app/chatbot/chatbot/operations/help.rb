@@ -3,20 +3,22 @@ module Chatbot
     class Help < BaseOperation
       def execute
         <<~HELP
-         *set budget <month> <amount>*
-          _Sets the budget for the given month to the given amount_
+          Available Operations:
 
-         *get budget <month>*
-         _Gets the budget for the given month. `budget` is an alias for `get budget`_
+          *set budget <month> <amount>*
+           _Sets the budget for the given month to the given amount_
 
-         *spent <amount> <category>*
-         _Registers the given amount as spending to the given category_
+          *get budget <month>*
+           _Gets the budget for the given month. `budget` is an alias for `get budget`_
 
-         *status*
-         _Returns the budget status for the current period (month)_
+          *spent <amount> <category>*
+           _Registers the given amount as spending to the given category_
 
-         *help*
-         _Returns this help message_
+          *status*
+           _Returns the budget status for the current period (month)_
+
+          *help*
+           _Returns this help message_
         HELP
       end
     end
