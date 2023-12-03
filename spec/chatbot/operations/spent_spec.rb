@@ -6,6 +6,10 @@ RSpec.describe Chatbot::Operations::Spent do
       input: 'spent 10.32 food',
       output: 'Spent €10.32 on food',
     },
+    'single decimal point' => {
+      input: 'spent 10.5 food',
+      output: 'Spent €10.50 on food'
+    },
     'multi-word category' => {
       input: 'spent 0.50 cat food',
       output: 'Spent €0.50 on cat food',

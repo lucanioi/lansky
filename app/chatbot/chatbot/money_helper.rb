@@ -1,6 +1,6 @@
 module Chatbot
   module MoneyHelper
-    MONEY_MATCHER = /^(€|$)?\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$/
+    MONEY_MATCHER = /^(€|$)?\d{1,3}(?:,?\d{3})*(?:\.\d{1,2})?$/
 
     module_function
 
