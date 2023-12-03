@@ -1,7 +1,6 @@
-- current month status
-- create datetime helper
-- refactor budget search based on month
-- allow currency to be passed into money formatting
-- enable different currencies
-- create GPT layer
-
+[x] current month status
+[ ] create datetime helper
+[ ] refactor budget search based on month
+[ ] allow currency to be passed into money formatting
+[ ] enable different currencies
+[ ] create GPT layer
