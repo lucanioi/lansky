@@ -35,10 +35,10 @@ module Chatbot
       end
 
       def reply_for_under_budget(status)
-        amount_left = format_money(status.amount_left_for_period)
+        amount_left_period = format_money(status.amount_left_for_period)
         amount_per_day = format_money(status.amount_left_per_day)
 
-        "You have #{amount_left} left for #{period_name}.\n" \
+        "You have #{amount_left_period} left for #{period_name}.\n\n" \
         "That's #{amount_per_day} per day for the rest of the month."
       end
 

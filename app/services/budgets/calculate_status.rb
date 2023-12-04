@@ -3,6 +3,7 @@ module Budgets
     include Service
 
     BudgetStatus = Struct.new(
+      :amount_left_today,
       :amount_left_for_period,
       :amount_left_per_day,
       keyword_init: true
