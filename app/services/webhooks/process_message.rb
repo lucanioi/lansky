@@ -8,7 +8,9 @@ module Webhooks
     STATUS     = /^status/
     HELP       = /^help/
 
+    # for internal testing purposes
     TRIGGER_ERROR = /^trigger error/
+    TIME          = /^time/
 
     def call
       operation = parse_operation
@@ -27,6 +29,7 @@ module Webhooks
       when SPENT      then Chatbot::Operations::Spent
       when STATUS     then Chatbot::Operations::Status
       when HELP       then Chatbot::Operations::Help
+      when TIME       then time_operation
       when TRIGGER_ERROR then (raise 'error triggered')
       end
     end
@@ -39,6 +42,26 @@ module Webhooks
       message.downcase.strip
     end
 
+    def time_operation
+      SimpleOperation.create do
+        <<~TEXT
+          Time.current: ${Time.current}
+          DateTime.current: ${DateTime.current}
+          Date.today: ${Date.today}
+          Date.current: ${Date.current}
+        TEXT
+      end
+    end
+
     attr_accessor :message, :phone_number
+
+    class SimpleOperation
+      def self.create(&block)
+        Class.new do
+          def initialize(*); end
+          def execute = yield
+        end
+      end
+    end
   end
 end
