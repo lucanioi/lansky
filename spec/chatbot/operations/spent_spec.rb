@@ -30,6 +30,10 @@ RSpec.describe Chatbot::Operations::Spent do
       input: 'spent',
       error: 'invalid amount',
     },
+    'rounding issues' =>{
+      input: 'spent 4.60 groceries',
+      output: 'Spent €4.60 on groceries',
+    }
   }
 
   describe 'state changes' do

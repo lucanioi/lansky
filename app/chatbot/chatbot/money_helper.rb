@@ -23,10 +23,11 @@ module Chatbot
       cents > 0 ? "#{currency_symbol}#{amount}.#{pad(cents)}" : "#{currency_symbol}#{amount}"
     end
 
-    def parse_to_cents(money_string, currency: :eur)
+    def parse_to_cents(amount_string, currency: :eur)
       currency_symbol = currency_symbol(currency)
+      normalized_amount = amount_string.gsub(currency_symbol, '').gsub(',', '')
 
-      money_string.gsub(currency_symbol, '').gsub(',', '').to_f * 100
+      BigDecimal(normalized_amount) * 100
     end
 
     def parse_amount(string)
