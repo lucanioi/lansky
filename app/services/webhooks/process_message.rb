@@ -53,11 +53,11 @@ module Webhooks
       end
     end
 
-    class SimpleOperation
+    module SimpleOperation
       def self.create(&block)
         Class.new do
           def initialize(*); end
-          def execute = yield
+          def execute = block.call
         end
       end
     end

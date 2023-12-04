@@ -1,10 +1,10 @@
 [x] current month status
 [x] allow single decimal point number
 [x] include today's budget left in status
+[x] fix weird rounding error — "Spent 4.60 grocies" yielded "Spent €4.59 on groceries"
 
 [ ] improve status text using ChatGPT's guidance
     - when it's the last day of hte month, it should be idiomatic
-[ ] fix weird rounding error — "Spent 4.60 grocies" yielded "Spent €4.59 on groceries"
 [ ] create datetime helper
 [ ] refactor budget search based on month
 [ ] allow currency to be passed into money formatting
