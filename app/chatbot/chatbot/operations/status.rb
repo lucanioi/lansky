@@ -31,7 +31,7 @@ module Chatbot
       def reply_for_over_budget(status)
         amount_over = format_money(status.amount_left_for_period.abs)
 
-        "You are over budget by #{amount_over} for #{period_name}."
+        "You are over budget by *#{amount_over}* for #{period_name}."
       end
 
       def reply_for_under_budget(status)
@@ -39,9 +39,9 @@ module Chatbot
         amount_left_period = format_money(status.amount_left_for_period)
         amount_per_day = format_money(status.amount_left_per_day)
 
-        "You have #{amount_left_today} left to spend today.\n\n" \
-        "You have #{amount_left_period} left for #{period_name}.\n\n" \
-        "You're at #{amount_per_day} per day for the rest of the month."
+        "You have *#{amount_left_today}* left to spend today.\n\n" \
+        "You have *#{amount_left_period}* left for #{period_name}.\n\n" \
+        "You're at *#{amount_per_day}* per day for the rest of the month."
       end
 
       def format_money(amount)

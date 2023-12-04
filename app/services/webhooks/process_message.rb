@@ -53,8 +53,6 @@ module Webhooks
       end
     end
 
-    attr_accessor :message, :phone_number
-
     class SimpleOperation
       def self.create(&block)
         Class.new do
@@ -63,5 +61,7 @@ module Webhooks
         end
       end
     end
+
+    attr_accessor :message, :phone_number
   end
 end
