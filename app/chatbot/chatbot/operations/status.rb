@@ -48,10 +48,10 @@ module Chatbot
         amount_spent_today = format_money(status.amount_spent_today)
 
         spent_today_text = status.amount_spent_today.positive? ?
-          "You've spent *#{amount_spent_today}* today." :
-          "You haven't spent anything today."
+          "You've already spent *#{amount_spent_today}*." :
+          "You haven't spent anything yet."
 
-        "You have *#{amount_left_today}* left to spend today. #{spent_today_text}"
+        "You have *#{amount_left_today}* left for the day. #{spent_today_text}"
       end
 
       def format_money(amount)
