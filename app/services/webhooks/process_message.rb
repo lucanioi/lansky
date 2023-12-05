@@ -39,6 +39,7 @@ module Webhooks
     end
 
     def normalized_message
+      binding.pry
       message.downcase.strip
     end
 
@@ -56,8 +57,8 @@ module Webhooks
     module SimpleOperation
       def self.create(&block)
         Class.new do
-          def initialize(*); end
-          def execute = block.call
+          define_method(:initialize) { |*| }
+          define_method(:execute) { yield }
         end
       end
     end
