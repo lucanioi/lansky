@@ -35,7 +35,7 @@ module Chatbot
             collapse_cents: false
           ).rjust(max_length)
 
-          "#{amount} - #{detail.category}"
+          "```#{amount} - #{detail.category}```"
         end.join("\n")
       end
 
