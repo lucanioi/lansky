@@ -28,6 +28,22 @@ RSpec.describe Chatbot::Operations::Spending do
               "```280.88``` - clothes\n" \
               "``` 42.00``` - food"
     },
+    'No spendings' => {
+      input: 'spending last month',
+      output: "No spendings found for September 2023"
+    },
+    'Given period is future' => {
+      input: 'spending next month',
+      output: "No spendings found for November 2023"
+    },
+    'Invalid period' => {
+      input: 'spending foobar',
+      error: "invalid period: foobar"
+    },
+    'No period given' => {
+      input: 'spending',
+      error: "no period specified"
+    }
   }
 
   def create_spending(amount_in_cents, spent_at, category)
