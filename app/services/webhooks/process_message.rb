@@ -45,10 +45,10 @@ module Webhooks
     def time_operation
       SimpleOperation.create do
         <<~TEXT
-          Time.current: ${Time.current}
-          DateTime.current: ${DateTime.current}
-          Date.today: ${Date.today}
-          Date.current: ${Date.current}
+          Time.current: #{Time.current}
+          DateTime.current: #{DateTime.current}
+          Date.today: #{Date.today}
+          Date.current: #{Date.current}
         TEXT
       end
     end
