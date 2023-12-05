@@ -36,10 +36,6 @@ module Webhooks
       end
     end
 
-    def user
-      Users::FindOrCreate.call(phone: phone_number).value
-    end
-
     def normalized_message
       message.downcase.strip
     end
@@ -68,6 +64,6 @@ module Webhooks
       end
     end
 
-    attr_accessor :message, :phone_number
+    attr_accessor :message, :user
   end
 end
