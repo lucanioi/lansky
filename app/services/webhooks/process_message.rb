@@ -7,6 +7,7 @@ module Webhooks
     SPENT      = /^spent/
     STATUS     = /^status/
     HELP       = /^help/
+    SPENDING   = /^spending/
 
     # for internal testing purposes
     TRIGGER_ERROR = /^trigger error/
@@ -29,6 +30,7 @@ module Webhooks
       when SPENT      then Chatbot::Operations::Spent
       when STATUS     then Chatbot::Operations::Status
       when HELP       then Chatbot::Operations::Help
+      when SPENDING   then Chatbot::Operations::Spending
       when TIME       then time_operation
       when TRIGGER_ERROR then (raise 'error triggered')
       end
@@ -41,6 +43,10 @@ module Webhooks
     def normalized_message
       message.downcase.strip
     end
+
+    #####################
+    # SIMPLE OPERATIONS #
+    #####################
 
     def time_operation
       SimpleOperation.create do

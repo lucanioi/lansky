@@ -14,6 +14,9 @@ module Chatbot
           *spent <amount> <category>*
            _Registers the given amount as spending to the given category_
 
+          *spening <period>*
+          _Returns the spending ovoerview for given period_
+
           *status*
            _Returns the budget status for the current period (month)_
 

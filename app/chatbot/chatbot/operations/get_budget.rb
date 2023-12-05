@@ -31,8 +31,8 @@ module Chatbot
 
       def period_start
         case month
-        when 'this month' then return Date.today.beginning_of_month
-        when 'next month' then return Date.today.next_month.beginning_of_month
+        when 'this month' then return Date.today.bom
+        when 'next month' then return Date.today.next_month.bom
         when nil then (raise 'invalid month')
         end
 

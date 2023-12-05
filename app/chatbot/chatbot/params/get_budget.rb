@@ -9,14 +9,14 @@ module Chatbot
 
       private
 
-      def argument
-        message.delete_prefix('get ').delete_suffix('budget ')
-      end
-
       def extract_month
         VALID_MONTHS.find do |month|
           argument.downcase.include?(month.downcase)
         end || (raise 'invalid month')
+      end
+
+      def argument
+        message.delete_prefix('get ').delete_suffix('budget ').strip
       end
     end
   end

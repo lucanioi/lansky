@@ -13,14 +13,6 @@ module Chatbot
 
       private
 
-      def period_end
-        period_start.end_of_month
-      end
-
-      def argument
-        message.delete_prefix('set budget ')
-      end
-
       def extract_month
         VALID_MONTHS.find do |month|
           argument.downcase.include?(month.downcase)
@@ -30,6 +22,14 @@ module Chatbot
       def extract_amount
         amount = argument.split(' ')[-1].strip
         ::Chatbot::MoneyHelper.parse_amount(amount) || (raise 'invalid amount')
+      end
+
+      def period_end
+        period_start.end_of_month
+      end
+
+      def argument
+        message.delete_prefix('set budget ').strip
       end
     end
   end
