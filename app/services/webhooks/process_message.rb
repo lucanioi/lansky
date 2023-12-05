@@ -39,7 +39,6 @@ module Webhooks
     end
 
     def normalized_message
-      binding.pry
       message.downcase.strip
     end
 

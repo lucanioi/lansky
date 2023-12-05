@@ -3,6 +3,7 @@ module Budgets
     include Service
 
     BudgetStatus = Struct.new(
+      :amount_spent_today,
       :amount_left_today,
       :amount_left_for_period,
       :amount_left_per_day,
@@ -11,6 +12,7 @@ module Budgets
 
     def call
       BudgetStatus.new(
+        amount_spent_today:,
         amount_left_today:,
         amount_left_for_period:,
         amount_left_per_day:

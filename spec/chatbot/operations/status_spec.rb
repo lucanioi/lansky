@@ -24,15 +24,15 @@ RSpec.describe Chatbot::Operations::Status do
     '20 euros spent today' => {
       input: 'status',
       setup: 'create_spending 20_00, 1.hour.ago',
-      output: "You have *€38.82* left to spend today. You have spent €20 today.\n\n" \
+      output: "You have *€38.82* left to spend today. You've spent *€20* today.\n\n" \
               "You have *€980* left for December.\n\n" \
               "You're at *€58.82* per day for the rest of the month."
     },
     'multiple spendings' => {
       input: 'status',
       setup: "create_spending 100_00, 5.days.ago; create_spending 20_00, 2.hours.ago; create_spending 10_00, 2.hours.ago",
-      output: "You have *€22.94* left to spend today You have spent €30 today.\n\n" \
-              "You have *€860* left for December.\n\n" \
+      output: "You have *€22.94* left to spend today. You've spent *€30* today.\n\n" \
+              "You have *€870* left for December.\n\n" \
               "You're at *€52.94* per day for the rest of the month."
     },
     'spending in other month' => {

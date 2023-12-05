@@ -38,18 +38,20 @@ module Chatbot
         amount_left_period = format_money(status.amount_left_for_period)
         amount_per_day = format_money(status.amount_left_per_day)
 
-        "You have *#{amount_left_today}* left to spend today. #{current_day_status(status)}\n\n" \
+        "#{current_day_status(status)}\n\n" \
         "You have *#{amount_left_period}* left for #{period_name}.\n\n" \
         "You're at *#{amount_per_day}* per day for the rest of the month."
       end
 
       def current_day_status(status)
         amount_left_today = format_money(status.amount_left_today)
-        spent_today = status.spent_today.positive? ?
-          "You've spent *#{format_money(status.spent_today)}* today." :
+        amount_spent_today = format_money(status.amount_spent_today)
+
+        spent_today_text = status.amount_spent_today.positive? ?
+          "You've spent *#{amount_spent_today}* today." :
           "You haven't spent anything today."
 
-        "You have *#{amount_left_today}* left to spend today. #{spent_today}"
+        "You have *#{amount_left_today}* left to spend today. #{spent_today_text}"
       end
 
       def format_money(amount)
