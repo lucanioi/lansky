@@ -18,15 +18,15 @@ RSpec.describe Chatbot::Operations::Spending do
       input: 'spending today',
       output: "Total spent (Today):\n" \
               "*€122.88*\n\n" \
-              "```80.88 - clothes```\n" \
-              "```42.00 - food```"
+              "```80.88``` - clothes\n" \
+              "```42.00``` - food"
     },
     'October' => {
       input: 'spending October',
       output: "Total spent (October):\n" \
               "*€322.88*\n\n" \
-              "```280.88 - clothes```\n" \
-              "``` 42.00 - food```"
+              "```280.88``` - clothes\n" \
+              "``` 42.00``` - food"
     },
   }
 
