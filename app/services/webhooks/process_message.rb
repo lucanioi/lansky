@@ -14,14 +14,18 @@ module Webhooks
     TIME          = /^time/
 
     def call
+      use_user_timezone { process_message }
+    end
+
+    private
+
+    def process_message
       operation = parse_operation
 
       return Service::Result.new(value: 'no comprendo') if operation.nil?
 
       operation.new(user:, message: normalized_message).execute
     end
-
-    private
 
     def parse_operation
       case normalized_message
@@ -38,6 +42,14 @@ module Webhooks
 
     def normalized_message
       message.downcase.strip
+    end
+
+    def use_user_timezone(&block)
+      Time.use_zone('Madrid', &block)
+    end
+
+    def user
+      @user ||= Users::FindOrCreate.call(phone:).value
     end
 
     #####################
@@ -64,6 +76,6 @@ module Webhooks
       end
     end
 
-    attr_accessor :message, :user
+    attr_accessor :message, :phone
   end
 end
