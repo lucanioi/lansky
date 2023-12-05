@@ -23,43 +23,78 @@ module Chatbot
 
     STRING_TO_RANGE.merge!(
       DAYS_OF_WEEK.product([nil]).to_h { |day, _|
-        [day.downcase, ->(direction) { day_range(day, direction) }]
+        [
+          day.downcase,
+          ->(direction, include_current) { day_range(day, direction, include_current) }
+        ]
       },
       MONTHS_OF_YEAR.product([nil]).to_h { |month, _|
-        [month.downcase, ->(direction) { month_range(month, direction) }]
+        [
+          month.downcase,
+          ->(direction, include_current) { month_range(month, direction, include_current) }
+        ]
       }
     )
 
+    VALID_PERIOD_NAMES = (STRING_TO_RANGE.keys + DAYS_OF_WEEK + MONTHS_OF_YEAR).freeze
+
+    DAY_DURATION   = (1.day - 1.seconds).to_f..1.day.to_f
+    WEEK_DURATION  = (1.week - 1.seconds).to_f..1.week.to_f
+    MONTH_DURATION = (28.days - 1.second).to_f..31.days.to_f
+    YEAR_DURATION  = (1.year - 1.seconds).to_f..1.year.to_f
+
     module_function
 
-    def parse_period(period_string, direction: nil)
-      raise('invalid period') unless STRING_TO_RANGE.key?(period_string)
+    def parse_period(period_string, direction: nil, include_current: false)
+      period_string = period_string
+      raise("invalid period: #{period_string}") unless VALID_PERIOD_NAMES.include?(period_string)
 
-      STRING_TO_RANGE[period_string].call(direction)
+      STRING_TO_RANGE[period_string].call(direction, include_current)
+    end
+
+    # in the format 'Monday, 01 Jan 2020' for specific days
+    # in the format 'week starting Mon, 01/Jan' for weeks
+    # in the format 'January 2020' for months
+    # in the format '2020' for years
+    def format_period(period_range)
+      case period_range.end - period_range.begin.to_datetime
+      in duration if DAY_DURATION.cover?(duration)
+        period_range.begin.strftime('%A, %d %b %Y')
+      in duration if WEEK_DURATION.cover?(duration)
+        period_range.begin.strftime("week starting %a, %d/%b")
+      in duration if MONTH_DURATION.cover?(duration) && period_range.begin.day == 1
+        period_range.begin.strftime('%B %Y')
+      in duration if YEAR_DURATION.cover?(duration) && period_range.begin.day == 1 && period_range.begin.month == 1
+        period_range.begin.strftime('%Y')
+      else
+        start_name = period_range.begin.strftime('%A, %d %b %Y')
+        end_name = period_range.end.strftime('%A, %d %b %Y')
+        "#{start_name} - #{end_name}"
+      end
     end
 
     ###################
     # private methods #
     ###################
 
-    def day_range(day, direction = :forward)
+    def day_range(day, direction = :forward, include_current = false)
       target_day  = DAYS_OF_WEEK.index(day) # 0-indexed
       current_day = Date.today.wday - 1     # 0-indexed
 
       difference = (target_day - current_day) % 7
-      difference = 7 if difference.zero?
+      difference = 7 if difference.zero? && !include_current
       difference = difference - 7 if direction == :backward
 
       target_date = Date.today + difference.days
       target_date..target_date.eod
     end
 
-    def month_range(month, direction = :forward)
+    def month_range(month, direction = :forward, include_current = false)
       target_month  = MONTHS_OF_YEAR.index(month) # 0-indexed
       current_month = Date.today.month - 1        # 0-indexed
 
       difference = (target_month - current_month) % 12
-      difference = 12 if difference.zero?
+      difference = 12 if difference.zero? && !include_current
       difference = difference - 12 if direction == :backward
 
       target_date = Date.today + difference.months

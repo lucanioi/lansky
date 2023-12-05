@@ -1,14 +1,10 @@
 module Chatbot
   module Operations
     class GetBudget < BaseOperation
-      params :month
+      params :period
 
       def execute
-        result = Budgets::Find.call(
-          period_start: period_start,
-          period_end: period_end,
-          user: user
-        )
+        result = Budgets::Find.call(user:, period_start:, period_end:)
 
         raise result.error if result.failure?
         return not_found_reply if result.value.nil?
@@ -19,35 +15,31 @@ module Chatbot
       private
 
       def not_found_reply
-        "No budget set for #{Date::MONTHNAMES[period_start.month]}"
+        "No budget set for #{period_title}"
       end
 
       def reply(budget)
-        month = Date::MONTHNAMES[budget.period_start.month]
         formatted_amount = ::Chatbot::MoneyHelper.format_euros(budget.amount_in_cents)
 
-        "Budget for #{month} is #{formatted_amount}"
+        "Budget for #{period_title} is #{formatted_amount}"
       end
 
       def period_start
-        case month
-        when 'this month' then return Date.today.bom
-        when 'next month' then return Date.today.next_month.bom
-        when nil then (raise 'invalid month')
-        end
-
-        parse_month
+        period_range.begin
       end
 
       def period_end
-        period_start.end_of_month
+        period_range.end
       end
 
-      def parse_month
-        # if month is before current month, then set it for next year
-        numerical_month = Date::MONTHNAMES.index(month.capitalize)
-        year = numerical_month < Date.today.month ? Date.today.year + 1 : Date.today.year
-        Date.new(year, numerical_month)
+      def period_range
+        @period_range ||=
+          DateTimeHelper.parse_period(period, include_current: true)
+      end
+
+      def period_title
+        @period_title ||=
+          DateTimeHelper.format_period(period_range)
       end
     end
   end

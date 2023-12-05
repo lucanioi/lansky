@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Chatbot::DateTimeHelper do
   before do
-    Timecop.freeze(Date.new(2023, 10, 12))
+    Timecop.freeze(DateTime.new(2023, 10, 12))
   end
 
   test_cases = {

@@ -46,7 +46,7 @@ module Budgets
 
     def amount_spent_today
       user.spendings
-          .where(spent_at: Date.today.beginning_of_day..DateTime.current)
+          .where(spent_at: Date.today.bod..DateTime.current)
           .sum(:amount_in_cents)
     end
 

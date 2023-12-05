@@ -1,13 +1,6 @@
 module Chatbot
   module Operations
     class Status < BaseOperation
-      # Currently, it uses current month's budget. It's a bit confusing,
-      # since Budgets::CalculateStatus supports any budget period, and
-      # the budget is derived based on current month. For now the
-      # #period_name method assumes current month, but it could be
-      # changed to use the period_start and period_end attributes of
-      # the budget eventually.
-
       def execute
         return 'No budget set for current period.' unless budget
 
@@ -31,7 +24,7 @@ module Chatbot
       def reply_for_over_budget(status)
         amount_over = format_money(status.amount_left_for_period.abs)
 
-        "You are over budget by *#{amount_over}* for #{period_name}."
+        "You are over budget by *#{amount_over}* for #{period_title}."
       end
 
       def reply_for_under_budget(status)
@@ -39,7 +32,7 @@ module Chatbot
         amount_per_day = format_money(status.daily_limit)
 
         "#{current_day_status(status)}\n\n" \
-        "You have *#{amount_left_period}* left for #{period_name}.\n\n" \
+        "You have *#{amount_left_period}* left for #{period_title}.\n\n" \
         "Current daily limit is *#{amount_per_day}*."
       end
 
@@ -58,8 +51,8 @@ module Chatbot
         ::Chatbot::MoneyHelper.format_euros_with_cents(amount)
       end
 
-      def period_name
-        budget.period_start.strftime('%B')
+      def period_title
+        DateTimeHelper.format_period(budget.period_start..budget.period_end)
       end
 
       def budget

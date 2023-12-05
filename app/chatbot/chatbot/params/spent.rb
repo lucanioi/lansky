@@ -21,7 +21,7 @@ module Chatbot
       end
 
       def period_end
-        period_start.end_of_month
+        period_start.eom
       end
 
       def argument

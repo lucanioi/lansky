@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Chatbot::Operations::GetBudget do
   before do
-    Timecop.freeze(Date.new(2023, 10, 12))
+    Timecop.freeze(DateTime.new(2023, 10, 12))
 
     create :budget,
-            period_start: Date.new(2023, 10, 1),
-            period_end: Date.new(2023, 10, 31),
+            period_start: DateTime.new(2023, 10, 1),
+            period_end: DateTime.new(2023, 10, 31).eod,
             amount_in_cents: 1000_00,
             user:
   end
@@ -14,19 +14,19 @@ RSpec.describe Chatbot::Operations::GetBudget do
   it_behaves_like 'operation', {
     'basic' => {
       input: 'get budget october',
-      output: 'Budget for October is €1,000',
+      output: 'Budget for October 2023 is €1,000',
     },
     'this month' => {
       input: 'get budget this month',
-      output: 'Budget for October is €1,000',
+      output: 'Budget for October 2023 is €1,000',
     },
     'next month' => {
       input: 'get budget next month',
-      output: 'No budget set for November',
+      output: 'No budget set for November 2023',
     },
     'abbreviated' => {
       input: 'budget october',
-      output: 'Budget for October is €1,000',
+      output: 'Budget for October 2023 is €1,000',
     },
   }
 end

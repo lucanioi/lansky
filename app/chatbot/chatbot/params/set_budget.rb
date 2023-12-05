@@ -3,8 +3,8 @@ module Chatbot
     class SetBudget < BaseParams
       VALID_MONTHS = Date::MONTHNAMES.compact + ['this month', 'next month']
 
-      def month
-        @month ||= extract_month
+      def period
+        @month ||= extract_period
       end
 
       def amount_in_cents
@@ -13,10 +13,10 @@ module Chatbot
 
       private
 
-      def extract_month
+      def extract_period
         VALID_MONTHS.find do |month|
-          argument.downcase.include?(month.downcase)
-        end || (raise 'invalid month')
+          argument.include?(month.downcase)
+        end&.downcase || (raise 'invalid month')
       end
 
       def extract_amount
@@ -25,11 +25,11 @@ module Chatbot
       end
 
       def period_end
-        period_start.end_of_month
+        period_start.eom
       end
 
       def argument
-        message.delete_prefix('set budget ').strip
+        message.delete_prefix('set budget ').strip.downcase
       end
     end
   end
