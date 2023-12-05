@@ -12,7 +12,7 @@ module Chatbot
       end
 
       def argument
-        message.delete_prefix('spending ').strip
+        message.delete_prefix('spending ').strip.downcase
       end
     end
   end

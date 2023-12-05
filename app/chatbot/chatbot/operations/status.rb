@@ -48,7 +48,7 @@ module Chatbot
       end
 
       def format_money(amount)
-        ::Chatbot::MoneyHelper.format_euros_with_cents(amount)
+        ::Chatbot::MoneyHelper.format(amount)
       end
 
       def period_title

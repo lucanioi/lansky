@@ -15,7 +15,7 @@ module Chatbot
 
       def reply(budget)
         period_name = DateTimeHelper.format_period(period_range)
-        formatted_amount = ::Chatbot::MoneyHelper.format_euros(budget.amount_in_cents)
+        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_in_cents)
 
         "Budget for #{period_name} set to #{formatted_amount}"
       end

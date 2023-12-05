@@ -8,19 +8,15 @@ module Chatbot
 
     module_function
 
-    def format_euros(amount_in_cents, currency: :eur)
-      euros  = amount_in_cents / 100
-      amount = euros.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
-      "#{currency_symbol(currency)}#{amount}"
-    end
-
-    def format_euros_with_cents(amount_in_cents, currency: :eur)
-      euros  = amount_in_cents / 100
+    def format(amount_in_cents, currency: :eur, collapse_cents: true)
+      whole  = amount_in_cents / 100
       cents  = amount_in_cents % 100
-      amount = euros.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+      amount = whole.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
       currency_symbol = currency_symbol(currency)
 
-      cents > 0 ? "#{currency_symbol}#{amount}.#{pad(cents)}" : "#{currency_symbol}#{amount}"
+      return "#{currency_symbol}#{amount}" if collapse_cents && cents.zero?
+
+      "#{currency_symbol}#{amount}.#{pad(cents)}"
     end
 
     def parse_to_cents(amount_string, currency: :eur)
@@ -43,6 +39,8 @@ module Chatbot
     end
 
     def currency_symbol(currency_key)
+      return if currency_key.nil?
+
       CURRENCY_SYMBOLS[currency_key] || CURRENCY_SYMBOLS[DEFAULT_CURRENCY]
     end
   end
