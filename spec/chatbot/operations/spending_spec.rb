@@ -16,14 +16,14 @@ RSpec.describe Chatbot::Operations::Spending do
   it_behaves_like 'operation', {
     'today' => {
       input: 'spending today',
-      output: "Total spent (Today):\n" \
+      output: "Total spent (Thu, 12 oct 2023):\n" \
               "*€122.88*\n\n" \
               "```80.88``` - clothes\n" \
               "```42.00``` - food"
     },
     'October' => {
-      input: 'spending October',
-      output: "Total spent (October):\n" \
+      input: 'spending october',
+      output: "Total spent (October 2023):\n" \
               "*€322.88*\n\n" \
               "```280.88``` - clothes\n" \
               "``` 42.00``` - food"

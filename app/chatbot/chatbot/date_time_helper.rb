@@ -52,14 +52,14 @@ module Chatbot
       STRING_TO_RANGE[period_string].call(direction, include_current)
     end
 
-    # in the format 'Monday, 01 Jan 2020' for specific days
+    # in the format 'Mon, 01 Jan 2020' for specific days
     # in the format 'week starting Mon, 01/Jan' for weeks
     # in the format 'January 2020' for months
     # in the format '2020' for years
     def format_period(period_range)
       case period_range.end - period_range.begin.to_datetime
       in duration if DAY_DURATION.cover?(duration)
-        period_range.begin.strftime('%A, %d %b %Y')
+        period_range.begin.strftime('%a, %d %b %Y')
       in duration if WEEK_DURATION.cover?(duration)
         period_range.begin.strftime("week starting %a, %d/%b")
       in duration if MONTH_DURATION.cover?(duration) && period_range.begin.day == 1

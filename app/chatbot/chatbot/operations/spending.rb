@@ -20,28 +20,35 @@ module Chatbot
       def reply(overview)
         total = Chatbot::MoneyHelper.format(overview.total_in_cents)
 
-        "Total spent (#{period.capitalize}):\n" \
+        "Total spent (#{period_title.capitalize}):\n" \
         "*#{total}*\n\n" \
         "#{spending_details(overview)}"
       end
 
       def spending_details(overview)
-        max_length = overview.details.max_by(&:amount).amount.to_s.size + 1 # +1 for the dot
+        amount_width = overview.details.max_by(&:amount).amount.to_s.size + 1
 
         overview.details.map do |detail|
-          amount = Chatbot::MoneyHelper.format(
-            detail.amount,
-            currency: nil,
-            collapse_cents: false
-          ).rjust(max_length)
-
-          "```#{amount} - #{detail.category}```"
+          formatted_amount = format_detail_amount(detail.amount, amount_width)
+          "```#{formatted_amount}``` - #{detail.category}"
         end.join("\n")
+      end
+
+      def format_detail_amount(amount, width)
+        amount = Chatbot::MoneyHelper.format(
+          amount,
+          currency: nil,
+          collapse_cents: false
+        ).rjust(width)
       end
 
       def period_range
         @period_range ||=
           DateTimeHelper.parse_period(period, include_current: true)
+      end
+
+      def period_title
+        DateTimeHelper.format_period(period_range)
       end
     end
   end
