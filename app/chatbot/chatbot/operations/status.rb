@@ -36,11 +36,11 @@ module Chatbot
 
       def reply_for_under_budget(status)
         amount_left_period = format_money(status.amount_left_for_period)
-        amount_per_day = format_money(status.amount_left_per_day)
+        amount_per_day = format_money(status.daily_limit)
 
         "#{current_day_status(status)}\n\n" \
         "You have *#{amount_left_period}* left for #{period_name}.\n\n" \
-        "You're at *#{amount_per_day}* per day for the rest of the month."
+        "Current daily limit is *#{amount_per_day}*."
       end
 
       def current_day_status(status)

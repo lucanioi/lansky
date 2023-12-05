@@ -6,7 +6,7 @@ module Budgets
       :amount_spent_today,
       :amount_left_today,
       :amount_left_for_period,
-      :amount_left_per_day,
+      :daily_limit,
       keyword_init: true
     )
 
@@ -15,21 +15,21 @@ module Budgets
         amount_spent_today:,
         amount_left_today:,
         amount_left_for_period:,
-        amount_left_per_day:
+        daily_limit:
       )
     end
 
     private
 
     def amount_left_today
-      amount_left_per_day - amount_spent_today
+      daily_limit - amount_spent_today
     end
 
     def amount_left_for_period
       budget.amount_in_cents - total_spending_for_period
     end
 
-    def amount_left_per_day
+    def daily_limit
       (amount_left_for_period + amount_spent_today) / days_left_in_period
     end
 
