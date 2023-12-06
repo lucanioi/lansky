@@ -10,6 +10,10 @@ RSpec.describe Chatbot::Operations::SetTimezone do
       input: 'set timezone Madrid',
       output: 'Timezone set to Madrid +01:00',
     },
+    'UTC' => {
+      input: 'set timezone UTC',
+      output: 'Timezone set to UTC +00:00',
+    },
     'invalid timezone' => {
       input: 'set timezone foobar',
       output: 'invalid timezone: foobar',

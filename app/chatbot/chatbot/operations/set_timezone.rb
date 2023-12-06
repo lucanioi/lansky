@@ -26,7 +26,10 @@ module Chatbot
       end
 
       def timezone_obj
-        @timezone_obj ||= ActiveSupport::TimeZone.new(timezone.capitalize)
+        @timezone_obj ||=
+          ActiveSupport::TimeZone.new(timezone.capitalize) ||
+          ActiveSupport::TimeZone.new(timezone.upcase) ||
+          ActiveSupport::TimeZone.new(timezone)
       end
     end
   end

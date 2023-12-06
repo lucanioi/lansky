@@ -8,7 +8,7 @@ module Chatbot
       private
 
       def extract_timezone
-        argument.downcase
+        argument
       end
 
       def argument
