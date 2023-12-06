@@ -8,11 +8,11 @@ module Chatbot
       private
 
       def extract_period
-        argument
+        argument.downcase
       end
 
       def argument
-        message.delete_prefix('spending').strip.downcase
+        message.delete_prefix('spending').strip
       end
     end
   end

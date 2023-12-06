@@ -28,6 +28,12 @@ module Service
       @error = error
     end
 
+    def value!
+      raise error if failure?
+
+      value
+    end
+
     def success?
       error.nil?
     end

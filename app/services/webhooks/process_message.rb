@@ -45,11 +45,11 @@ module Webhooks
     end
 
     def use_user_timezone(&block)
-      Time.use_zone('Madrid', &block)
+      Time.use_zone(user.timezone, &block)
     end
 
     def user
-      @user ||= Users::FindOrCreate.call(phone:).value
+      @user ||= Users::FindOrCreate.call(phone:).value!
     end
 
     #####################
