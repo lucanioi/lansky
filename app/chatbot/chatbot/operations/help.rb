@@ -5,11 +5,12 @@ module Chatbot
         <<~HELP
           Available Operations:
 
-          *set budget <month> <amount>*
-           _Sets the budget for the given month to the given amount_
+          *set budget <period> <amount>*
+           _Sets the budget for the given period to the given amount.
+           <period> could be 'january', 'today', 'this month', 'Thursday', etc_
 
-          *get budget <month>*
-           _Gets the budget for the given month. `budget` is an alias for `get budget`_
+          *get budget <period>*
+           _Gets the budget for the given period. `budget` is an alias for `get budget`_
 
           *spent <amount> <category>*
            _Registers the given amount as spending to the given category_
@@ -18,7 +19,7 @@ module Chatbot
           _Returns the spending ovoerview for given period_
 
           *status*
-           _Returns the budget status for the current period (month)_
+           _Returns the budget status for the current period_
 
           *help*
            _Returns this help message_

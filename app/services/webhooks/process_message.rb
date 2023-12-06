@@ -8,13 +8,14 @@ module Webhooks
     STATUS     = /^status/
     HELP       = /^help/
     SPENDING   = /^spending/
+    SET_TZ     = /^set timezone/
 
     # for internal testing purposes
     TRIGGER_ERROR = /^trigger error/
     TIME          = /^time/
 
     def call
-      use_user_timezone { process_message }
+      use_user_environment { process_message }
     end
 
     private
@@ -35,6 +36,7 @@ module Webhooks
       when STATUS     then Chatbot::Operations::Status
       when HELP       then Chatbot::Operations::Help
       when SPENDING   then Chatbot::Operations::Spending
+      when SET_TZ     then Chatbot::Operations::SetTimezone
       when TIME       then time_operation
       when TRIGGER_ERROR then (raise 'error triggered')
       end
@@ -44,8 +46,14 @@ module Webhooks
       message.downcase.strip
     end
 
-    def use_user_timezone(&block)
-      Time.use_zone(user.timezone, &block)
+    def use_user_environment(&block)
+      Time.use_zone(user.timezone) do
+        original_currency = Money.default_currency
+        Money.default_currency = user.currency || original_currency
+        block.call
+      ensure
+        Money.default_currency = original_currency
+      end
     end
 
     def user

@@ -7,10 +7,10 @@
 [x] daily spending totals / summary
 [x] timezones
 [x] use period_ranges
+[x] user money gem and use it for currency formatting
 
-[O] enable different currencies
+[O] enable `set currency` operation
 
 [ ] create GPT layer
 [ ] error handling
-[ ] refactor budget search based on month
 [ ] status: when it's the last day of hte month, it should be idiomatic

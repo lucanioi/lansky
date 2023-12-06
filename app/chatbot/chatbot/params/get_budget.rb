@@ -2,7 +2,7 @@ module Chatbot
   module Params
     class GetBudget < BaseParams
       def period
-        @month ||= extract_period
+        @period ||= extract_period
       end
 
       private

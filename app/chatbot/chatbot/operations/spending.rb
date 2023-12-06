@@ -37,11 +37,8 @@ module Chatbot
       end
 
       def format_detail_amount(amount, width)
-        amount = Chatbot::MoneyHelper.format(
-          amount,
-          currency: nil,
-          collapse_cents: false
-        ).rjust(width)
+        Chatbot::MoneyHelper.format(amount, trunc_cents: false, symbol: false)
+                            .rjust(width)
       end
 
       def period_range
