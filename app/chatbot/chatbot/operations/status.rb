@@ -15,7 +15,9 @@ module Chatbot
 
       def reply(status)
         return reply_period_over_budget(status) if status.amount_left_period.negative?
+        return reply_period_spot_on_budget(status) if status.amount_left_period.zero?
         return reply_daily_over_budget(status) if status.amount_left_today.negative?
+        return reply_daily_spot_on_budget(status) if status.amount_left_today.zero?
 
         reply_under_budget(status)
       end
@@ -30,10 +32,28 @@ module Chatbot
         "Adjusted daily limit is *#{adjusted_daily_limit}* for the rest of the period."
       end
 
+      def reply_period_spot_on_budget(status)
+        amount_spent_period = format_money(budget.amount_cents)
+        amount_left_period = format_money(status.amount_left_period)
+
+        "You've spent the total budget of *#{amount_spent_period}*.\n\n" \
+        "No remaining budget for #{period_title}. You can overwrite and increase " \
+        "the budget by the `set budget` operation."
+      end
+
       def reply_period_over_budget(status)
         amount_over = format_money(status.amount_left_period.abs)
 
         "You are over budget by *#{amount_over}* for #{period_title}."
+      end
+
+      def reply_daily_spot_on_budget(status)
+        amount_left_period = format_money(status.amount_left_period)
+        current_daily_limit = format_money(status.current_daily_limit)
+
+        "Today's spending is spot on the budget, exactly *#{current_daily_limit}*.\n\n" \
+        "You have *#{amount_left_period}* left for #{period_title}.\n\n" \
+        "Daily limit remains at *#{current_daily_limit}* for the rest of the period."
       end
 
       def reply_under_budget(status)

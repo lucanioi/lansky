@@ -86,6 +86,19 @@ RSpec.describe Chatbot::Operations::Status do
       output: "You are over budget by *€11.18* today.\n\n" \
               "You have *€930* left for December 2023.\n\n" \
               "Adjusted daily limit is *€58.12* for the rest of the period."
+    },
+    'spent exactly the daily limit' => {
+      input: 'status',
+      setup: 'create_spending 58_82, 1.hour.ago',
+      output: "Today's spending is spot on the budget, exactly *€58.82*.\n\n" \
+              "You have *€941.18* left for December 2023.\n\n" \
+              "Daily limit remains at *€58.82* for the rest of the period."
+    },
+    'spent exactly the period budget' => {
+      input: 'status',
+      setup: 'create_spending 1_000_00, 1.day.ago',
+      output: "You've spent the total budget of *€1,000*.\n\n" \
+              "No remaining budget for December 2023. You can overwrite and increase the budget by the `set budget` operation." \
     }
   }
 
