@@ -5,8 +5,9 @@ module Budgets
     BudgetStatus = Struct.new(
       :amount_spent_today,
       :amount_left_today,
-      :amount_left_for_period,
-      :daily_limit,
+      :amount_left_period,
+      :current_daily_limit,
+      :adjusted_daily_limit,
       keyword_init: true
     )
 
@@ -14,27 +15,34 @@ module Budgets
       BudgetStatus.new(
         amount_spent_today:,
         amount_left_today:,
-        amount_left_for_period:,
-        daily_limit:
+        amount_left_period:,
+        current_daily_limit:,
+        adjusted_daily_limit:
       )
     end
 
     private
 
     def amount_left_today
-      daily_limit - amount_spent_today
+      current_daily_limit - amount_spent_today
     end
 
-    def amount_left_for_period
+    def amount_left_period
       budget.amount_cents - total_spending_for_period
     end
 
-    def daily_limit
-      (amount_left_for_period + amount_spent_today) / days_left_in_period
+    # This is the daily limit for the rest of the month including today,
+    # without taking into account today's spending
+    def current_daily_limit
+      (amount_left_period + amount_spent_today) / days_left_in_period
     end
 
-    def budget
-      @budget ||= Budgets::Find.call(user:, period_range:)
+    # This is the amount left per day taking into account today's spending
+    # It only counts the days after today
+    def adjusted_daily_limit
+      return amount_left_period if days_left_in_period <= 1
+
+      amount_left_period / (days_left_in_period - 1)
     end
 
     def total_spending_for_period

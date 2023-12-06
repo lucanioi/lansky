@@ -14,26 +14,35 @@ module Chatbot
       private
 
       def reply(status)
-        amount_left = status.amount_left_for_period
+        return reply_period_over_budget(status) if status.amount_left_period.negative?
+        return reply_daily_over_budget(status) if status.amount_left_today.negative?
 
-        return reply_for_under_budget(status) if amount_left.positive?
-
-        reply_for_over_budget(status)
+        reply_under_budget(status)
       end
 
-      def reply_for_over_budget(status)
-        amount_over = format_money(status.amount_left_for_period.abs)
+      def reply_daily_over_budget(status)
+        amount_over = format_money(status.amount_left_today.abs)
+        amount_left_period = format_money(status.amount_left_period)
+        adjusted_daily_limit = format_money(status.adjusted_daily_limit)
+
+        "You are over budget by *#{amount_over}* today.\n\n" \
+        "You have *#{amount_left_period}* left for #{period_title}.\n\n" \
+        "Adjusted daily limit is *#{adjusted_daily_limit}* for the rest of the period."
+      end
+
+      def reply_period_over_budget(status)
+        amount_over = format_money(status.amount_left_period.abs)
 
         "You are over budget by *#{amount_over}* for #{period_title}."
       end
 
-      def reply_for_under_budget(status)
-        amount_left_period = format_money(status.amount_left_for_period)
-        amount_per_day = format_money(status.daily_limit)
+      def reply_under_budget(status)
+        amount_left_period = format_money(status.amount_left_period)
+        current_daily_limit = format_money(status.current_daily_limit)
 
         "#{current_day_status(status)}\n\n" \
         "You have *#{amount_left_period}* left for #{period_title}.\n\n" \
-        "Current daily limit is *#{amount_per_day}*."
+        "Current daily limit is *#{current_daily_limit}*."
       end
 
       def current_day_status(status)
@@ -44,7 +53,7 @@ module Chatbot
           "You've already spent *#{amount_spent_today}*." :
           "You haven't spent anything yet."
 
-        "You have *#{amount_left_today}* left for the day. #{spent_today_text}"
+        "You have *#{amount_left_today}* left today. #{spent_today_text}"
       end
 
       def format_money(amount)

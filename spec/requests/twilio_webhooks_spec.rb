@@ -37,7 +37,7 @@ RSpec.describe 'Twilio Webhooks', type: :request do
 
       send_message   'status'
       expect_response <<~TEXT.strip
-                        You have *€29.50* left for the day. You've already spent *€20*.
+                        You have *€29.50* left today. You've already spent *€20*.
 
                         You have *€970* left for October 2023.
 
