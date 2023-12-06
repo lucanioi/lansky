@@ -23,25 +23,19 @@ module Chatbot
 
     STRING_TO_RANGE.merge!(
       DAYS_OF_WEEK.product([nil]).to_h { |day, _|
-        [
-          day.downcase,
-          ->(direction, include_current) { day_range(day, direction, include_current) }
-        ]
+        [day.downcase, ->(*options) { day_range(day, *options) }]
       },
       MONTHS_OF_YEAR.product([nil]).to_h { |month, _|
-        [
-          month.downcase,
-          ->(direction, include_current) { month_range(month, direction, include_current) }
-        ]
+        [month.downcase, ->(*options) { month_range(month, *options) }]
       }
     )
 
     VALID_PERIOD_NAMES = (STRING_TO_RANGE.keys + DAYS_OF_WEEK + MONTHS_OF_YEAR).freeze
 
-    DAY_DURATION   = (1.day - 1.seconds).to_f..1.day.to_f
-    WEEK_DURATION  = (1.week - 1.seconds).to_f..1.week.to_f
+    DAY_DURATION = (1.day - 1.seconds).to_f..1.day.to_f
+    WEEK_DURATION = (1.week - 1.seconds).to_f..1.week.to_f
     MONTH_DURATION = (28.days - 1.second).to_f..31.days.to_f
-    YEAR_DURATION  = (1.year - 1.seconds).to_f..1.year.to_f
+    YEAR_DURATION = (1.year - 1.seconds).to_f..1.year.to_f
 
     module_function
 

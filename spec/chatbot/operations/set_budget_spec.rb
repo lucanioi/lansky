@@ -31,8 +31,8 @@ RSpec.describe Chatbot::Operations::SetBudget do
       output: 'Budget for January 2024 set to €1,000',
     },
     'invalid month' => {
-      input: 'set budget invalid month 1000',
-      error:  'invalid month',
+      input: 'set budget foobar 1000',
+      error:  'invalid period: foobar',
     },
     'invalid amount' => {
       input: 'set budget january 98oi3j',
