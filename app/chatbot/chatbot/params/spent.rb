@@ -20,10 +20,6 @@ module Chatbot
         ::Chatbot::MoneyHelper.parse_amount(amount) || (raise 'invalid amount')
       end
 
-      def period_end
-        period_start.eom
-      end
-
       def argument
         message.delete_prefix('spent ').strip
       end

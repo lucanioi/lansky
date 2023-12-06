@@ -4,11 +4,7 @@ module Chatbot
       params :period
 
       def execute
-        result = Spendings::GenerateOverview.call(
-          user:,
-          period_start: period_range.begin,
-          period_end: period_range.end
-        )
+        result = Spendings::GenerateOverview.call(user:, period_range:)
 
         return reply(result.value) if result.success?
 

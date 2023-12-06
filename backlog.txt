@@ -4,12 +4,12 @@
 [x] fix weird rounding error — "Spent 4.60 grocies" yielded "Spent €4.59 on groceries"
 [x] improve status text using ChatGPT's guidance
 [x] daily spending totals / summary
+[x] timezones
 
-[O] timezones
+[ ] use period_ranges
 
 [ ] error handling
 [ ] status: when it's the last day of hte month, it should be idiomatic
-[ ] use period_ranges
 [ ] create datetime helper
 [ ] refactor budget search based on month
 [ ] allow currency to be passed into money formatting

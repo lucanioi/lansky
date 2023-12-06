@@ -34,13 +34,12 @@ module Budgets
     end
 
     def budget
-      @budget ||=
-        user.budgets.where(period_start:, period_end:).first
+      @budget ||= Budgets::Find.call(user:, period_range:)
     end
 
     def total_spending_for_period
       user.spendings
-          .where(spent_at: period_start..period_end)
+          .where(spent_at: period_range)
           .sum(:amount_in_cents)
     end
 
@@ -62,6 +61,10 @@ module Budgets
 
     def period_end
       budget.period_end
+    end
+
+    def period_range
+      period_start..period_end
     end
 
     attr_accessor :user, :budget

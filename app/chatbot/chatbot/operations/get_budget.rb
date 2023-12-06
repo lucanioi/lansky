@@ -4,7 +4,7 @@ module Chatbot
       params :period
 
       def execute
-        result = Budgets::Find.call(user:, period_start:, period_end:)
+        result = Budgets::Find.call(user:, period_range:)
 
         raise result.error if result.failure?
         return not_found_reply if result.value.nil?
@@ -22,14 +22,6 @@ module Chatbot
         formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_in_cents)
 
         "Budget for #{period_title} is #{formatted_amount}"
-      end
-
-      def period_start
-        period_range.begin
-      end
-
-      def period_end
-        period_range.end
       end
 
       def period_range

@@ -58,7 +58,7 @@ module Chatbot
       def budget
         @budget ||= user.budgets
                         .where('period_start <= ? AND period_end >= ?', Date.today, Date.today)
-                        .first
+                        .last
       end
     end
   end

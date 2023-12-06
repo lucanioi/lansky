@@ -4,7 +4,7 @@ module Chatbot
       params :period, :amount_in_cents
 
       def execute
-        result = Budgets::Upsert.call(amount_in_cents:, period_start:, period_end:, user:)
+        result = Budgets::Upsert.call(amount_in_cents:, period_range:, user:)
 
         return reply(result.value) if result.success?
 
@@ -18,14 +18,6 @@ module Chatbot
         formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_in_cents)
 
         "Budget for #{period_name} set to #{formatted_amount}"
-      end
-
-      def period_start
-        period_range.begin
-      end
-
-      def period_end
-        period_range.end
       end
 
       def period_range

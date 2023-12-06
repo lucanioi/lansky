@@ -24,13 +24,13 @@ module Spendings
 
     def spendings_in_period
       @spendings_in_period ||=
-        user.spendings.where(spent_at: period_start..period_end)
+        user.spendings.where(spent_at: period_range)
     end
 
     def totals_by_category
       spendings_in_period.group(:category).sum(:amount_in_cents)
     end
 
-    attr_accessor :user, :period_start, :period_end
+    attr_accessor :user, :period_range
   end
 end
