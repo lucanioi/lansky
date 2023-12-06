@@ -21,17 +21,17 @@ module Service
   end
 
   class Result
-    attr_reader :value, :error
+    attr_reader :error
 
     def initialize(value: nil, error: nil)
       @value = value
       @error = error
     end
 
-    def value!
+    def value
       raise error if failure?
 
-      value
+      @value
     end
 
     def success?

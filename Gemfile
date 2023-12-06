@@ -21,7 +21,7 @@ gem "bootsnap", require: false
 gem 'twilio-ruby', '~> 6.7.1'
 
 # for money handling
-gem 'money-rails'
+gem 'monetize'
 
 # error reporting
 gem 'sentry-ruby'

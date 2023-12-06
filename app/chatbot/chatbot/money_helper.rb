@@ -1,14 +1,14 @@
 module Chatbot
   module MoneyHelper
     MONEY_MATCHER = /^(€|$)?\d{1,3}(?:,?\d{3})*(?:\.\d{1,2})?$/
-    DEFAULT_CURRENCY = :eur
+    DEFAULT_CURRENCY = :EUR
     CURRENCY_SYMBOLS = {
-      eur: '€'
+      EUR: '€'
     }.freeze
 
     module_function
 
-    def format(amount_cents, currency: :eur, collapse_cents: true)
+    def format(amount_cents, currency: :EUR, collapse_cents: true)
       whole  = amount_cents / 100
       cents  = amount_cents % 100
       amount = whole.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
@@ -19,7 +19,7 @@ module Chatbot
       "#{currency_symbol}#{amount}.#{pad(cents)}"
     end
 
-    def parse_to_cents(amount_string, currency: :eur)
+    def parse_to_cents(amount_string, currency: :EUR)
       currency_symbol = currency_symbol(currency)
       normalized_amount = amount_string.gsub(currency_symbol, '').gsub(',', '')
 

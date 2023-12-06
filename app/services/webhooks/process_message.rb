@@ -49,7 +49,7 @@ module Webhooks
     end
 
     def user
-      @user ||= Users::FindOrCreate.call(phone:).value!
+      @user ||= Users::FindOrCreate.call(phone:).value
     end
 
     #####################
