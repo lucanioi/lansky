@@ -73,24 +73,34 @@ module Chatbot
     ###################
 
     def day_range(day, direction = :forward, include_current = false)
-      target_day  = DAYS_OF_WEEK.index(day) # 0-indexed
-      current_day = Date.today.wday - 1     # 0-indexed
+      target_day  = DAYS_OF_WEEK.index(day) # 0-index
+      current_day = Date.today.wday - 1     # 0-index
 
       difference = (target_day - current_day) % 7
-      difference = 7 if difference.zero? && !include_current
-      difference = difference - 7 if direction == :backward
+
+      case direction
+      when :forward
+        difference = 7 if difference.zero? && !include_current
+      when :backward
+        difference -= 7 unless difference.zero? && include_current
+      end
 
       target_date = Date.today + difference.days
       target_date.bod..target_date.eod
     end
 
     def month_range(month, direction = :forward, include_current = false)
-      target_month  = MONTHS_OF_YEAR.index(month) # 0-indexed
-      current_month = Date.today.month - 1        # 0-indexed
+      target_month  = MONTHS_OF_YEAR.index(month) # 0-index
+      current_month = Date.today.month - 1        # 0-index
 
       difference = (target_month - current_month) % 12
-      difference = 12 if difference.zero? && !include_current
-      difference = difference - 12 if direction == :backward
+
+      case direction
+      when :forward
+        difference = 12 if difference.zero? && !include_current
+      when :backward
+        difference -= 12 unless difference.zero? && include_current
+      end
 
       target_date = Date.today + difference.months
       target_date.bom.bod..target_date.eom.eod

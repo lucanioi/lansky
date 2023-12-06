@@ -30,7 +30,7 @@ RSpec.describe Chatbot::DateTimeHelper do
       ['wednesday', { direction: :forward  }] => 'Wed, 18 Oct 2023 00:00:00.000000000 UTC +00:00..Wed, 18 Oct 2023 23:59:59.999999999 UTC +00:00',
       ['wednesday', { direction: :backward }] => 'Wed, 11 Oct 2023 00:00:00.000000000 UTC +00:00..Wed, 11 Oct 2023 23:59:59.999999999 UTC +00:00',
       ['thursday',  { direction: :forward  }] => 'Thu, 19 Oct 2023 00:00:00.000000000 UTC +00:00..Thu, 19 Oct 2023 23:59:59.999999999 UTC +00:00',
-      ['thursday',  { direction: :backward }] => 'Thu, 12 Oct 2023 00:00:00.000000000 UTC +00:00..Thu, 12 Oct 2023 23:59:59.999999999 UTC +00:00',
+      ['thursday',  { direction: :backward }] => 'Thu, 05 Oct 2023 00:00:00.000000000 UTC +00:00..Thu, 05 Oct 2023 23:59:59.999999999 UTC +00:00',
       ['friday',    { direction: :forward  }] => 'Fri, 13 Oct 2023 00:00:00.000000000 UTC +00:00..Fri, 13 Oct 2023 23:59:59.999999999 UTC +00:00',
       ['friday',    { direction: :backward }] => 'Fri, 06 Oct 2023 00:00:00.000000000 UTC +00:00..Fri, 06 Oct 2023 23:59:59.999999999 UTC +00:00',
       ['saturday',  { direction: :forward  }] => 'Sat, 14 Oct 2023 00:00:00.000000000 UTC +00:00..Sat, 14 Oct 2023 23:59:59.999999999 UTC +00:00',
@@ -57,7 +57,7 @@ RSpec.describe Chatbot::DateTimeHelper do
       ['september', { direction: :forward  }] => 'Sun, 01 Sep 2024 00:00:00.000000000 UTC +00:00..Mon, 30 Sep 2024 23:59:59.999999999 UTC +00:00',
       ['september', { direction: :backward }] => 'Fri, 01 Sep 2023 00:00:00.000000000 UTC +00:00..Sat, 30 Sep 2023 23:59:59.999999999 UTC +00:00',
       ['october',   { direction: :forward  }] => 'Tue, 01 Oct 2024 00:00:00.000000000 UTC +00:00..Thu, 31 Oct 2024 23:59:59.999999999 UTC +00:00',
-      ['october',   { direction: :backward }] => 'Sun, 01 Oct 2023 00:00:00.000000000 UTC +00:00..Tue, 31 Oct 2023 23:59:59.999999999 UTC +00:00',
+      ['october',   { direction: :backward }] => 'Sat, 01 Oct 2022 00:00:00.000000000 UTC +00:00..Mon, 31 Oct 2022 23:59:59.999999999 UTC +00:00',
       ['november',  { direction: :forward  }] => 'Wed, 01 Nov 2023 00:00:00.000000000 UTC +00:00..Thu, 30 Nov 2023 23:59:59.999999999 UTC +00:00',
       ['november',  { direction: :backward }] => 'Tue, 01 Nov 2022 00:00:00.000000000 UTC +00:00..Wed, 30 Nov 2022 23:59:59.999999999 UTC +00:00',
       ['december',  { direction: :forward  }] => 'Fri, 01 Dec 2023 00:00:00.000000000 UTC +00:00..Sun, 31 Dec 2023 23:59:59.999999999 UTC +00:00',
@@ -66,6 +66,10 @@ RSpec.describe Chatbot::DateTimeHelper do
       # default direction is :forward
       'monday'  => 'Mon, 16 Oct 2023 00:00:00.000000000 UTC +00:00..Mon, 16 Oct 2023 23:59:59.999999999 UTC +00:00',
       'january' => 'Mon, 01 Jan 2024 00:00:00.000000000 UTC +00:00..Wed, 31 Jan 2024 23:59:59.999999999 UTC +00:00',
+
+      # include current
+      ['october',   { direction: :forward,  include_current: true }] => 'Sun, 01 Oct 2023 00:00:00.000000000 UTC +00:00..Tue, 31 Oct 2023 23:59:59.999999999 UTC +00:00',
+      ['october',   { direction: :backward, include_current: true }] => 'Sun, 01 Oct 2023 00:00:00.000000000 UTC +00:00..Tue, 31 Oct 2023 23:59:59.999999999 UTC +00:00',
     }
 
     test_cases.each do |input, expected|

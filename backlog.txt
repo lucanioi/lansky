@@ -8,6 +8,7 @@
 [x] timezones
 [x] use period_ranges
 [x] user money gem and use it for currency formatting
+[x] fix display bug with timezone stuff
 
 [O] enable `set currency` operation
 
