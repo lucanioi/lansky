@@ -1,10 +1,10 @@
 module Chatbot
   module Operations
     class SetBudget < BaseOperation
-      params :period, :amount_in_cents
+      params :period, :amount_cents
 
       def execute
-        result = Budgets::Upsert.call(amount_in_cents:, period_range:, user:)
+        result = Budgets::Upsert.call(amount_cents:, period_range:, user:)
 
         return reply(result.value) if result.success?
 
@@ -15,7 +15,7 @@ module Chatbot
 
       def reply(budget)
         period_name = DateTimeHelper.format_period(period_range)
-        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_in_cents)
+        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_cents)
 
         "Budget for #{period_name} set to #{formatted_amount}"
       end

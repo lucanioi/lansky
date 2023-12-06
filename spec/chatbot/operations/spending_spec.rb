@@ -46,8 +46,8 @@ RSpec.describe Chatbot::Operations::Spending do
     }
   }
 
-  def create_spending(amount_in_cents, spent_at, category)
-    create :spending, user:, amount_in_cents:, spent_at:,
+  def create_spending(amount_cents, spent_at, category)
+    create :spending, user:, amount_cents:, spent_at:,
            category: SpendingCategory.find_or_create_by(name: category)
   end
 end

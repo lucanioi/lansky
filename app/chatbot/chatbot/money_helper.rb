@@ -8,9 +8,9 @@ module Chatbot
 
     module_function
 
-    def format(amount_in_cents, currency: :eur, collapse_cents: true)
-      whole  = amount_in_cents / 100
-      cents  = amount_in_cents % 100
+    def format(amount_cents, currency: :eur, collapse_cents: true)
+      whole  = amount_cents / 100
+      cents  = amount_cents % 100
       amount = whole.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
       currency_symbol = currency_symbol(currency)
 

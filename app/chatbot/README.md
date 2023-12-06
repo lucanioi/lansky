@@ -11,10 +11,10 @@ module Chatbot
   module Operations
     class SomeOperation < BaseOperation
       # there should be a declaration of params available in the operation
-      params :month, :amount_in_cents
+      params :month, :amount_cents
 
       def execute
-        # month and amount_in_cents, as declared above, become available as
+        # month and amount_cents, as declared above, become available as
         # methods in this class. `user` is also available in the instance.
         #
         # the `execute` method must return a string as a reply to be
@@ -36,8 +36,8 @@ module Chatbot
         @month ||= extract_month(message)
       end
 
-      def amount_in_cents
-        @amount_in_cents ||= extract_amount(message)
+      def amount_cents
+        @amount_cents ||= extract_amount(message)
       end
     end
   end

@@ -20,6 +20,9 @@ gem "bootsnap", require: false
 # for receiving message via SMS/Whatsapp
 gem 'twilio-ruby', '~> 6.7.1'
 
+# for money handling
+gem 'money-rails'
+
 # error reporting
 gem 'sentry-ruby'
 gem 'sentry-rails'

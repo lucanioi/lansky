@@ -48,7 +48,7 @@ RSpec.describe Chatbot::Operations::Spent do
     it 'sets the spending amount' do
       result
 
-      expect(user.spendings.last.amount_in_cents).to eq(550)
+      expect(user.spendings.last.amount_cents).to eq(550)
     end
 
     it 'sets the spending category' do

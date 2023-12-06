@@ -14,9 +14,9 @@ module Chatbot
       private
 
       def reply(overview)
-        return no_spending_reply if overview.total_in_cents.zero?
+        return no_spending_reply if overview.total_cents.zero?
 
-        total = Chatbot::MoneyHelper.format(overview.total_in_cents)
+        total = Chatbot::MoneyHelper.format(overview.total_cents)
 
         "Total spent (#{period_title.capitalize}):\n" \
         "*#{total}*\n\n" \

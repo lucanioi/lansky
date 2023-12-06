@@ -5,8 +5,8 @@ module Chatbot
         @month ||= extract_period
       end
 
-      def amount_in_cents
-        @amount_in_cents ||= extract_amount
+      def amount_cents
+        @amount_cents ||= extract_amount
       end
 
       private

@@ -2,17 +2,17 @@ module Spendings
   class GenerateOverview
     include Service
 
-    Overview = Struct.new(:total_in_cents, :details, keyword_init: true)
+    Overview = Struct.new(:total_cents, :details, keyword_init: true)
     Detail   = Struct.new(:amount, :category, keyword_init: true)
 
     def call
-      Overview.new(total_in_cents:, details:)
+      Overview.new(total_cents:, details:)
     end
 
     private
 
-    def total_in_cents
-      spendings_in_period.sum(:amount_in_cents)
+    def total_cents
+      spendings_in_period.sum(:amount_cents)
     end
 
     def details
@@ -28,7 +28,7 @@ module Spendings
     end
 
     def totals_by_category
-      spendings_in_period.group(:category).sum(:amount_in_cents)
+      spendings_in_period.group(:category).sum(:amount_cents)
     end
 
     attr_accessor :user, :period_range

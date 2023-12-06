@@ -16,9 +16,9 @@ module Budgets
         period_start: period_range.begin,
         period_end: period_range.end,
         user: user
-      ).tap { |budget| budget.amount_in_cents = amount_in_cents }
+      ).tap { |budget| budget.amount_cents = amount_cents }
     end
 
-    attr_accessor :amount_in_cents, :period_range, :user
+    attr_accessor :amount_cents, :period_range, :user
   end
 end

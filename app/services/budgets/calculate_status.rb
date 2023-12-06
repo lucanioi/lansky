@@ -26,7 +26,7 @@ module Budgets
     end
 
     def amount_left_for_period
-      budget.amount_in_cents - total_spending_for_period
+      budget.amount_cents - total_spending_for_period
     end
 
     def daily_limit
@@ -40,13 +40,13 @@ module Budgets
     def total_spending_for_period
       user.spendings
           .where(spent_at: period_range)
-          .sum(:amount_in_cents)
+          .sum(:amount_cents)
     end
 
     def amount_spent_today
       user.spendings
           .where(spent_at: Date.today.bod..DateTime.current)
-          .sum(:amount_in_cents)
+          .sum(:amount_cents)
     end
 
     def days_left_in_period

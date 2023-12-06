@@ -19,7 +19,7 @@ module Chatbot
       end
 
       def reply(budget)
-        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_in_cents)
+        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_cents)
 
         "Budget for #{period_title} is #{formatted_amount}"
       end

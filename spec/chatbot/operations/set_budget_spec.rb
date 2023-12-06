@@ -52,7 +52,7 @@ RSpec.describe Chatbot::Operations::SetBudget do
     it 'sets the budget amount' do
       result
 
-      expect(user.budgets.last.amount_in_cents).to eq(1000_00)
+      expect(user.budgets.last.amount_cents).to eq(1000_00)
     end
 
     it 'sets the budget period' do
@@ -78,14 +78,14 @@ RSpec.describe Chatbot::Operations::SetBudget do
         create :budget,
                 period_start: Date.today.bom,
                 period_end: Date.today.eom.eod,
-                amount_in_cents: 500_00,
+                amount_cents: 500_00,
                 user:
       end
 
       it 'updates the budget' do
         expect { result }
-          .to change { budget.reload.amount_in_cents }
-            .from(budget.amount_in_cents).to(1000_00)
+          .to change { budget.reload.amount_cents }
+            .from(budget.amount_cents).to(1000_00)
       end
     end
   end

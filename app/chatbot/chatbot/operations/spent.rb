@@ -1,10 +1,10 @@
 module Chatbot
   module Operations
     class Spent < BaseOperation
-      params :amount_in_cents, :category_name
+      params :amount_cents, :category_name
 
       def execute
-        result = Spendings::Create.call(category:, amount_in_cents:, user:)
+        result = Spendings::Create.call(category:, amount_cents:, user:)
 
         return reply(result.value) if result.success?
 
@@ -14,7 +14,7 @@ module Chatbot
       private
 
       def reply(spending)
-        formatted_amount = format(spending.amount_in_cents)
+        formatted_amount = format(spending.amount_cents)
 
         "Spent #{formatted_amount} #{category_description}"
       end
