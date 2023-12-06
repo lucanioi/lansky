@@ -107,7 +107,6 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
-    fuzzy_match (2.1.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -250,7 +249,6 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
-  fuzzy_match
   pg
   pry
   puma (>= 5.0)
