@@ -18,13 +18,13 @@ module Chatbot
 
         total = Chatbot::MoneyHelper.format(overview.total_cents)
 
-        "Total spent (#{period_title.capitalize}):\n" \
+        "Total spent (#{period_title}):\n" \
         "*#{total}*\n\n" \
         "#{spending_details(overview)}"
       end
 
       def no_spending_reply
-        "No spendings found for #{period_title.capitalize}"
+        "No spendings found for #{period_title}"
       end
 
       def spending_details(overview)
@@ -47,7 +47,11 @@ module Chatbot
       end
 
       def period_title
-        DateTimeHelper.format_period(period_range)
+        capitalize_first_letter(DateTimeHelper.format_period(period_range))
+      end
+
+      def capitalize_first_letter(string)
+        string[0].upcase + string[1..]
       end
     end
   end

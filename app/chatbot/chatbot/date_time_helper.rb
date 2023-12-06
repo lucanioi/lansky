@@ -4,21 +4,21 @@ module Chatbot
     MONTHS_OF_YEAR = %w[january february march april may june july august september october november december]
 
     STRING_TO_RANGE = {
-      'yesterday'  => ->(*) { Date.yesterday..Date.yesterday.eod },
-      'today'      => ->(*) { Date.today    ..Date.today.eod },
-      'tomorrow'   => ->(*) { Date.tomorrow ..Date.tomorrow.eod },
+      'yesterday'  => ->(*) { Date.yesterday.bod..Date.yesterday.eod },
+      'today'      => ->(*) { Date.today.bod    ..Date.today.eod },
+      'tomorrow'   => ->(*) { Date.tomorrow.bod ..Date.tomorrow.eod },
 
-      'last week'  => ->(*) { Date.today.prev_week..Date.today.prev_week.eow.eod },
-      'this week'  => ->(*) { Date.today.bow      ..Date.today.eow.eod },
-      'next week'  => ->(*) { Date.today.next_week..Date.today.next_week.eow.eod },
+      'last week'  => ->(*) { Date.today.prev_week.bod..Date.today.prev_week.eow.eod },
+      'this week'  => ->(*) { Date.today.bow .bod     ..Date.today.eow.eod },
+      'next week'  => ->(*) { Date.today.next_week.bod..Date.today.next_week.eow.eod },
 
-      'last month' => ->(*) { Date.today.prev_month.bom..Date.today.prev_month.eom.eod },
-      'this month' => ->(*) { Date.today.bom           ..Date.today.eom.eod },
-      'next month' => ->(*) { Date.today.next_month.bom..Date.today.next_month.eom.eod },
+      'last month' => ->(*) { Date.today.prev_month.bom.bod..Date.today.prev_month.eom.eod },
+      'this month' => ->(*) { Date.today.bom.bod           ..Date.today.eom.eod },
+      'next month' => ->(*) { Date.today.next_month.bom.bod..Date.today.next_month.eom.eod },
 
-      'last year'  => ->(*) { Date.today.prev_year.boy..Date.today.prev_year.eoy.eod },
-      'this year'  => ->(*) { Date.today.boy          ..Date.today.eoy.eod },
-      'next year'  => ->(*) { Date.today.next_year.boy..Date.today.next_year.eoy.eod },
+      'last year'  => ->(*) { Date.today.prev_year.boy.bod..Date.today.prev_year.eoy.eod },
+      'this year'  => ->(*) { Date.today.boy.bod          ..Date.today.eoy.eod },
+      'next year'  => ->(*) { Date.today.next_year.boy.bod..Date.today.next_year.eoy.eod },
     }
 
     STRING_TO_RANGE.merge!(
@@ -50,8 +50,9 @@ module Chatbot
     # in the format 'week starting Mon, 01/Jan' for weeks
     # in the format 'January 2020' for months
     # in the format '2020' for years
+    # in the format 'Mon, 01 Jan 2020 - Sun, 31 Jan 2020' for other periods
     def format_period(period_range)
-      case period_range.end - period_range.begin.to_datetime
+      case period_range.end - period_range.begin.to_time
       in duration if DAY_DURATION.cover?(duration)
         period_range.begin.strftime('%a, %d %b %Y')
       in duration if WEEK_DURATION.cover?(duration)
@@ -80,7 +81,7 @@ module Chatbot
       difference = difference - 7 if direction == :backward
 
       target_date = Date.today + difference.days
-      target_date..target_date.eod
+      target_date.bod..target_date.eod
     end
 
     def month_range(month, direction = :forward, include_current = false)
@@ -92,7 +93,7 @@ module Chatbot
       difference = difference - 12 if direction == :backward
 
       target_date = Date.today + difference.months
-      target_date.bom..target_date.eom.eod
+      target_date.bom.bod..target_date.eom.eod
     end
 
     private_class_method :day_range, :month_range

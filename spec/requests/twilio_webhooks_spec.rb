@@ -49,7 +49,7 @@ RSpec.describe 'Twilio Webhooks', type: :request do
 
       send_message    'spending today'
       expect_response <<~TEXT.strip
-                        Total spent (Thu, 12 oct 2023):
+                        Total spent (Thu, 12 Oct 2023):
                         *€25.25*
 
                         ```20.00``` - food
@@ -62,6 +62,18 @@ RSpec.describe 'Twilio Webhooks', type: :request do
                         *€35.25*
 
                         ```30.00``` - food
+                        ``` 5.25``` - drinks
+                      TEXT
+
+      send_message    'set timezone Madrid'
+      expect_response 'Timezone set to Madrid +01:00'
+
+      send_message    'spending today'
+      expect_response <<~TEXT.strip
+                        Total spent (Thu, 12 Oct 2023):
+                        *€25.25*
+
+                        ```20.00``` - food
                         ``` 5.25``` - drinks
                       TEXT
     end
