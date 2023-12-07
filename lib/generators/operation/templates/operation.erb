@@ -1,0 +1,13 @@
+module Chatbot
+  module Operations
+    class <%= class_name %> < BaseOperation
+<% if params.any? -%>
+      params :<%= params.join(', ') %>
+
+<% end -%>
+      def execute
+
+      end
+    end
+  end
+end

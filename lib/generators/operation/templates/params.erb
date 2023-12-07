@@ -1,0 +1,11 @@
+module Chatbot
+  module Params
+    class <%= class_name %> < BaseOperation
+<% params.each_with_index do |param, i| -%>
+      def <%= param %>
+
+      end<%= "\n" unless i == params.length - 1 %>
+<% end -%>
+    end
+  end
+end
