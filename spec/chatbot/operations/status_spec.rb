@@ -101,11 +101,22 @@ RSpec.describe Chatbot::Operations::Status do
       setup: 'create_spending 1_000_00, 1.day.ago',
       output: "You've spent the total budget of *€1,000*.\n\n" \
               "No remaining budget for December 2023. You can overwrite and increase the budget by the `set budget` operation." \
-    }
+    },
+    'money recovered' => {
+      input: 'status',
+      setup: 'create_spending 100_00, 1.hour.ago; create_recovery 50_00, 1.hour.ago',
+      output: "You have *€8.82* left today. You've spent *€100* and recovered *€50*.\n\n" \
+              "You have *€950* left for December 2023.\n\n" \
+              "Current daily limit is *€58.82*."
+    },
   }
 
   def create_spending(amount_cents, recorded_at)
     create :ledger_entry, user:, amount_cents:, recorded_at:, entry_type: :spending
+  end
+
+  def create_recovery(amount_cents, recorded_at)
+    create :ledger_entry, user:, amount_cents:, recorded_at:, entry_type: :recovery
   end
 
   def create_budget_current_month(amount)

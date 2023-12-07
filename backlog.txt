@@ -16,6 +16,7 @@
 
 [o] enable registering reimbusements
 
+[ ] make sure status is clear for last day of period
 [ ] rethink error handling
 [ ] status: when it's the last day of hte month, it should be idiomatic
 [ ] create GPT layer
