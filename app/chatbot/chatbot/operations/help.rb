@@ -3,29 +3,30 @@ module Chatbot
     class Help < BaseOperation
       def execute
         <<~HELP
-          Available Operations:
+          Commands:
 
           *set budget <period> <amount>*
-           _Sets the budget for the given period to the given amount._
-           _<period> could be 'january', 'today', 'this month', 'Thursday', etc_
+           _Define budget for 'january', 'today', 'this month', 'Thursday', etc._
 
           *spent <amount> <category>*
-           _Registers the given amount as spending to the given category_
+           _Log spending amount under a category._
 
           *spending <period>*
-          _Returns the spending ovoerview for given period_
+           _Show spending summary for a period._
 
           *status*
-           _Returns the budget status for the current period_
+           _Display current budget status._
 
           *set timezone <timezone>*
-           _Sets your current timezone_
+           _Update your timezone._
 
           *set currency <currency>*
-           _Sets your currency_
+           _Change your currency._
 
           *help*
-           _Returns this help message_
+           _Get this help message._
+
+          Tip: Type 'budget', 'timezone', or 'currency' to view current settings.
         HELP
       end
     end
