@@ -26,14 +26,14 @@ RSpec.describe Chatbot::Operations::Status do
     '20 euros spent today' => {
       input: 'status',
       setup: 'create_spending 20_00, 1.hour.ago',
-      output: "You have *€38.82* left today. You've already spent *€20*.\n\n" \
+      output: "You have *€38.82* left today. You've spent *€20*.\n\n" \
               "You have *€980* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
     'multiple spending' => {
       input: 'status',
       setup: "create_spending 100_00, 5.days.ago; create_spending 20_00, 2.hours.ago; create_spending 10_00, 2.hours.ago",
-      output: "You have *€22.94* left today. You've already spent *€30*.\n\n" \
+      output: "You have *€22.94* left today. You've spent *€30*.\n\n" \
               "You have *€870* left for December 2023.\n\n" \
               "Current daily limit is *€52.94*."
     },
@@ -104,11 +104,18 @@ RSpec.describe Chatbot::Operations::Status do
     },
     'money recovered' => {
       input: 'status',
-      setup: 'create_spending 100_00, 1.hour.ago; create_recovery 50_00, 1.hour.ago',
-      output: "You have *€8.82* left today. You've spent *€100* and recovered *€50*.\n\n" \
-              "You have *€950* left for December 2023.\n\n" \
+      setup: 'create_spending 20_00, 1.hour.ago; create_recovery 20_00, 1.hour.ago',
+      output: "You have *€58.82* left today. You've spent *€20* and recovered *€20*.\n\n" \
+              "You have *€1,000* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
+    # 'more money recovered than spent' => {
+    #   input: 'status',
+    #   setup: 'create_spending 100_00, 5.days.ago; create_spending 20_00, 1.hour.ago; create_recovery 30_00, 1.hour.ago',
+    #   output: "You have *€53.52* left today. You've spent *€20* and recovered *€30*.\n\n" \
+    #           "You have *€910* left for December 2023.\n\n" \
+    #           "Current daily limit is *€53.52*."
+    # },
   }
 
   def create_spending(amount_cents, recorded_at)
