@@ -4,7 +4,7 @@ module Chatbot
       def execute
         return 'No budget set for current period.' unless budget
 
-        result = Budgets::Statuses::Calculate.call(user:, budget:)
+        result = Budgets::Stats::Calculate.call(user:, budget:)
 
         return reply(result.value) if result.success?
 
@@ -14,25 +14,25 @@ module Chatbot
       private
 
       def reply(status)
-        return reply_period_over_budget(status)    if status.period_remaining_amount.negative?
-        return reply_period_spot_on_budget(status) if status.period_remaining_amount.zero?
-        return reply_daily_over_budget(status)     if status.today_remaining_amount.negative?
-        return reply_daily_spot_on_budget(status)  if status.today_remaining_amount.zero?
+        return reply_period_over_budget(status)  if status.period_remaining_amount.negative?
+        return reply_period_exact_budget(status) if status.period_remaining_amount.zero?
+        return reply_today_over_budget(status)   if status.today_remaining_amount.negative?
+        return reply_today_exact_budget(status)  if status.today_remaining_amount.zero?
 
         reply_under_budget(status)
       end
 
-      def reply_daily_over_budget(status)
-        remaining_daily_limit   = format_money(status.remaining_daily_limit)
+      def reply_today_over_budget(status)
+        period_daily_limit   = format_money(status.period_daily_limit)
         amount_over             = format_money(status.today_remaining_amount.abs)
         period_remaining_amount = format_money(status.period_remaining_amount)
 
         "You are over budget by *#{amount_over}* today.\n\n" \
         "You have *#{period_remaining_amount}* left for #{period_title}.\n\n" \
-        "Adjusted daily limit is *#{remaining_daily_limit}* for the rest of the period."
+        "Adjusted daily limit is *#{period_daily_limit}* for the rest of the period."
       end
 
-      def reply_period_spot_on_budget(status)
+      def reply_period_exact_budget(status)
         period_spent_amount     = format_money(budget.amount_cents)
         period_remaining_amount = format_money(status.period_remaining_amount)
 
@@ -47,23 +47,24 @@ module Chatbot
         "You are over budget by *#{amount_over}* for #{period_title}."
       end
 
-      def reply_daily_spot_on_budget(status)
-        today_daily_limit       = format_money(status.today_daily_limit)
-        remaining_daily_limit   = format_money(status.remaining_daily_limit)
+      def reply_today_exact_budget(status)
+        today_limit       = format_money(status.today_limit)
+        period_daily_limit   = format_money(status.period_daily_limit)
         period_remaining_amount = format_money(status.period_remaining_amount)
 
-        "Today's spending is spot on the budget, exactly *#{today_daily_limit}*.\n\n" \
+        "Today's spending is spot on the budget, exactly *#{today_limit}*.\n\n" \
         "You have *#{period_remaining_amount}* left for #{period_title}.\n\n" \
-        "Daily limit remains at *#{remaining_daily_limit}* for the rest of the period."
+        "Daily limit remains at *#{period_daily_limit}* for the rest of the period."
       end
 
       def reply_under_budget(status)
-        remaining_daily_limit   = format_money(status.remaining_daily_limit)
+        period_daily_limit   = format_money(status.period_daily_limit)
         period_remaining_amount = format_money(status.period_remaining_amount)
 
         "#{current_day_status(status)}\n\n" \
-        "You have *#{period_remaining_amount}* left for #{period_title}.\n\n" \
-        "Current daily limit is *#{remaining_daily_limit}*."
+        "You have *#{period_remaining_amount}* left for #{period_title}" \
+        "#{period_surplus_message(status)}.\n\n" \
+        "Current daily limit is *#{period_daily_limit}*."
       end
 
       def current_day_status(status)
@@ -80,7 +81,15 @@ module Chatbot
           "You've spent *#{today_spent_amount}*#{recovery_message}." :
           "You haven't spent anything yet#{recovery_message}."
 
-        "You have *#{today_remaining_amount}* left today. #{spent_today_text}"
+        "You have *#{today_remaining_amount}* left for the day. #{spent_today_text}"
+      end
+
+      def period_surplus_message(status)
+        return '' unless status.period_surplus_amount.positive?
+
+        surplus_amount = format_money(status.period_surplus_amount)
+
+        " with an additional #{surplus_amount} surplus"
       end
 
       def format_money(amount)

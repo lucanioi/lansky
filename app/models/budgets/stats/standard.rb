@@ -1,5 +1,5 @@
 module Budgets
-  module Statuses
+  module Stats
     class Standard < Base
       def today_remaining_amount
         current_daily_limit - balance_today
@@ -9,15 +9,16 @@ module Budgets
         budgeted_amount - balance_period
       end
 
-      def today_daily_limit
+      def today_limit
         current_daily_limit
       end
 
       # daily limit for the rest of the period not including today
-      def remaining_daily_limit
-        return adjusted_daily_limit if today_remaining_amount.negative?
+      def period_daily_limit
+        return period_remaining_amount if days_left_in_period <= 1
+        return current_daily_limit if today_remaining_amount >= 0
 
-        current_daily_limit
+        period_remaining_amount / (days_left_in_period - 1)
       end
 
       private
@@ -29,10 +30,10 @@ module Budgets
       end
 
       # daily limit taking into account today's balance
-      def adjusted_daily_limit(include_today: false)
+      def adjusted_period_limit
         return period_remaining_amount if days_left_in_period <= 1
 
-        period_remaining_amount / (days_left_in_period - (include_today ? 0 : 1))
+        period_remaining_amount / (days_left_in_period - 1)
       end
     end
   end

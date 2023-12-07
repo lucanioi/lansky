@@ -12,49 +12,49 @@ RSpec.describe Chatbot::Operations::Status do
   it_behaves_like 'operation', {
     'no spending' => {
       input: 'status',
-      output: "You have *€58.82* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€58.82* left for the day. You haven't spent anything yet.\n\n" \
               "You have *€1,000* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
     '100 euros spent' => {
       input: 'status',
       setup: 'create_spending 100_00, 5.days.ago',
-      output: "You have *€52.94* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€52.94* left for the day. You haven't spent anything yet.\n\n" \
               "You have *€900* left for December 2023.\n\n" \
               "Current daily limit is *€52.94*."
     },
     '20 euros spent today' => {
       input: 'status',
       setup: 'create_spending 20_00, 1.hour.ago',
-      output: "You have *€38.82* left today. You've spent *€20*.\n\n" \
+      output: "You have *€38.82* left for the day. You've spent *€20*.\n\n" \
               "You have *€980* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
     'multiple spending' => {
       input: 'status',
       setup: "create_spending 100_00, 5.days.ago; create_spending 20_00, 2.hours.ago; create_spending 10_00, 2.hours.ago",
-      output: "You have *€22.94* left today. You've spent *€30*.\n\n" \
+      output: "You have *€22.94* left for the day. You've spent *€30*.\n\n" \
               "You have *€870* left for December 2023.\n\n" \
               "Current daily limit is *€52.94*."
     },
     'spending in other month' => {
       input: 'status',
       setup: 'create_spending 100_00, 1.month.ago',
-      output: "You have *€58.82* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€58.82* left for the day. You haven't spent anything yet.\n\n" \
               "You have *€1,000* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
     'spending in other year' => {
       input: 'status',
       setup: 'create_spending 100_00, 1.year.ago',
-      output: "You have *€58.82* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€58.82* left for the day. You haven't spent anything yet.\n\n" \
       "You have *€1,000* left for December 2023.\n\n" \
       "Current daily limit is *€58.82*."
     },
     'leap year' => {
       input: 'status',
       setup: 'Timecop.freeze(DateTime.new(2024, 2, 15)); create_budget_current_month 1_000_00; create_spending 100_00, 1.day.ago',
-      output: "You have *€60* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€60* left for the day. You haven't spent anything yet.\n\n" \
               "You have *€900* left for February 2024.\n\n" \
               "Current daily limit is *€60*."
     },
@@ -66,14 +66,14 @@ RSpec.describe Chatbot::Operations::Status do
     'last day of month' => {
       input: 'status',
       setup: 'Timecop.freeze(DateTime.new(2023, 12, 31))',
-      output: "You have *€1,000* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€1,000* left for the day. You haven't spent anything yet.\n\n" \
               "You have *€1,000* left for December 2023.\n\n" \
               "Current daily limit is *€1,000*."
     },
     'spending with decimal amount' => {
       input: 'status',
       setup: 'create_spending 100_50, 5.days.ago',
-      output: "You have *€52.91* left today. You haven't spent anything yet.\n\n" \
+      output: "You have *€52.91* left for the day. You haven't spent anything yet.\n\n" \
               "You have *€899.50* left for December 2023.\n\n" \
               "Current daily limit is *€52.91*."
     },
@@ -105,17 +105,31 @@ RSpec.describe Chatbot::Operations::Status do
     'money recovered' => {
       input: 'status',
       setup: 'create_spending 20_00, 1.hour.ago; create_recovery 20_00, 1.hour.ago',
-      output: "You have *€58.82* left today. You've spent *€20* and recovered *€20*.\n\n" \
+      output: "You have *€58.82* left for the day. You've spent *€20* and recovered *€20*.\n\n" \
               "You have *€1,000* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
-    'more money recovered than spent' => {
+    'more money recovered than spent today' => {
       input: 'status',
       setup: 'create_spending 100_00, 5.days.ago; create_spending 20_00, 1.hour.ago; create_recovery 30_00, 1.hour.ago',
-      output: "You have *€53.52* left today. You've spent *€20* and recovered *€30*.\n\n" \
+      output: "You have *€53.52* left for the day. You've spent *€20* and recovered *€30*.\n\n" \
               "You have *€910* left for December 2023.\n\n" \
               "Current daily limit is *€53.52*."
     },
+    'more money recovered than spent in period' => {
+      input: 'status',
+      setup: 'create_spending 100_00, 5.days.ago; create_recovery 200_00, 1.hour.ago',
+      output: "You have *€58.82* left for the day. You haven't spent anything yet but recovered *€200*.\n\n" \
+              "You have *€1,000* left for December 2023 with an additional €100 surplus.\n\n" \
+              "Current daily limit is *€58.82*."
+    },
+    'more money recovered than spent in period previously' => {
+      input: 'status',
+      setup: 'create_recovery 200_00, 5.days.ago',
+      output: "You have *€58.82* left for the day. You haven't spent anything yet.\n\n" \
+              "You have *€1,000* left for December 2023 with an additional €200 surplus.\n\n" \
+              "Current daily limit is *€58.82*."
+    }
   }
 
   def create_spending(amount_cents, recorded_at)

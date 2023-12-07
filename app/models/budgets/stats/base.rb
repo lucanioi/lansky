@@ -1,5 +1,5 @@
 module Budgets
-  module Statuses
+  module Stats
     class Base
       attr_reader :today_spent_amount,
                   :today_recovered_amount,
@@ -20,6 +20,10 @@ module Budgets
         @period_recovered_amount = period_recovered_amount
         @budgeted_amount         = budgeted_amount
         @period_range            = period_range
+      end
+
+      def period_surplus_amount
+        [balance_period, 0].min.abs
       end
 
       private

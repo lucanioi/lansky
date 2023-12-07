@@ -1,5 +1,5 @@
 module Budgets
-  module Statuses
+  module Stats
     class Calculate
       include Service
 
@@ -17,9 +17,9 @@ module Budgets
       private
 
       def status_class
-        return Budgets::Statuses::Surplus if surplus?
+        return Budgets::Stats::Surplus if surplus?
 
-        Budgets::Statuses::Standard
+        Budgets::Stats::Standard
       end
 
       def today_spent_amount
@@ -59,7 +59,8 @@ module Budgets
       end
 
       def surplus?
-        today_recovered_amount > today_spent_amount
+        today_recovered_amount > today_spent_amount ||
+          period_recovered_amount > period_spent_amount
       end
 
       attr_accessor :user, :budget
