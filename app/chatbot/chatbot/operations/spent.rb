@@ -4,7 +4,7 @@ module Chatbot
       params :amount_cents, :category_name
 
       def execute
-        result = Spendings::Create.call(category:, amount_cents:, user:)
+        result = LedgerEntries::CreateSpending.call(user:, amount_cents:, category:, )
 
         return reply(result.value) if result.success?
 
@@ -27,7 +27,7 @@ module Chatbot
 
       def category
         @category ||=
-          SpendingCategories::FindOrCreate.call(name: category_name).value
+          LedgerCategories::FindOrCreate.call(name: category_name).value
       end
 
       def format(amount)

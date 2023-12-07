@@ -1,4 +1,4 @@
-module SpendingCategories
+module LedgerCategories
   class FindOrCreate
     include Service
 
@@ -9,11 +9,11 @@ module SpendingCategories
     private
 
     def find_or_create
-      SpendingCategory.find_or_create_by(name: normalized_name)
+      LedgerCategory.find_or_create_by(name: normalized_name)
     end
 
     def normalized_name
-      return SpendingCategory::UNCATEGORIZED unless name
+      return LedgerCategory::UNCATEGORIZED unless name
 
       name.downcase.strip
     end

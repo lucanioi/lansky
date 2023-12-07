@@ -48,8 +48,9 @@ RSpec.describe Chatbot::Operations::Spending do
     }
   }
 
-  def create_spending(amount_cents, spent_at, category)
-    create :spending, user:, amount_cents:, spent_at:,
-           category: SpendingCategory.find_or_create_by(name: category)
+  def create_spending(amount_cents, recorded_at, category)
+    create :ledger_entry, user:, amount_cents:, recorded_at:,
+           category: LedgerCategory.find_or_create_by(name: category),
+           entry_type: :spending
   end
 end

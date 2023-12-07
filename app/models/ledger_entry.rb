@@ -5,5 +5,5 @@ class LedgerEntry < ApplicationRecord
   validates :amount_cents, presence: true, numericality: { greater_than: 0 }
   validates :category, presence: true
 
-  enum entry_type: { expense: 0, reimbursement: 1 }
+  enum entry_type: { spending: 0, reimbursement: 1 }
 end

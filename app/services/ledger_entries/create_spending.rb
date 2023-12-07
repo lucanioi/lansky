@@ -1,21 +1,22 @@
-module Spendings
-  class Create
+module LedgerEntries
+  class CreateSpending
     include Service
 
     def call
-      return spending if spending.save
+      return entry if entry.save
 
-      raise 'Spending could not be created: ' \
+      raise 'LedgerEntry could not be created: ' \
             "#{spending.errors.full_messages.join(", ")}"
     end
 
     private
 
-    def spending
-      @spending ||= Spending.new(
+    def entry
+      @entry ||= LedgerEntry.new(
         category: category,
         amount_cents: amount_cents,
-        spent_at: DateTime.current,
+        entry_type: LedgerEntry.entry_types[:spending],
+        recorded_at: DateTime.current,
         user: user
       )
     end

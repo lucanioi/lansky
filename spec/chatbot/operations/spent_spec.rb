@@ -42,19 +42,19 @@ RSpec.describe Chatbot::Operations::Spent do
     let(:user) { create :user }
 
     it 'creates a spending' do
-      expect { result }.to change { user.spendings.count }.by(1)
+      expect { result }.to change { user.ledger_entries.count }.by(1)
     end
 
     it 'sets the spending amount' do
       result
 
-      expect(user.spendings.last.amount_cents).to eq(550)
+      expect(user.ledger_entries.last.amount_cents).to eq(550)
     end
 
     it 'sets the spending category' do
       result
 
-      expect(user.spendings.last.category.name).to eq('food')
+      expect(user.ledger_entries.last.category.name).to eq('food')
     end
   end
 end

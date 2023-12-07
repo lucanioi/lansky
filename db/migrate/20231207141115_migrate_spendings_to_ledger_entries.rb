@@ -7,7 +7,7 @@ class MigrateSpendingsToLedgerEntries < ActiveRecord::Migration[7.1]
         amount_cents: spending.amount_cents,
         category: category,
         user_id: spending.user_id,
-        entry_type: :expense,
+        entry_type: LedgerEntry.entry_types[:spending],
         recorded_at: spending.spent_at,
         created_at: spending.created_at,
         updated_at: spending.updated_at

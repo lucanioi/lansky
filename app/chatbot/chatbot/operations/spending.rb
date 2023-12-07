@@ -4,7 +4,7 @@ module Chatbot
       params :period
 
       def execute
-        result = Spendings::GenerateOverview.call(user:, period_range:)
+        result = LedgerEntries::GenerateSpendingOverview.call(user:, period_range:)
 
         return reply(result.value) if result.success?
 

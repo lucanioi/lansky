@@ -46,14 +46,16 @@ module Budgets
     end
 
     def total_spending_for_period
-      user.spendings
-          .where(spent_at: period_range)
+      user.ledger_entries
+          .spending
+          .where(recorded_at: period_range)
           .sum(:amount_cents)
     end
 
     def amount_spent_today
-      user.spendings
-          .where(spent_at: Time.zone.today.bod..DateTime.current)
+      user.ledger_entries
+          .spending
+          .where(recorded_at: Time.zone.today.bod..DateTime.current)
           .sum(:amount_cents)
     end
 

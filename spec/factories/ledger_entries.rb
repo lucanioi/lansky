@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :ledger_entry do
-    amount_cents { 1 }
-    category { nil }
-    user { nil }
-    entry_type { 1 }
+    category { LedgerCategory.find_or_create_by(name: 'Food') }
+    amount_cents { 20_00 }
+    entry_type { :spending }
   end
 end

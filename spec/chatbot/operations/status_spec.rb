@@ -104,8 +104,8 @@ RSpec.describe Chatbot::Operations::Status do
     }
   }
 
-  def create_spending(amount_cents, spent_at)
-    create :spending, user:, amount_cents:, spent_at:
+  def create_spending(amount_cents, recorded_at)
+    create :ledger_entry, user:, amount_cents:, recorded_at:, entry_type: :spending
   end
 
   def create_budget_current_month(amount)

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :ledger_category do
-    name { "MyString" }
+    name { 'Food' }
   end
 end

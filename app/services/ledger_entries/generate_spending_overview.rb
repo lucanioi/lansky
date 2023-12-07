@@ -1,5 +1,5 @@
-module Spendings
-  class GenerateOverview
+module LedgerEntries
+  class GenerateSpendingOverview
     include Service
 
     Overview = Struct.new(:total_cents, :details, keyword_init: true)
@@ -24,7 +24,7 @@ module Spendings
 
     def spendings_in_period
       @spendings_in_period ||=
-        user.spendings.where(spent_at: period_range)
+        user.ledger_entries.spending.where(recorded_at: period_range)
     end
 
     def totals_by_category
