@@ -1,11 +1,11 @@
 module Chatbot
   module Operations
     class SetTimezone < BaseOperation
-      params :timezone
+      params :timezone_name
 
       def execute
-        return 'you need to specify a timezone' unless timezone.present?
-        return "invalid timezone: #{timezone}" unless timezone_obj
+        return 'you need to specify a timezone' unless timezone_name.present?
+        return "invalid timezone: #{timezone_name}" unless timezone
 
         result = Users::Update.call(user:, params: update_params)
 
@@ -17,20 +17,20 @@ module Chatbot
       private
 
       def reply
-        "Timezone set to #{timezone_obj.name} #{timezone_obj.formatted_offset}"
+        "Timezone set to #{timezone.name} #{timezone.formatted_offset}"
       end
 
       def update_params
         {
-          timezone: timezone_obj.name
+          timezone: timezone.name
         }
       end
 
-      def timezone_obj
-        @timezone_obj ||=
-          ActiveSupport::TimeZone.new(timezone.capitalize) ||
-          ActiveSupport::TimeZone.new(timezone.upcase) ||
-          ActiveSupport::TimeZone.new(timezone)
+      def timezone
+        @timezone ||=
+          ActiveSupport::TimeZone.new(timezone_name.capitalize) ||
+          ActiveSupport::TimeZone.new(timezone_name.upcase) ||
+          ActiveSupport::TimeZone.new(timezone_name)
       end
     end
   end

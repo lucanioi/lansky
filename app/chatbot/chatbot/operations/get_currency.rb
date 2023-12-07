@@ -2,7 +2,7 @@ module Chatbot
   module Operations
     class GetCurrency < BaseOperation
       def execute
-        "Your current currency setting is #{currency}"
+        "Currency: #{currency}"
       end
 
       private

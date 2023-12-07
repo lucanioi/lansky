@@ -13,12 +13,12 @@ RSpec.describe Chatbot::Operations::GetCurrency do
   it_behaves_like 'operation', {
     'returns default' => {
       input: 'get currency',
-      output: 'Your current currency setting is USD',
+      output: 'Currency: USD',
     },
     'returns user currency' => {
       input: 'get currency',
       setup: 'update_user_currency "EUR"',
-      output: 'Your current currency setting is EUR',
+      output: 'Currency: EUR',
     },
   }
 
