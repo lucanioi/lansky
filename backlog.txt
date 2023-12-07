@@ -14,7 +14,7 @@
 [x] get currency / timezone
 [x] refactor to use LedgerEntry instead of Spending
 
-[o] enable registering income
+[o] enable registering reimbusements
 
 [ ] rethink error handling
 [ ] status: when it's the last day of hte month, it should be idiomatic
