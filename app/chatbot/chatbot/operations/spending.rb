@@ -28,10 +28,10 @@ module Chatbot
       end
 
       def spending_details(overview)
-        amount_width = overview.details.max_by(&:amount).amount.to_s.size + 1
+        width_amount = overview.details.max_by(&:amount).amount.to_s.size + 1
 
         overview.details.map do |detail|
-          formatted_amount = format_detail_amount(detail.amount, amount_width)
+          formatted_amount = format_detail_amount(detail.amount, width_amount)
           "```#{formatted_amount}``` - #{detail.category}"
         end.join("\n")
       end
