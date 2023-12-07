@@ -9,9 +9,11 @@
 [x] use period_ranges
 [x] user money gem and use it for currency formatting
 [x] fix display bug with timezone stuff
+[x] enable `set currency` operation
 
-[O] enable `set currency` operation
+[O] create rails helper to generate operation
 
+[ ] get currency / timezone
 [ ] create GPT layer
-[ ] error handling
+[ ] rethink error handling
 [ ] status: when it's the last day of hte month, it should be idiomatic

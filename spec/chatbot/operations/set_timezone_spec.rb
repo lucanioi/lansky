@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Chatbot::Operations::SetTimezone do
-  before do
-    Timecop.freeze(DateTime.new(2023, 12, 6))
-  end
+  before { Timecop.freeze(DateTime.new(2023, 12, 6)) }
+  after  { Timecop.return }
 
   it_behaves_like 'operation', {
     'basic' => {
@@ -17,6 +16,10 @@ RSpec.describe Chatbot::Operations::SetTimezone do
     'invalid timezone' => {
       input: 'set timezone foobar',
       output: 'invalid timezone: foobar',
+    },
+    'missing timezone' => {
+      input: 'set timezone',
+      output: 'you need to specify a timezone',
     },
   }
 

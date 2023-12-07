@@ -8,13 +8,15 @@ Currently the Twilio sandbox is being used. To use the sandbox, you must be a ve
 
 ### Supported Operations
 
-- `set budget <month> <amount>`: Sets the budget for the given month to the given amount
-- `get budget <month>`: Gets the budget for the given month. `budget` is an alias for `get budget`
+- `set budget <period> <amount>`: Sets the budget for the given period to the given amount
+- `get budget <period>`: Gets the budget for the given period. `budget` is an alias for `get budget`
 - `spent <amount> <category>`: Registers the given amount as spending to the given category
-- `status`: Returns the budget status for the current period (month)
+- `status`: Returns the budget status for the current period
 - `spending <period>`: Returns the spending for the given period. `period` can be `today`, `yesterday`, `week`, `month`, `year`, or `all time`. It includes the total spent and the spending per category.
+- `set currency <currency>`: Sets the currency to the given currency.
+- `set timezone <timezone>`: Sets the timezone to the given timezone. Timezone must be a valid timezone location like 'Madrid', 'Japan', or 'America/Los_Angeles'
 
-`month` could be substituted by `this month` or `next month` to refer to the current or next month respectively. Similarly, words like `today` and `yesterday` could also substitute for specific dates.
+`period` can accept names of months and days like `january`, `monday`, as well as deictic expressions like `this month`, `last week`, `next year`, `yesterday`, `today`, `tomorrow`, etc.
 
 ## Technical Details
 

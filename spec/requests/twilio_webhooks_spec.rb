@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Twilio Webhooks', type: :request do
-  before do
-    Timecop.freeze(Time.zone.local(2023, 10, 12, 12, 0, 0))
-  end
+  before { Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0)) }
+  after  { Timecop.return }
 
   it 'responds with a 200 status' do
     send_message('')
@@ -44,8 +43,10 @@ RSpec.describe 'Twilio Webhooks', type: :request do
                         Current daily limit is *€49.50*.
                       TEXT
 
-      send_message    'spent 5.25 drinks'
-      expect_response 'Spent €5.25 on drinks'
+      Timecop.freeze 2.hours.ago do
+        send_message    'spent 5.25 drinks'
+        expect_response 'Spent €5.25 on drinks'
+      end
 
       send_message    'spending today'
       expect_response <<~TEXT.strip
@@ -70,12 +71,29 @@ RSpec.describe 'Twilio Webhooks', type: :request do
 
       send_message    'spending today'
       expect_response <<~TEXT.strip
-                        Total spent (Thu, 12 Oct 2023):
-                        *€25.25*
+                        Total spent (Fri, 13 Oct 2023):
+                        *€20*
 
                         ```20.00``` - food
-                        ``` 5.25``` - drinks
                       TEXT
+
+      send_message    'set timezone UTC'
+      expect_response 'Timezone set to UTC +00:00'
+
+      send_message    'set currency JPY'
+      expect_response 'Currency set to JPY'
+
+      send_message    'spending today'
+      expect_response <<~TEXT.strip
+                        Total spent (Thu, 12 Oct 2023):
+                        *¥2,525*
+
+                        ```2,000``` - food
+                        ```  525``` - drinks
+                      TEXT
+
+      send_message    'set currency EUR'
+      expect_response 'Currency set to EUR'
     end
   end
 

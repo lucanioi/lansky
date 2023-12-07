@@ -9,6 +9,7 @@ module Webhooks
     HELP       = /^help/
     SPENDING   = /^spending/
     SET_TZ     = /^set timezone/
+    SET_CUR    = /^set currency/
 
     # for internal testing purposes
     TRIGGER_ERROR = /^trigger error/
@@ -37,6 +38,7 @@ module Webhooks
       when HELP       then Chatbot::Operations::Help
       when SPENDING   then Chatbot::Operations::Spending
       when SET_TZ     then Chatbot::Operations::SetTimezone
+      when SET_CUR    then Chatbot::Operations::SetCurrency
       when TIME       then time_operation
       when TRIGGER_ERROR then (raise 'error triggered')
       end
@@ -69,7 +71,7 @@ module Webhooks
         <<~TEXT
           Time.current: #{Time.current}
           DateTime.current: #{DateTime.current}
-          Date.today: #{Date.today}
+          Time.zone.today: #{Time.zone.today}
           Date.current: #{Date.current}
         TEXT
       end

@@ -9,9 +9,6 @@ module Chatbot
            _Sets the budget for the given period to the given amount._
            _<period> could be 'january', 'today', 'this month', 'Thursday', etc_
 
-          *get budget <period>*
-           _Gets the budget for the given period.
-
           *spent <amount> <category>*
            _Registers the given amount as spending to the given category_
 
@@ -20,6 +17,12 @@ module Chatbot
 
           *status*
            _Returns the budget status for the current period_
+
+          *set timezone <timezone>*
+           _Sets your current timezone_
+
+          *set currency <currency>*
+           _Sets your currency_
 
           *help*
            _Returns this help message_

@@ -5,20 +5,20 @@ module Chatbot
 
     STRING_TO_RANGE = {
       'yesterday'  => ->(*) { Date.yesterday.bod..Date.yesterday.eod },
-      'today'      => ->(*) { Date.today.bod    ..Date.today.eod },
+      'today'      => ->(*) { Time.zone.today.bod    ..Time.zone.today.eod },
       'tomorrow'   => ->(*) { Date.tomorrow.bod ..Date.tomorrow.eod },
 
-      'last week'  => ->(*) { Date.today.prev_week.bod..Date.today.prev_week.eow.eod },
-      'this week'  => ->(*) { Date.today.bow .bod     ..Date.today.eow.eod },
-      'next week'  => ->(*) { Date.today.next_week.bod..Date.today.next_week.eow.eod },
+      'last week'  => ->(*) { Time.zone.today.prev_week.bod..Time.zone.today.prev_week.eow.eod },
+      'this week'  => ->(*) { Time.zone.today.bow .bod     ..Time.zone.today.eow.eod },
+      'next week'  => ->(*) { Time.zone.today.next_week.bod..Time.zone.today.next_week.eow.eod },
 
-      'last month' => ->(*) { Date.today.prev_month.bom.bod..Date.today.prev_month.eom.eod },
-      'this month' => ->(*) { Date.today.bom.bod           ..Date.today.eom.eod },
-      'next month' => ->(*) { Date.today.next_month.bom.bod..Date.today.next_month.eom.eod },
+      'last month' => ->(*) { Time.zone.today.prev_month.bom.bod..Time.zone.today.prev_month.eom.eod },
+      'this month' => ->(*) { Time.zone.today.bom.bod           ..Time.zone.today.eom.eod },
+      'next month' => ->(*) { Time.zone.today.next_month.bom.bod..Time.zone.today.next_month.eom.eod },
 
-      'last year'  => ->(*) { Date.today.prev_year.boy.bod..Date.today.prev_year.eoy.eod },
-      'this year'  => ->(*) { Date.today.boy.bod          ..Date.today.eoy.eod },
-      'next year'  => ->(*) { Date.today.next_year.boy.bod..Date.today.next_year.eoy.eod },
+      'last year'  => ->(*) { Time.zone.today.prev_year.boy.bod..Time.zone.today.prev_year.eoy.eod },
+      'this year'  => ->(*) { Time.zone.today.boy.bod          ..Time.zone.today.eoy.eod },
+      'next year'  => ->(*) { Time.zone.today.next_year.boy.bod..Time.zone.today.next_year.eoy.eod },
     }
 
     STRING_TO_RANGE.merge!(
@@ -74,7 +74,7 @@ module Chatbot
 
     def day_range(day, direction = :forward, include_current = false)
       target_day  = DAYS_OF_WEEK.index(day) # 0-index
-      current_day = Date.today.wday - 1     # 0-index
+      current_day = Time.zone.today.wday - 1     # 0-index
 
       difference = (target_day - current_day) % 7
 
@@ -85,13 +85,13 @@ module Chatbot
         difference -= 7 unless difference.zero? && include_current
       end
 
-      target_date = Date.today + difference.days
+      target_date = Time.zone.today + difference.days
       target_date.bod..target_date.eod
     end
 
     def month_range(month, direction = :forward, include_current = false)
       target_month  = MONTHS_OF_YEAR.index(month) # 0-index
-      current_month = Date.today.month - 1        # 0-index
+      current_month = Time.zone.today.month - 1        # 0-index
 
       difference = (target_month - current_month) % 12
 
@@ -102,7 +102,7 @@ module Chatbot
         difference -= 12 unless difference.zero? && include_current
       end
 
-      target_date = Date.today + difference.months
+      target_date = Time.zone.today + difference.months
       target_date.bom.bod..target_date.eom.eod
     end
 

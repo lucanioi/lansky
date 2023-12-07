@@ -53,12 +53,12 @@ module Budgets
 
     def amount_spent_today
       user.spendings
-          .where(spent_at: Date.today.bod..DateTime.current)
+          .where(spent_at: Time.zone.today.bod..DateTime.current)
           .sum(:amount_cents)
     end
 
     def days_left_in_period
-      remaining_days = (period_end.to_date - Date.today).to_i + 1
+      remaining_days = (period_end.to_date - Time.zone.today).to_i + 1
 
       [remaining_days, 0].max
     end

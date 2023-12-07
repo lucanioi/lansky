@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Chatbot::Operations::SetBudget do
-  before do
-    Timecop.freeze(DateTime.new(2023, 10, 12))
-  end
+  before { Timecop.freeze(DateTime.new(2023, 10, 12)) }
+  after  { Timecop.return }
 
   it_behaves_like 'operation', {
     'this month' => {
@@ -58,8 +57,8 @@ RSpec.describe Chatbot::Operations::SetBudget do
     it 'sets the budget period' do
       result
 
-      expect(user.budgets.last.period_start).to approx_eq(Date.today.bom)
-      expect(user.budgets.last.period_end).to approx_eq(Date.today.eom.eod)
+      expect(user.budgets.last.period_start).to approx_eq(Time.zone.today.bom)
+      expect(user.budgets.last.period_end).to approx_eq(Time.zone.today.eom.eod)
     end
 
     context 'when the specified month is for next year' do
@@ -68,16 +67,16 @@ RSpec.describe Chatbot::Operations::SetBudget do
       it 'sets the budget period' do
         result
 
-        expect(user.budgets.last.period_start).to approx_eq(DateTime.new(Date.today.year + 1, 1, 1))
-        expect(user.budgets.last.period_end).to approx_eq(DateTime.new(Date.today.year + 1, 1, 31).eod)
+        expect(user.budgets.last.period_start).to approx_eq(DateTime.new(Time.zone.today.year + 1, 1, 1))
+        expect(user.budgets.last.period_end).to approx_eq(DateTime.new(Time.zone.today.year + 1, 1, 31).eod)
       end
     end
 
     context 'when budget already exists for the month' do
       let!(:budget) do
         create :budget,
-                period_start: Date.today.bom,
-                period_end: Date.today.eom.eod,
+                period_start: Time.zone.today.bom,
+                period_end: Time.zone.today.eom.eod,
                 amount_cents: 500_00,
                 user:
       end

@@ -13,6 +13,8 @@ RSpec.describe Chatbot::Operations::Spending do
     create_spending(200_00, 5.days.ago, 'clothes')
   end
 
+  after { Timecop.return }
+
   it_behaves_like 'operation', {
     'today' => {
       input: 'spending today',

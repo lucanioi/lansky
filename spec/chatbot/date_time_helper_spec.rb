@@ -5,6 +5,8 @@ RSpec.describe Chatbot::DateTimeHelper do
     Timecop.freeze(DateTime.new(2023, 10, 12))
   end
 
+  after { Timecop.return }
+
   describe '.parse_period' do
     test_cases = {
       'yesterday' => 'Wed, 11 Oct 2023 00:00:00.000000000 UTC +00:00..Wed, 11 Oct 2023 23:59:59.999999999 UTC +00:00',

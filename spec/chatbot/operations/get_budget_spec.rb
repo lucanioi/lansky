@@ -11,6 +11,8 @@ RSpec.describe Chatbot::Operations::GetBudget do
             user:
   end
 
+  after { Timecop.return }
+
   it_behaves_like 'operation', {
     'basic' => {
       input: 'get budget october',

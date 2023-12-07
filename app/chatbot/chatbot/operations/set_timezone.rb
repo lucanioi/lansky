@@ -4,6 +4,7 @@ module Chatbot
       params :timezone
 
       def execute
+        return 'you need to specify a timezone' unless timezone.present?
         return "invalid timezone: #{timezone}" unless timezone_obj
 
         result = Users::Update.call(user:, params: update_params)

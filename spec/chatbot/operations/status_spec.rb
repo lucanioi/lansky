@@ -7,6 +7,8 @@ RSpec.describe Chatbot::Operations::Status do
     create_budget_current_month 1_000_00
   end
 
+  after { Timecop.return }
+
   it_behaves_like 'operation', {
     'no spending' => {
       input: 'status',
@@ -110,7 +112,7 @@ RSpec.describe Chatbot::Operations::Status do
     create :budget,
            user: user,
            amount_cents: amount,
-           period_start: Date.today.bom,
-           period_end: Date.today.eom
+           period_start: Time.zone.today.bom,
+           period_end: Time.zone.today.eom
   end
 end
