@@ -1,5 +1,5 @@
 class LedgerEntry < ApplicationRecord
-  belongs_to :category, class_name: 'LeedgerCategory', foreign_key: 'ledger_category_id'
+  belongs_to :category, class_name: 'LedgerCategory', foreign_key: 'ledger_category_id'
   belongs_to :user
 
   validates :amount_cents, presence: true, numericality: { greater_than: 0 }

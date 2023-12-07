@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_07_132617) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_07_141115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_132617) do
     t.integer "entry_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "recorded_at"
     t.index ["entry_type"], name: "index_ledger_entries_on_entry_type"
     t.index ["ledger_category_id"], name: "index_ledger_entries_on_ledger_category_id"
     t.index ["user_id"], name: "index_ledger_entries_on_user_id"
