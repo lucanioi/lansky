@@ -100,6 +100,18 @@ RSpec.describe 'Twilio Webhooks', type: :request do
 
       send_message    'set currency EUR'
       expect_response 'Currency set to EUR'
+
+      send_message    'recovered 5.25 food'
+      expect_response 'Recovered €5.25 (food)'
+
+      send_message    'status'
+      expect_response <<~TEXT.strip
+                        You have *€29.50* left for the day. You've spent *€25.25* and recovered *€5.25*.
+
+                        You have *€970* left for October 2023.
+
+                        Current daily limit is *€49.50*.
+                      TEXT
     end
   end
 
