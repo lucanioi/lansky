@@ -9,9 +9,7 @@ module Budgets
       :amount_left_period,
       :today_daily_limit,
       :remaining_daily_limit,
-      :current_daily_limit,
-      :adjusted_daily_limit,
-      keyword_init: true
+      keyword_init: true,
     )
 
     def call
@@ -22,15 +20,15 @@ module Budgets
         amount_left_period:,
         today_daily_limit:,
         remaining_daily_limit:,
-        current_daily_limit:,
-        adjusted_daily_limit:
       )
     end
 
     private
 
     def amount_left_today
-      current_daily_limit - [balance_today, 0].max
+      return adjusted_daily_limit(include_today: true) if balance_today.negative?
+
+      current_daily_limit - balance_today
     end
 
     def amount_left_period
@@ -38,12 +36,15 @@ module Budgets
     end
 
     def today_daily_limit
+      return adjusted_daily_limit(include_today: true) if balance_today.negative?
+
       current_daily_limit
     end
 
     # This is the daily limit for the rest of the period not including today
     def remaining_daily_limit
       return adjusted_daily_limit if amount_left_today.negative?
+      return adjusted_daily_limit(include_today: true) if balance_today.negative?
 
       current_daily_limit
     end
@@ -55,11 +56,10 @@ module Budgets
     end
 
     # This is the amount left per day taking into account today's balance
-    # It only counts the days after today
-    def adjusted_daily_limit
+    def adjusted_daily_limit(include_today: false)
       return amount_left_period if days_left_in_period <= 1
 
-      amount_left_period / (days_left_in_period - 1)
+      amount_left_period / (days_left_in_period - (include_today ? 0 : 1))
     end
 
     def amount_spent_today
