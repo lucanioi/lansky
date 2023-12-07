@@ -1,3 +1,5 @@
+[△] rethink error handling
+
 [x] current month status
 [x] allow single decimal point number
 [x] include today's budget left in status
@@ -15,6 +17,4 @@
 [x] refactor to use LedgerEntry instead of Spending
 [x] enable registering reimbusements
 
-[△] rethink error handling
-
-[ ] create GPT layer
+[o] create GPT layer
