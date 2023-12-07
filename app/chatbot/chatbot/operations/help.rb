@@ -6,16 +6,16 @@ module Chatbot
           Available Operations:
 
           *set budget <period> <amount>*
-           _Sets the budget for the given period to the given amount.
-           <period> could be 'january', 'today', 'this month', 'Thursday', etc_
+           _Sets the budget for the given period to the given amount._
+           _<period> could be 'january', 'today', 'this month', 'Thursday', etc_
 
           *get budget <period>*
-           _Gets the budget for the given period. `budget` is an alias for `get budget`_
+           _Gets the budget for the given period.
 
           *spent <amount> <category>*
            _Registers the given amount as spending to the given category_
 
-          *spening <period>*
+          *spending <period>*
           _Returns the spending ovoerview for given period_
 
           *status*
