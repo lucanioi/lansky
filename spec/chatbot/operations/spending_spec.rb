@@ -4,12 +4,12 @@ RSpec.describe Chatbot::Operations::Spending do
   before do
     Timecop.freeze(DateTime.new(2023, 10, 12, 12, 0, 0))
 
-    # today's spendings
+    # today's spending
     create_spending(32_00, 1.hour.ago, 'food')
     create_spending(10_00, 30.minutes.ago, 'food')
     create_spending(80_88, 2.hours.ago, 'clothes')
 
-    # this month's spendings
+    # this month's spending
     create_spending(200_00, 5.days.ago, 'clothes')
   end
 
@@ -30,13 +30,13 @@ RSpec.describe Chatbot::Operations::Spending do
               "```280.88``` - clothes\n" \
               "``` 42.00``` - food"
     },
-    'No spendings' => {
+    'No spending' => {
       input: 'spending last month',
-      output: "No spendings found for September 2023"
+      output: "No spending found for September 2023"
     },
     'Given period is future' => {
       input: 'spending next month',
-      output: "No spendings found for November 2023"
+      output: "No spending found for November 2023"
     },
     'Invalid period' => {
       input: 'spending foobar',

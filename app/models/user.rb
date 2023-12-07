@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_many :spendings, dependent: :destroy
   has_many :ledger_entries, dependent: :destroy
   has_many :budgets, dependent: :destroy
 

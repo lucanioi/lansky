@@ -12,6 +12,7 @@
 [x] enable `set currency` operation
 [x] create rails helper to generate operation
 [x] get currency / timezone
+[x] refactor to use LedgerEntry instead of Spending
 
 [o] enable registering income
 

@@ -24,7 +24,7 @@ module Chatbot
       end
 
       def no_spending_reply
-        "No spendings found for #{period_title}"
+        "No spending found for #{period_title}"
       end
 
       def spending_details(overview)

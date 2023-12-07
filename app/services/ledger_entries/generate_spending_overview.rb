@@ -12,7 +12,7 @@ module LedgerEntries
     private
 
     def total_cents
-      spendings_in_period.sum(:amount_cents)
+      spending_in_period.sum(:amount_cents)
     end
 
     def details
@@ -22,13 +22,13 @@ module LedgerEntries
         .reverse
     end
 
-    def spendings_in_period
-      @spendings_in_period ||=
+    def spending_in_period
+      @spending_in_period ||=
         user.ledger_entries.spending.where(recorded_at: period_range)
     end
 
     def totals_by_category
-      spendings_in_period.group(:category).sum(:amount_cents)
+      spending_in_period.group(:category).sum(:amount_cents)
     end
 
     attr_accessor :user, :period_range

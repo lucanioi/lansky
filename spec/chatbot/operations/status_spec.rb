@@ -30,7 +30,7 @@ RSpec.describe Chatbot::Operations::Status do
               "You have *€980* left for December 2023.\n\n" \
               "Current daily limit is *€58.82*."
     },
-    'multiple spendings' => {
+    'multiple spending' => {
       input: 'status',
       setup: "create_spending 100_00, 5.days.ago; create_spending 20_00, 2.hours.ago; create_spending 10_00, 2.hours.ago",
       output: "You have *€22.94* left today. You've already spent *€30*.\n\n" \
