@@ -10,10 +10,10 @@
 [x] user money gem and use it for currency formatting
 [x] fix display bug with timezone stuff
 [x] enable `set currency` operation
+[x] create rails helper to generate operation
+[x] get currency / timezone
 
-[O] create rails helper to generate operation
-
-[ ] get currency / timezone
 [ ] create GPT layer
 [ ] rethink error handling
 [ ] status: when it's the last day of hte month, it should be idiomatic
+[ ] enable registering income

@@ -3,17 +3,15 @@ module Webhooks
     include Service
 
     SET_BUDGET = /^set budget/
-    GET_BUDGET = /^get budget|^budget /
+    GET_BUDGET = /^get budget|^budget/
     SPENT      = /^spent/
     STATUS     = /^status/
     HELP       = /^help/
     SPENDING   = /^spending/
     SET_TZ     = /^set timezone/
+    GET_TZ     = /^get timezone|^timezone/
     SET_CUR    = /^set currency/
-
-    # for internal testing purposes
-    TRIGGER_ERROR = /^trigger error/
-    TIME          = /^time/
+    GET_CUR    = /^get currency|^currency/
 
     def call
       use_user_environment { process_message }
@@ -24,7 +22,7 @@ module Webhooks
     def process_message
       operation = parse_operation
 
-      return Service::Result.new(value: 'no comprendo') if operation.nil?
+      return Service::Result.new(value: 'Did not understand') unless operation
 
       operation.new(user:, message: normalized_message).execute
     end
@@ -38,9 +36,9 @@ module Webhooks
       when HELP       then Chatbot::Operations::Help
       when SPENDING   then Chatbot::Operations::Spending
       when SET_TZ     then Chatbot::Operations::SetTimezone
+      when GET_TZ     then Chatbot::Operations::GetTimezone
       when SET_CUR    then Chatbot::Operations::SetCurrency
-      when TIME       then time_operation
-      when TRIGGER_ERROR then (raise 'error triggered')
+      when GET_CUR    then Chatbot::Operations::GetCurrency
       end
     end
 
@@ -65,17 +63,6 @@ module Webhooks
     #####################
     # SIMPLE OPERATIONS #
     #####################
-
-    def time_operation
-      SimpleOperation.create do
-        <<~TEXT
-          Time.current: #{Time.current}
-          DateTime.current: #{DateTime.current}
-          Time.zone.today: #{Time.zone.today}
-          Date.current: #{Date.current}
-        TEXT
-      end
-    end
 
     module SimpleOperation
       def self.create(&block)

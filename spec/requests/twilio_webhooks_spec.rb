@@ -14,7 +14,7 @@ RSpec.describe 'Twilio Webhooks', type: :request do
     it 'responds with a message echoing the body in TwiML format' do
       send_message('Does not recognize this message')
 
-      expect(response.body).to eq(format_twiml('no comprendo'))
+      expect(response.body).to eq(format_twiml('Did not understand'))
     end
   end
 
@@ -67,7 +67,10 @@ RSpec.describe 'Twilio Webhooks', type: :request do
                       TEXT
 
       send_message    'set timezone Madrid'
-      expect_response 'Timezone set to Madrid +01:00'
+      expect_response 'Timezone set to Madrid +02:00' # summer time
+
+      send_message    'timezone'
+      expect_response 'Timezone: Madrid +02:00' # summer time
 
       send_message    'spending today'
       expect_response <<~TEXT.strip
@@ -82,6 +85,9 @@ RSpec.describe 'Twilio Webhooks', type: :request do
 
       send_message    'set currency JPY'
       expect_response 'Currency set to JPY'
+
+      send_message    'currency'
+      expect_response 'Currency: JPY'
 
       send_message    'spending today'
       expect_response <<~TEXT.strip

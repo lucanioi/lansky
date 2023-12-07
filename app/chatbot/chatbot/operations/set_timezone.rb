@@ -17,7 +17,9 @@ module Chatbot
       private
 
       def reply
-        "Timezone set to #{timezone.name} #{timezone.formatted_offset}"
+        Time.use_zone(timezone) do
+          "Timezone set to #{timezone.name} #{DateTime.current.formatted_offset}"
+        end
       end
 
       def update_params
