@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_07_142515) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_07_214606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_142515) do
     t.datetime "updated_at", null: false
     t.string "timezone", default: "UTC", null: false
     t.string "currency"
+    t.boolean "test_user", default: false
     t.index ["phone"], name: "index_users_on_phone", unique: true
   end
 

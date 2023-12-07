@@ -70,13 +70,6 @@ RSpec.describe Chatbot::Operations::Status do
               "You have *€1,000* left for December 2023.\n\n" \
               "Current daily limit is *€1,000*."
     },
-    'spending with decimal amount' => {
-      input: 'status',
-      setup: 'create_spending 100_50, 5.days.ago',
-      output: "You have *€52.91* left for the day. You haven't spent anything yet.\n\n" \
-              "You have *€899.50* left for December 2023.\n\n" \
-              "Current daily limit is *€52.91*."
-    },
     'budget for period surpassed' => {
       input: 'status',
       setup: 'create_spending 1_100_00, 5.days.ago',

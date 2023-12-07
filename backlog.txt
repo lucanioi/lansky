@@ -13,10 +13,8 @@
 [x] create rails helper to generate operation
 [x] get currency / timezone
 [x] refactor to use LedgerEntry instead of Spending
+[x] enable registering reimbusements
 
-[o] enable registering reimbusements
+[△] rethink error handling
 
-[ ] make sure status is clear for last day of period
-[ ] rethink error handling
-[ ] status: when it's the last day of hte month, it should be idiomatic
 [ ] create GPT layer

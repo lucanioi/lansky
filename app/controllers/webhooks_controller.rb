@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
       phone: params['From']
     )
 
-    body = result.success? ? result.value : result.error.message
+    body = result.success? ? result.value : '500: Internal server error'
 
     twiml = Twilio::TwiML::MessagingResponse.new do |r|
       r.message body:

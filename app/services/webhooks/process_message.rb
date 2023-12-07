@@ -26,6 +26,9 @@ module Webhooks
       return Service::Result.new(value: 'Did not understand') unless operation
 
       operation.new(user:, message: normalized_message).execute
+    rescue => e
+      value = user.test_user? ? e.message : 'Internal server error'
+      Service::Result.new(value:)
     end
 
     def parse_operation
