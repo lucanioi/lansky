@@ -13,7 +13,7 @@
 [x] create rails helper to generate operation
 [x] get currency / timezone
 
-[ ] create GPT layer
 [ ] rethink error handling
 [ ] status: when it's the last day of hte month, it should be idiomatic
 [ ] enable registering income
+[ ] create GPT layer
