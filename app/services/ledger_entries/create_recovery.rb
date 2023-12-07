@@ -1,5 +1,5 @@
 module LedgerEntries
-  class CreateSpending
+  class CreateRecovery
     include Service
 
     def call
@@ -15,7 +15,7 @@ module LedgerEntries
       @entry ||= LedgerEntry.new(
         category: category,
         amount_cents: amount_cents,
-        entry_type: LedgerEntry.entry_types[:spending],
+        entry_type: LedgerEntry.entry_types[:recovery],
         recorded_at: DateTime.current,
         user: user
       )

@@ -11,6 +11,9 @@ module Chatbot
           *spent <amount> <category>*
            _Log spending amount under a category._
 
+          *recovered <amount> <category>*
+           _Log recovered amount under a category._
+
           *spending <period>*
            _Show spending summary for a period._
 

@@ -5,6 +5,7 @@ module Webhooks
     SET_BUDGET = /^set budget/
     GET_BUDGET = /^get budget|^budget/
     SPENT      = /^spent/
+    RECOVERED  = /^recovered/
     STATUS     = /^status/
     HELP       = /^help/
     SPENDING   = /^spending/
@@ -39,6 +40,7 @@ module Webhooks
       when GET_TZ     then Chatbot::Operations::GetTimezone
       when SET_CUR    then Chatbot::Operations::SetCurrency
       when GET_CUR    then Chatbot::Operations::GetCurrency
+      when RECOVERED  then Chatbot::Operations::Recovered
       end
     end
 

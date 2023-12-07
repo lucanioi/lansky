@@ -1,57 +1,57 @@
 require 'rails_helper'
 
-RSpec.describe Chatbot::Operations::Spent do
+RSpec.describe Chatbot::Operations::Recovered do
   it_behaves_like 'operation', {
     'basic' => {
-      input: 'spent 10.32 food',
-      output: 'Spent €10.32 on food',
+      input: 'recovered 10.32 food',
+      output: 'Recovered €10.32 (food)',
     },
     'single decimal point' => {
-      input: 'spent 10.5 food',
-      output: 'Spent €10.50 on food'
+      input: 'recovered 10.5 food',
+      output: 'Recovered €10.50 (food)',
     },
     'multi-word category' => {
-      input: 'spent 0.50 cat food',
-      output: 'Spent €0.50 on cat food',
+      input: 'recovered 0.50 cat food',
+      output: 'Recovered €0.50 (cat food)',
     },
     'no category' => {
-      input: 'spent 100',
-      output: 'Spent €100 (uncategorized)',
+      input: 'recovered 100',
+      output: 'Recovered €100 (uncategorized)',
     },
     'invalid amount' => {
-      input: 'spent 98oi3j',
+      input: 'recovered 98oi3j',
       error: 'invalid amount',
     },
     'missing amount' => {
-      input: 'spent food',
+      input: 'recovered food',
       error: 'invalid amount',
     },
     'missing arguments' => {
-      input: 'spent',
+      input: 'recovered',
       error: 'invalid amount',
     },
     'rounding issues' =>{
-      input: 'spent 4.60 groceries',
-      output: 'Spent €4.60 on groceries',
+      input: 'recovered 4.60 groceries',
+      output: 'Recovered €4.60 (groceries)',
     }
   }
 
   describe 'state changes' do
     let(:result) { described_class.new(user:, message:).execute }
-    let(:message) { 'spent 5.50 food' }
+    let(:message) { 'recovered 5.50 food' }
     let(:user) { create :user }
 
     it 'creates a ledger entry' do
       expect { result }.to change { user.ledger_entries.count }.by(1)
     end
 
-    it 'sets the spending amount' do
+    it 'sets the recovery amount' do
       result
 
       expect(user.ledger_entries.last.amount_cents).to eq(550)
     end
 
-    it 'sets the spending category' do
+    it 'sets the recovery category' do
       result
 
       expect(user.ledger_entries.last.category.name).to eq('food')
