@@ -3,7 +3,7 @@ module Chatbot
     class SetTimezone < BaseOperation
       params :timezone_name
 
-      def execute
+      def run
         return 'you need to specify a timezone' unless timezone_name.present?
         return "invalid timezone: #{timezone_name}" unless timezone
 

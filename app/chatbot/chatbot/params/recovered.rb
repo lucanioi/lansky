@@ -1,21 +1,17 @@
 module Chatbot
   module Params
     class Recovered < BaseParams
-      def category_name
-        @category_name ||= extract_category_name
-      end
-
-      def amount_cents
-        @amount_cents ||= extract_amount
+      def to_h
+        { category_name:, amount_cents: }
       end
 
       private
 
-      def extract_category_name
+      def category_name
         argument.split(' ')[1..-1].join(' ').presence
       end
 
-      def extract_amount
+      def amount_cents
         amount = argument.split(' ')[0]
         ::Chatbot::MoneyHelper.parse_amount(amount) || (raise 'invalid amount')
       end

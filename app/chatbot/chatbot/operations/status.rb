@@ -1,7 +1,7 @@
 module Chatbot
   module Operations
     class Status < BaseOperation
-      def execute
+      def run
         return 'No budget set for current period.' unless budget
 
         result = Budgets::Stats::Calculate.run(user:, budget:)

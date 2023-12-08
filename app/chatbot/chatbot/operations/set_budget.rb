@@ -3,7 +3,7 @@ module Chatbot
     class SetBudget < BaseOperation
       params :period, :amount_cents
 
-      def execute
+      def run
         result = Budgets::Upsert.run(amount_cents:, period_range:, user:)
 
         return reply(result.value) if result.success?

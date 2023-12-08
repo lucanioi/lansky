@@ -1,9 +1,9 @@
 module Chatbot
   module Operations
     class Spent < BaseOperation
-      params :amount_cents, :category_name
+      params :category_name, :amount_cents
 
-      def execute
+      def run
         result = LedgerEntries::CreateSpending.run(user:, amount_cents:, category:, )
 
         return reply(result.value) if result.success?

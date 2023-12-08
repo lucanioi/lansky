@@ -3,7 +3,7 @@ RSpec.shared_examples 'operation' do |test_cases|
     # Since `user` is made available in the scope of this shared example, we can
     # use it in the spec files that use this shared example.
     let(:user) { create :user }
-    let(:result) { described_class.new(user:, message:).execute }
+    let(:result) { run_operation(user:, message:).value! }
 
     test_cases.each do |name, test_case|
       context name do

@@ -24,7 +24,7 @@ RSpec.describe Chatbot::Operations::SetTimezone do
   }
 
   describe 'state changes' do
-    let(:result) { described_class.new(user:, message:).execute }
+    let(:result) { run_operation(user:, message:) }
     let(:message) { 'set timezone Madrid' }
     let(:user) { create :user }
 

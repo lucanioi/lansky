@@ -3,7 +3,7 @@ module Chatbot
     class Spending < BaseOperation
       params :period
 
-      def execute
+      def run
         result = LedgerEntries::GenerateSpendingOverview.run(user:, period_range:)
 
         return reply(result.value) if result.success?

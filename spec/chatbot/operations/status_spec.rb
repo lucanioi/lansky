@@ -76,7 +76,7 @@ RSpec.describe Chatbot::Operations::Status do
       output: "You are over budget by *€100* for December 2023."
     },
     'budget for the day surpassed' => {
-      intput: 'status',
+      input: 'status',
       setup: 'create_spending 70_00, 1.hour.ago',
       output: "You are over budget by *€11.18* today. You've spent *€70*.\n\n" \
               "You have *€930* left for December 2023.\n\n" \

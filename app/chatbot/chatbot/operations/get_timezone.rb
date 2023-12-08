@@ -1,7 +1,7 @@
 module Chatbot
   module Operations
     class GetTimezone < BaseOperation
-      def execute
+      def run
         "Timezone: #{Time.zone.name} #{DateTime.current.formatted_offset}"
       end
     end

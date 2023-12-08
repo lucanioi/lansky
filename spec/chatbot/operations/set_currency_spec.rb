@@ -24,7 +24,7 @@ RSpec.describe Chatbot::Operations::SetCurrency do
   }
 
   describe 'state changes' do
-    let(:result) { described_class.new(user:, message:).execute }
+    let(:result) { run_operation(user:, message:) }
     let(:message) { 'set currency JPY' }
     let(:user) { create :user }
 

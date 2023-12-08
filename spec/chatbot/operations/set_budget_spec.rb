@@ -31,16 +31,16 @@ RSpec.describe Chatbot::Operations::SetBudget do
     },
     'invalid month' => {
       input: 'set budget foobar 1000',
-      error:  'invalid period: foobar',
+      output:  'invalid period: foobar',
     },
     'invalid amount' => {
       input: 'set budget january 98oi3j',
-      error:  'invalid amount',
+      output:  'invalid amount',
     },
   }
 
   describe 'state changes' do
-    let(:result) { described_class.new(user:, message:).execute }
+    let(:result) { run_operation(user:, message:) }
     let(:message) { 'set budget this month 1000' }
     let(:user) { create :user }
 
@@ -57,8 +57,8 @@ RSpec.describe Chatbot::Operations::SetBudget do
     it 'sets the budget period' do
       result
 
-      expect(user.budgets.last.period_start).to approx_eq(Time.zone.today.bom)
-      expect(user.budgets.last.period_end).to approx_eq(Time.zone.today.eom.eod)
+      expect(user.budgets.last.period_start).to approx_eq(Date.today.bom)
+      expect(user.budgets.last.period_end).to approx_eq(Date.today.eom.eod)
     end
 
     context 'when the specified month is for next year' do
@@ -67,16 +67,16 @@ RSpec.describe Chatbot::Operations::SetBudget do
       it 'sets the budget period' do
         result
 
-        expect(user.budgets.last.period_start).to approx_eq(DateTime.new(Time.zone.today.year + 1, 1, 1))
-        expect(user.budgets.last.period_end).to approx_eq(DateTime.new(Time.zone.today.year + 1, 1, 31).eod)
+        expect(user.budgets.last.period_start).to approx_eq(DateTime.new(Date.today.year + 1, 1, 1))
+        expect(user.budgets.last.period_end).to approx_eq(DateTime.new(Date.today.year + 1, 1, 31).eod)
       end
     end
 
     context 'when budget already exists for the month' do
       let!(:budget) do
         create :budget,
-                period_start: Time.zone.today.bom,
-                period_end: Time.zone.today.eom.eod,
+                period_start: Date.today.bom,
+                period_end: Date.today.eom.eod,
                 amount_cents: 500_00,
                 user:
       end

@@ -40,11 +40,11 @@ RSpec.describe Chatbot::Operations::Spending do
     },
     'Invalid period' => {
       input: 'spending foobar',
-      error: "invalid period: foobar"
+      output: "invalid period: foobar"
     },
     'No period given' => {
       input: 'spending',
-      error: "no period specified"
+      output: "no period specified"
     }
   }
 

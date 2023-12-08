@@ -1,13 +1,13 @@
 module Chatbot
   module Params
     class Spending < BaseParams
-      def period
-        @period ||= extract_period
+      def to_h
+        { period: }
       end
 
       private
 
-      def extract_period
+      def period
         argument.downcase
       end
 

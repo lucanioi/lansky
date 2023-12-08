@@ -4,7 +4,7 @@ class WebhooksController < ApplicationController
   def twilio
     result = Chatbot::Engine.run(user:, message: params['Body'])
 
-    body = result.success? ? result.value : '500: Internal server error'
+    body = result.success? ? result.value : 'Internal server error'
 
     twiml = Twilio::TwiML::MessagingResponse.new do |r|
       r.message body: body

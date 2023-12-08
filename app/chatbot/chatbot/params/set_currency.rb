@@ -1,13 +1,13 @@
 module Chatbot
   module Params
     class SetCurrency < BaseParams
-      def currency
-        @period ||= extract_currency
+      def to_h
+        { currency: }
       end
 
       private
 
-      def extract_currency
+      def currency
         argument.strip.downcase
       end
 

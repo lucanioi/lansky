@@ -5,6 +5,10 @@ module Chatbot
         @message = message
       end
 
+      def to_h
+        raise NotImplementedError
+      end
+
       private
 
       attr_reader :message

@@ -1,13 +1,13 @@
 module Chatbot
   module Params
     class SetTimezone < BaseParams
-      def timezone_name
-        @timezone ||= extract_timezone_name
+      def to_h
+        { timezone_name: }
       end
 
       private
 
-      def extract_timezone_name
+      def timezone_name
         argument
       end
 

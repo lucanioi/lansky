@@ -20,15 +20,15 @@ RSpec.describe Chatbot::Operations::Recovered do
     },
     'invalid amount' => {
       input: 'recovered 98oi3j',
-      error: 'invalid amount',
+      output: 'invalid amount',
     },
     'missing amount' => {
       input: 'recovered food',
-      error: 'invalid amount',
+      output: 'invalid amount',
     },
     'missing arguments' => {
       input: 'recovered',
-      error: 'invalid amount',
+      output: 'invalid amount',
     },
     'rounding issues' =>{
       input: 'recovered 4.60 groceries',
@@ -37,7 +37,7 @@ RSpec.describe Chatbot::Operations::Recovered do
   }
 
   describe 'state changes' do
-    let(:result) { described_class.new(user:, message:).execute }
+    let(:result) { run_operation(user:, message:) }
     let(:message) { 'recovered 5.50 food' }
     let(:user) { create :user }
 

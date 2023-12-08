@@ -9,11 +9,11 @@ through the Chatbot.
 
 module Chatbot
   module Operations
-    class SomeOperation < BaseOperation
+    class SomeOperation
       # there should be a declaration of params available in the operation
       params :month, :amount_cents
 
-      def execute
+      def run
         # month and amount_cents, as declared above, become available as
         # methods in this class. `user` is also available in the instance.
         #

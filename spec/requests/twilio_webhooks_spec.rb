@@ -1,8 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Twilio Webhooks', type: :request do
-  before { Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0)) }
+  before do
+    Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0))
+
+    create :user, phone: phone, test_user: true
+  end
+
   after  { Timecop.return }
+
+  let(:phone) { '1234567890' }
 
   it 'responds with a 200 status' do
     send_message('')
@@ -118,7 +125,7 @@ RSpec.describe 'Twilio Webhooks', type: :request do
   def build_params(body)
     {
       'Body' => body,
-      'From' => '+1234567890',
+      'From' => phone,
     }
   end
 

@@ -3,7 +3,7 @@ module Chatbot
     class SetCurrency < BaseOperation
       params :currency
 
-      def execute
+      def run
         return 'you need to specify a currency' unless currency.present?
         return "invalid currency: #{currency}" unless normalized_currency
 

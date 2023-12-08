@@ -24,6 +24,6 @@ RSpec.describe Chatbot::Operations::GetTimezone do
   }
 
   def set_timezone(timezone)
-    Time.zone = timezone
+    user.update!(timezone: timezone)
   end
 end

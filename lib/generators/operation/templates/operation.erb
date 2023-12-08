@@ -1,11 +1,11 @@
 module Chatbot
   module Operations
-    class <%= class_name %> < BaseOperation
+    class <%= class_name %>
 <% if params.any? -%>
       params <%= params.map { |p| ":#{p}" }.join(', ') %>
 
 <% end -%>
-      def execute
+      def run
 
       end
     end

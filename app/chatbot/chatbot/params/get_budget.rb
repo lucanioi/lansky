@@ -1,8 +1,8 @@
 module Chatbot
   module Params
     class GetBudget < BaseParams
-      def period
-        @period ||= extract_period
+      def to_h
+        { period: extract_period }
       end
 
       private

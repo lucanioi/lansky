@@ -3,7 +3,7 @@ module Chatbot
     class GetBudget < BaseOperation
       params :period
 
-      def execute
+      def run
         result = Budgets::Find.run(user:, period_range:)
 
         raise result.error if result.failure?
