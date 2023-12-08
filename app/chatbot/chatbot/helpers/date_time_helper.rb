@@ -7,9 +7,9 @@ module Chatbot
       MONTHS_OF_YEAR = %w[january february march april may june july august september october november december]
 
       STRING_TO_RANGE = {
-        'yesterday'  => ->(*) { Date.yesterday.bod ..Date.yesterday.eod },
-        'today'      => ->(*) { Time.zone.today.bod..Time.zone.today.eod },
-        'tomorrow'   => ->(*) { Date.tomorrow.bod  ..Date.tomorrow.eod },
+        'yesterday'  => ->(*) { Time.zone.yesterday.bod..Time.zone.yesterday.eod },
+        'today'      => ->(*) { Time.zone.today.bod    ..Time.zone.today.eod },
+        'tomorrow'   => ->(*) { Time.zone.tomorrow.bod ..Time.zone.tomorrow.eod },
 
         'last week'  => ->(*) { Time.zone.today.prev_week.bod..Time.zone.today.prev_week.eow.eod },
         'this week'  => ->(*) { Time.zone.today.bow .bod     ..Time.zone.today.eow.eod },

@@ -4,7 +4,7 @@ module Chatbot
       params :category_name, :amount_cents
 
       def run
-        result = LedgerEntries::CreateSpending.run(user:, amount_cents:, category:, )
+        result = LedgerEntries::CreateSpending.run(user:, amount_cents:, category_name:)
 
         return reply(result.value) if result.success?
 
@@ -16,18 +16,13 @@ module Chatbot
       def reply(spending)
         formatted_amount = format(spending.amount_cents)
 
-        "Spent #{formatted_amount} #{category_description}"
+        "Spent #{formatted_amount} #{category_description(spending.category)}"
       end
 
-      def category_description
+      def category_description(category)
         return "(uncategorized)" if category.uncategorized?
 
         "on #{category.name}"
-      end
-
-      def category
-        @category ||=
-          LedgerCategories::FindOrCreate.run(name: category_name).value
       end
 
       def format(amount)

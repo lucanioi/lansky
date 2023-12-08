@@ -4,7 +4,7 @@ module Chatbot
       params :category_name, :amount_cents
 
       def run
-        result = LedgerEntries::CreateRecovery.run(user:, amount_cents:, category:, )
+        result = LedgerEntries::CreateRecovery.run(user:, amount_cents:, category_name:)
 
         return reply(result.value) if result.success?
 
@@ -16,12 +16,7 @@ module Chatbot
       def reply(recovery)
         formatted_amount = format(recovery.amount_cents)
 
-        "Recovered #{formatted_amount} (#{category.name})"
-      end
-
-      def category
-        @category ||=
-          LedgerCategories::FindOrCreate.run(name: category_name).value
+        "Recovered #{formatted_amount} (#{recovery.category.name})"
       end
 
       def format(amount)

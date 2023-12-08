@@ -3,10 +3,12 @@ module LedgerEntries
     include Runnable
 
     def run
-      return entry if entry.save
+      ActiveRecord::Base.transaction do
+        return entry if entry.save
 
-      raise 'LedgerEntry could not be created: ' \
-            "#{entry.errors.full_messages.join(", ")}"
+        raise 'LedgerEntry could not be created: ' \
+              "#{entry.errors.full_messages.join(", ")}"
+      end
     end
 
     private
@@ -21,6 +23,11 @@ module LedgerEntries
       )
     end
 
-    attr_accessor :category, :amount_cents, :user
+    def category
+      @category ||=
+        LedgerCategories::FindOrCreate.run(name: category_name).value
+    end
+
+    attr_accessor :user, :amount_cents, :category_name
   end
 end
