@@ -1,16 +1,25 @@
 class WebhooksController < ApplicationController
+  before_action :ensure_user
+
   def twilio
-    result = Webhooks::ProcessMessage.call(
-      message: params['Body'],
-      phone: params['From']
-    )
+    result = Chatbot::Engine.run(user:, message: params['Body'])
 
     body = result.success? ? result.value : '500: Internal server error'
 
     twiml = Twilio::TwiML::MessagingResponse.new do |r|
-      r.message body:
+      r.message body: body
     end
 
     render xml: twiml.to_s
+  end
+
+  private
+
+  def user
+    @user ||= Users::FindOrCreate.run(phone: params['From']).value!
+  end
+
+  def ensure_user
+    head :forbidden unless user
   end
 end

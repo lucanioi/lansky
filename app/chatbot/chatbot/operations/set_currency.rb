@@ -7,7 +7,7 @@ module Chatbot
         return 'you need to specify a currency' unless currency.present?
         return "invalid currency: #{currency}" unless normalized_currency
 
-        result = Users::Update.call(user:, params: update_params)
+        result = Users::Update.run(user:, params: update_params)
 
         return reply if result.success?
 

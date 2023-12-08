@@ -1,8 +1,8 @@
 module Budgets
   class Find
-    include Service
+    include Runnable
 
-    def call
+    def run
       return find_with_period_range if period_range.present?
 
       find_active_budget

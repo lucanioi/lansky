@@ -4,7 +4,7 @@ module Chatbot
       params :period
 
       def execute
-        result = Budgets::Find.call(user:, period_range:)
+        result = Budgets::Find.run(user:, period_range:)
 
         raise result.error if result.failure?
         return not_found_reply if result.value.nil?

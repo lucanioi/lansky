@@ -1,11 +1,11 @@
 module LedgerEntries
   class GenerateSpendingOverview
-    include Service
+    include Runnable
 
     Overview = Struct.new(:total_cents, :details, keyword_init: true)
     Detail   = Struct.new(:amount, :category, keyword_init: true)
 
-    def call
+    def run
       Overview.new(total_cents:, details:)
     end
 

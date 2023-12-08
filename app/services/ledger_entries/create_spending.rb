@@ -1,8 +1,8 @@
 module LedgerEntries
   class CreateSpending
-    include Service
+    include Runnable
 
-    def call
+    def run
       return entry if entry.save
 
       raise 'LedgerEntry could not be created: ' \

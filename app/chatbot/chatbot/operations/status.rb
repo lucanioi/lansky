@@ -4,7 +4,7 @@ module Chatbot
       def execute
         return 'No budget set for current period.' unless budget
 
-        result = Budgets::Stats::Calculate.call(user:, budget:)
+        result = Budgets::Stats::Calculate.run(user:, budget:)
 
         return reply(result.value) if result.success?
 

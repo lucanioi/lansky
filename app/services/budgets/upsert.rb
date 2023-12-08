@@ -1,8 +1,8 @@
 module Budgets
   class Upsert
-    include Service
+    include Runnable
 
-    def call
+    def run
       return budget if budget.save
 
       raise 'Budget could not be created: ' \

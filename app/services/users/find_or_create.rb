@@ -1,11 +1,9 @@
 module Users
   class FindOrCreate
-    include Service
+    include Runnable
 
-    def call
-      user = User.find_or_create_by(phone: normalized_phone)
-
-      Service::Result.new(value: user)
+    def run
+      User.find_or_create_by(phone: normalized_phone)
     end
 
     private

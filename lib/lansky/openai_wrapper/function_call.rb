@@ -8,7 +8,7 @@ module Lansky
         @client = client
       end
 
-      def call
+      def run
         response = client.chat(parameters:)
         message = response.dig('choices', 0, 'message')
 
@@ -44,7 +44,7 @@ module Lansky
             type: :object,
             properties: {
               amount_cents: {
-                type: :string,
+                type: :integer,
                 description: <<~DESC.strip,
                   The amount of money spent. Example: 10.00, 10, 10.5, etc.
                   Always positive. 10 euros should be represented as 1000.

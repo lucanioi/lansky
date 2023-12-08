@@ -1,8 +1,8 @@
 module LedgerCategories
   class FindOrCreate
-    include Service
+    include Runnable
 
-    def call
+    def run
       find_or_create
     end
 

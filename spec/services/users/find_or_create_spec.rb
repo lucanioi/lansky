@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Users::FindOrCreate, type: :service do
   let(:phone) { '1234567890' }
 
-  subject { described_class.call(phone: phone) }
+  subject { described_class.run(phone: phone) }
 
   context 'when the user does not exist' do
     it 'creates a new user' do

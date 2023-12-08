@@ -1,9 +1,9 @@
 module Budgets
   module Stats
     class Calculate
-      include Service
+      include Runnable
 
-      def call
+      def run
         status_class.new(
           today_spent_amount:,
           today_recovered_amount:,

@@ -4,7 +4,7 @@ module Chatbot
       params :period, :amount_cents
 
       def execute
-        result = Budgets::Upsert.call(amount_cents:, period_range:, user:)
+        result = Budgets::Upsert.run(amount_cents:, period_range:, user:)
 
         return reply(result.value) if result.success?
 

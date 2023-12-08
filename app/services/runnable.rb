@@ -1,4 +1,4 @@
-module Service
+module Runnable
   extend ActiveSupport::Concern
 
   included do
@@ -6,8 +6,8 @@ module Service
       define_accessor_methods(params)
     end
 
-    def self.call(*args)
-      result = new(*args).call
+    def self.run(*args)
+      result = new(*args).run
       result.is_a?(Result) ? result : Result.new(value: result)
     rescue StandardError => e
       Result.new(error: e)
@@ -21,14 +21,14 @@ module Service
   end
 
   class Result
-    attr_reader :error
+    attr_reader :error, :value
 
     def initialize(value: nil, error: nil)
       @value = value
       @error = error
     end
 
-    def value
+    def value!
       raise error if failure?
 
       @value

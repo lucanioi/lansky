@@ -1,6 +1,6 @@
 module Webhooks
   class ProcessMessage
-    include Service
+    include Runnable
 
     SET_BUDGET = /^set budget/
     GET_BUDGET = /^get budget|^budget/
@@ -14,7 +14,7 @@ module Webhooks
     SET_CUR    = /^set currency/
     GET_CUR    = /^get currency|^currency/
 
-    def call
+    def run
       use_user_environment { process_message }
     end
 
@@ -23,12 +23,11 @@ module Webhooks
     def process_message
       operation = parse_operation
 
-      return Service::Result.new(value: 'Did not understand') unless operation
+      return 'Did not understand' unless operation
 
       operation.new(user:, message: normalized_message).execute
     rescue => e
-      value = user.test_user? ? e.message : 'Internal server error'
-      Service::Result.new(value:)
+      user.test_user? ? e.message : 'Internal server error'
     end
 
     def parse_operation
@@ -61,10 +60,6 @@ module Webhooks
       end
     end
 
-    def user
-      @user ||= Users::FindOrCreate.call(phone:).value
-    end
-
     #####################
     # SIMPLE OPERATIONS #
     #####################
@@ -78,6 +73,6 @@ module Webhooks
       end
     end
 
-    attr_accessor :message, :phone
+    attr_accessor :message, :user
   end
 end
