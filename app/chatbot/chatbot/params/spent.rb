@@ -1,3 +1,5 @@
+require_relative 'errors'
+
 module Chatbot
   module Params
     class Spent < BaseParams
@@ -13,7 +15,9 @@ module Chatbot
 
       def amount_cents
         amount = argument.split(' ')[0]
-        ::Chatbot::MoneyHelper.parse_amount(amount)&.abs || (raise 'invalid amount')
+        amount = ::Chatbot::MoneyHelper.parse_amount(amount)&.abs
+
+        amount || raise(Params::InvalidAmount, "Invalid amount: #{argument}")
       end
 
       def argument

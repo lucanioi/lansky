@@ -18,17 +18,17 @@ RSpec.describe Chatbot::Operations::Recovered do
       input: 'recovered 100',
       output: 'Recovered €100 (uncategorized)',
     },
-    'invalid amount' => {
+    'Invalid amount' => {
       input: 'recovered 98oi3j',
-      output: 'invalid amount',
+      output: 'Invalid amount',
     },
     'missing amount' => {
       input: 'recovered food',
-      output: 'invalid amount',
+      output: 'Invalid amount',
     },
     'missing arguments' => {
       input: 'recovered',
-      output: 'invalid amount',
+      output: 'Invalid amount',
     },
     'rounding issues' =>{
       input: 'recovered 4.60 groceries',

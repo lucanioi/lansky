@@ -1,5 +1,3 @@
-[△] rethink error handling
-
 [x] current month status
 [x] allow single decimal point number
 [x] include today's budget left in status
@@ -18,5 +16,6 @@
 [x] enable registering reimbusements
 
 [o] create GPT layer
+[△] rethink error handling
 
 [ ] status and get budget are both relying on discerning active budget. iffy.

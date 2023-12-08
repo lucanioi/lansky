@@ -22,17 +22,17 @@ RSpec.describe Chatbot::Operations::Spent do
       input: 'spent -10.50 food',
       output: 'Spent €10.50 on food',
     },
-    'invalid amount' => {
+    'Invalid amount' => {
       input: 'spent 98oi3j',
-      output: 'invalid amount',
+      output: 'Invalid amount',
     },
     'missing amount' => {
       input: 'spent food',
-      output: 'invalid amount',
+      output: 'Invalid amount',
     },
     'missing arguments' => {
       input: 'spent',
-      output: 'invalid amount',
+      output: 'Invalid amount',
     },
     'rounding issues' =>{
       input: 'spent 4.60 groceries',

@@ -4,10 +4,10 @@ RSpec.describe 'Twilio Webhooks', type: :request do
   before do
     Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0))
 
-    create :user, phone: phone, test_user: true
+    create :user, phone: phone, test_user: false
   end
 
-  after  { Timecop.return }
+  after { Timecop.return }
 
   let(:phone) { '1234567890' }
 

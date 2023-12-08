@@ -4,6 +4,8 @@ module Chatbot
       class Router
         include Runnable
 
+        UnknownOperation = Class.new(Lansky::DisplayableError)
+
         SET_BUDGET = /^set budget/
         GET_BUDGET = /^get budget|^budget/
         SPENT      = /^spent/
@@ -19,7 +21,7 @@ module Chatbot
         def run
           operation = find_operation
 
-          raise 'Did not understand' unless operation
+          raise UnknownOperation unless operation
 
           Chatbot::Route.new(user:, operation:, params:)
         end

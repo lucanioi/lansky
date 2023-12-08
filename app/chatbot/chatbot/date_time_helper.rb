@@ -1,5 +1,7 @@
 module Chatbot
   module DateTimeHelper
+    InvalidPeriod = Class.new(Lansky::DisplayableError)
+
     DAYS_OF_WEEK   = %w[monday tuesday wednesday thursday friday saturday sunday]
     MONTHS_OF_YEAR = %w[january february march april may june july august september october november december]
 
@@ -40,8 +42,8 @@ module Chatbot
     module_function
 
     def parse_period(period_string, direction: nil, include_current: false)
-      raise('no period specified') if period_string.blank?
-      raise("invalid period: #{period_string}") unless VALID_PERIOD_NAMES.include?(period_string)
+      raise(InvalidPeriod, 'Invalid period') if period_string.blank?
+      raise(InvalidPeriod, "Invalid period: #{period_string}") unless VALID_PERIOD_NAMES.include?(period_string)
 
       STRING_TO_RANGE[period_string].call(direction, include_current)
     end

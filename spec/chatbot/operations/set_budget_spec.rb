@@ -31,11 +31,11 @@ RSpec.describe Chatbot::Operations::SetBudget do
     },
     'invalid month' => {
       input: 'set budget foobar 1000',
-      output:  'invalid period: foobar',
+      output:  'Invalid period',
     },
-    'invalid amount' => {
+    'Invalid amount' => {
       input: 'set budget january 98oi3j',
-      output:  'invalid amount',
+      output:  'Invalid amount',
     },
   }
 

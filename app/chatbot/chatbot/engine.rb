@@ -5,13 +5,12 @@ module Chatbot
     def run
       use_user_environment do
         result = router(user).run(user:, message:)
-        return result.error.message if result.failure?
+        return handle_error(result.error) if result.failure?
         route = result.value
 
         result = route.operation.run(user:, **route.params)
-        return result.value if result.success?
-
-        user.test_user? ? result.error.message : 'Internal server error'
+        return handle_error(result.error) if result.failure?
+        result.value
       end
     end
 
@@ -36,6 +35,10 @@ module Chatbot
       ensure
         Money.default_currency = original_currency
       end
+    end
+
+    def handle_error(error)
+      Chatbot::ErrorHandler.handle_error(error)
     end
 
     attr_accessor :user, :message
