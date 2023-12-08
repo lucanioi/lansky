@@ -18,3 +18,5 @@
 [x] enable registering reimbusements
 
 [o] create GPT layer
+
+[ ] status and get budget are both relying on discerning active budget. iffy.

@@ -30,15 +30,15 @@ module Lansky
             },
           ],
           functions: [
-            register_spending_function,
+            spent_function,
             get_budget_function,
           ]
         }
       end
 
-      def register_spending_function
+      def spent_function
         {
-          name: 'register_spending',
+          name: 'spent',
           description: 'Register the user\'s spending with categories',
           parameters: {
             type: :object,
@@ -50,6 +50,8 @@ module Lansky
                   Always positive. 10 euros should be represented as 1000.
                   However, some currencies without fractional cents (like JPY)
                   should be represented as 10.
+                  It's crucial that you get this right,
+                  otherwise I might lose my job. Please be careful.
                 DESC
               },
               category: {
@@ -59,6 +61,8 @@ module Lansky
                   groceries, rent, Meggie's Bday Party, etc. When unclear,
                   do not hesitate to make it null. The language of the input
                   must be preserved.
+                  It's crucial that you get this right,
+                  otherwise I might lose my job. Please be careful.
                 DESC
               },
             },
@@ -68,7 +72,83 @@ module Lansky
       end
 
       def get_budget_function
+        {
+          name: 'get_budget',
+          description: 'Returns the user\'s budget for the given period.',
+          parameters: {
+            type: :object,
+            properties: {
+              day: {
+                type: :string,
+                description: <<~DESC.strip,
+                  ONLY the values below are accepted.
+                  It is strictly forbidden to use any other values.
+                  It's crucial that you get this right,
+                  otherwise I might lose my job. Please be careful.
+                  Return null if no obvious day is indicated.
+                DESC
+                enum: [
+                  ['today', 'yesterday', 'tomorrow'],
+                  (1..31).to_a.map(&:to_s),
+                  day_names,
+                  ['this ', 'last ', 'next '].product(day_names).map(&:join),
+                ].flatten,
+              },
+              week: {
+                type: :string,
+                description: <<~DESC.strip,
+                  ONLY the values below are accepted.
+                  It is strictly forbidden to use any other values.
+                  It's crucial that you get this right,
+                  otherwise I might lose my job. Please be careful.
+                  Return null if no obvious day is indicated.
+                DESC
+                enum: [
+                  'this week', 'last week', 'next week',
+                  '1', '2', '3', '4'
+                ]
+              },
+              month: {
+                type: :string,
+                description: <<~DESC.strip,
+                  ONLY the values below are accepted.
+                  It is strictly forbidden to use any other values.
+                  It's crucial that you get this right,
+                  otherwise I might lose my job. Please be careful.
+                  Return null if no obvious day is indicated.
+                DESC
+                enum: [
+                  ['this month', 'last month', 'next month'],
+                  (1..12).to_a.map(&:to_s),
+                  month_names,
+                  ['this ', 'last ', 'next '].product(month_names).map(&:join),
+                ].flatten,
+              },
+              year: {
+                type: :string,
+                description: <<~DESC.strip,
+                  Any of the values listed under "enums" are accepted.
+                  Year numbers are accepted (2020, 2021, etc.)
+                  It is very important that you get this right,
+                  otherwise I might lose my job. Please be careful.
+                  Return null if no obvious day is indicated.
+                DESC
+                enum: [
+                  ['this year', 'last year', 'next year'],
+                ].flatten,
+              },
+            },
+            required: [],
+          },
+        }
+      end
 
+      def day_names
+        Date::DAYNAMES.map(&:downcase)
+      end
+
+      def month_names
+        Date::MONTHNAMES.compact.map(&:downcase)
       end
     end
   end

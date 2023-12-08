@@ -15,23 +15,32 @@ module Chatbot
       private
 
       def not_found_reply
-        "No budget set for #{period_title}"
+        if period_range.present?
+          "No budget set for #{period_title}"
+        else
+          'No active budget found'
+        end
       end
 
       def reply(budget)
         formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_cents)
 
-        "Budget for #{period_title} is #{formatted_amount}"
+        "Budget for #{period_title(budget)} is #{formatted_amount}"
       end
 
       def period_range
+        return if period.blank?
+
         @period_range ||=
           DateTimeHelper.parse_period(period, include_current: true)
       end
 
-      def period_title
-        @period_title ||=
-          DateTimeHelper.format_period(period_range)
+      def period_title(budget = nil)
+        return nil unless budget || period_range
+        return DateTimeHelper.format_period(period_range) if period_range.present?
+
+        range = budget.period_start..budget.period_end
+        DateTimeHelper.format_period(range)
       end
     end
   end

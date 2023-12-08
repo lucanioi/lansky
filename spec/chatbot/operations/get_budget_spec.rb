@@ -30,5 +30,9 @@ RSpec.describe Chatbot::Operations::GetBudget do
       input: 'budget october',
       output: 'Budget for October 2023 is €1,000',
     },
+    'defaults to currently active budget' => {
+      input: 'budget',
+      output: 'Budget for October 2023 is €1,000',
+    }
   }
 end

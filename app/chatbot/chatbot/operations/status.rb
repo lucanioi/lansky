@@ -22,7 +22,7 @@ module Chatbot
       end
 
       def today_summary(stats)
-        return '' if period_over_budget?(stats) || period_exact_budget?(stats)
+        return '' if period_overbudget?(stats) || period_exact_budget?(stats)
 
         [
           today_limit_message(stats),
@@ -32,7 +32,7 @@ module Chatbot
       end
 
       def today_limit_message(stats)
-        if today_over_budget?(stats)
+        if today_overbudget?(stats)
           over_amount = format_money(stats.today_remaining_amount.abs)
           "You are over budget by *#{over_amount}* today."
         elsif today_exact_budget?(stats)
@@ -65,7 +65,7 @@ module Chatbot
       def period_summary(stats)
         amount = stats.period_remaining_amount
 
-        if period_over_budget?(stats)
+        if period_overbudget?(stats)
           over_amount = format_money(amount.abs)
           "You are over budget by *#{over_amount}* for #{period_title}."
         elsif period_exact_budget?(stats)
@@ -82,9 +82,9 @@ module Chatbot
       def daily_limit_summary(stats)
         period_daily_limit = format_money(stats.period_daily_limit)
 
-        if period_over_budget?(stats) || period_exact_budget?(stats)
+        if period_overbudget?(stats) || period_exact_budget?(stats)
           ''
-        elsif today_over_budget?(stats)
+        elsif today_overbudget?(stats)
           "Adjusted daily limit is *#{period_daily_limit}* for the rest of the period."
         else
           "Current daily limit is *#{period_daily_limit}*."
@@ -99,7 +99,7 @@ module Chatbot
         " with an additional #{surplus_amount} surplus"
       end
 
-      def today_over_budget?(stats)
+      def today_overbudget?(stats)
         stats.today_remaining_amount.negative?
       end
 
@@ -107,7 +107,7 @@ module Chatbot
         stats.today_remaining_amount.zero?
       end
 
-      def period_over_budget?(stats)
+      def period_overbudget?(stats)
         stats.period_remaining_amount.negative?
       end
 
@@ -129,7 +129,7 @@ module Chatbot
 
       def budget
         @budget ||= user.budgets
-                        .where('period_start <= ? AND period_end >= ?', Time.zone.today, Time.zone.today)
+                        .where('period_start <= ? AND period_end >= ?', DateTime.current, DateTime.current)
                         .last
       end
     end
