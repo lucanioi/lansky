@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class Help < BaseOperation
+    class Help < Base
       def run
         <<~HELP
           Commands:

@@ -46,13 +46,13 @@ module Chatbot
 
         def find_param_parser
           case normalized_message
-          when SET_BUDGET then Chatbot::Params::SetBudget
-          when GET_BUDGET then Chatbot::Params::GetBudget
-          when SPENT      then Chatbot::Params::Spent
-          when SPENDING   then Chatbot::Params::Spending
-          when SET_TZ     then Chatbot::Params::SetTimezone
-          when SET_CUR    then Chatbot::Params::SetCurrency
-          when RECOVERED  then Chatbot::Params::Recovered
+          when SET_BUDGET then Parsers::SetBudget
+          when GET_BUDGET then Parsers::GetBudget
+          when SPENT      then Parsers::Spent
+          when SPENDING   then Parsers::Spending
+          when SET_TZ     then Parsers::SetTimezone
+          when SET_CUR    then Parsers::SetCurrency
+          when RECOVERED  then Parsers::Recovered
           end
         end
 

@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class Status < BaseOperation
+    class Status < Base
       def run
         return 'No budget set for current period.' unless budget
 

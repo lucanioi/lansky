@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class BaseOperation
+    class Base
       include Runnable
 
       class << self

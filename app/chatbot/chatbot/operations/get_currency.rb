@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class GetCurrency < BaseOperation
+    class GetCurrency < Base
       def run
         "Currency: #{currency}"
       end

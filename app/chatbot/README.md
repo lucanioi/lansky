@@ -25,14 +25,14 @@ module Chatbot
 end
 
 module Chatbot
-  module Params
-    class SomeOperation < BaseParams
+  module Parsers
+    class SomeOperation < Base
       # The corresponding params object should expose an interface that match
       # the parameters declared with the `params` keyword in the operation class
 
       def month
         # attribute reader `message` is available in classes that inherit
-        # from BaseParams
+        # from BaseParser
         @month ||= extract_month(message)
       end
 

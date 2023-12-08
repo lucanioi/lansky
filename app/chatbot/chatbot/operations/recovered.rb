@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class Recovered < BaseOperation
+    class Recovered < Base
       params :category_name, :amount_cents
 
       def run

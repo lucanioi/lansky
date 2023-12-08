@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class Spending < BaseOperation
+    class Spending < Base
       params :period
 
       def run

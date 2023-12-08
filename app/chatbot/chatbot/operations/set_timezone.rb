@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class SetTimezone < BaseOperation
+    class SetTimezone < Base
       params :timezone_name
 
       def run

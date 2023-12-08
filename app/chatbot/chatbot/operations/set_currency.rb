@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class SetCurrency < BaseOperation
+    class SetCurrency < Base
       params :currency
 
       def run

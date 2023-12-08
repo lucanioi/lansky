@@ -14,8 +14,11 @@
 [x] get currency / timezone
 [x] refactor to use LedgerEntry instead of Spending
 [x] enable registering reimbusements
+[x] rethink error handling
+[x] refactor into engines (classic vs ai)
+[x] new architecture
 
+[o] make operations accept Period objects
 [o] create GPT layer
-[△] rethink error handling
 
 [ ] status and get budget are both relying on discerning active budget. iffy.

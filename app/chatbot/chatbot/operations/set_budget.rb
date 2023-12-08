@@ -1,6 +1,6 @@
 module Chatbot
   module Operations
-    class SetBudget < BaseOperation
+    class SetBudget < Base
       params :period, :amount_cents
 
       def run
