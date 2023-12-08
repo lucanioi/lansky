@@ -1,18 +1,18 @@
 require_relative 'engines/classic/parsers/errors'
-require_relative 'date_time_helper'
+require_relative 'helpers/date_time_helper'
 
 module Chatbot
   module ErrorHandler
     module_function
 
     ERRORS = {
-      Chatbot::Engines::Classic::Router::UnknownOperation => {
+      Engines::Classic::Router::UnknownOperation => {
         friendly_message: 'Did not understand'
       },
-      Chatbot::Engines::Classic::Parsers::InvalidAmount => {
+      Engines::Classic::Parsers::InvalidAmount => {
         friendly_message: 'Invalid amount'
       },
-      Chatbot::DateTimeHelper::InvalidPeriod => {
+      Helpers::DateTimeHelper::InvalidPeriod => {
         friendly_message: "Invalid period"
       },
     }.freeze

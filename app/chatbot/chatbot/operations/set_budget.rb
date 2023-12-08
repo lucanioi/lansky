@@ -14,14 +14,14 @@ module Chatbot
       private
 
       def reply(budget)
-        period_name = DateTimeHelper.format_period(period_range)
-        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_cents)
+        period_name = Helpers::DateTimeHelper.format_period(period_range)
+        formatted_amount = Helpers::MoneyHelper.format(budget.amount_cents)
 
         "Budget for #{period_name} set to #{formatted_amount}"
       end
 
       def period_range
-        @period_range ||= DateTimeHelper.parse_period(period, direction: :forward)
+        @period_range ||= Helpers::DateTimeHelper.parse_period(period, direction: :forward)
       end
     end
   end

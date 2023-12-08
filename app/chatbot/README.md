@@ -44,7 +44,7 @@ module Chatbot
 end
 
 # the usage is as follows:
-Chatbot::Operations::SomeOperation.new(
+Operations::SomeOperation.new(
   user: user,
   message: 'some operation 1000 euros whatever'
 ).execute

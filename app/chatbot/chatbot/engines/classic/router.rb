@@ -23,24 +23,24 @@ module Chatbot
 
           raise UnknownOperation unless operation
 
-          Chatbot::Route.new(user:, operation:, params:)
+          Route.new(user:, operation:, params:)
         end
 
         private
 
         def find_operation
           case normalized_message
-          when SET_BUDGET then Chatbot::Operations::SetBudget
-          when GET_BUDGET then Chatbot::Operations::GetBudget
-          when SPENT      then Chatbot::Operations::Spent
-          when STATUS     then Chatbot::Operations::Status
-          when HELP       then Chatbot::Operations::Help
-          when SPENDING   then Chatbot::Operations::Spending
-          when SET_TZ     then Chatbot::Operations::SetTimezone
-          when GET_TZ     then Chatbot::Operations::GetTimezone
-          when SET_CUR    then Chatbot::Operations::SetCurrency
-          when GET_CUR    then Chatbot::Operations::GetCurrency
-          when RECOVERED  then Chatbot::Operations::Recovered
+          when SET_BUDGET then Operations::SetBudget
+          when GET_BUDGET then Operations::GetBudget
+          when SPENT      then Operations::Spent
+          when STATUS     then Operations::Status
+          when HELP       then Operations::Help
+          when SPENDING   then Operations::Spending
+          when SET_TZ     then Operations::SetTimezone
+          when GET_TZ     then Operations::GetTimezone
+          when SET_CUR    then Operations::SetCurrency
+          when GET_CUR    then Operations::GetCurrency
+          when RECOVERED  then Operations::Recovered
           end
         end
 

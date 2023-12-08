@@ -120,11 +120,11 @@ module Chatbot
       end
 
       def format_money(amount)
-        ::Chatbot::MoneyHelper.format(amount)
+        Helpers::MoneyHelper.format(amount)
       end
 
       def period_title
-        DateTimeHelper.format_period(budget.period_start..budget.period_end)
+        Helpers::DateTimeHelper.format_period(budget.period_start..budget.period_end)
       end
 
       def budget

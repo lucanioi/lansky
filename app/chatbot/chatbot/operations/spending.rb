@@ -16,7 +16,7 @@ module Chatbot
       def reply(overview)
         return no_spending_reply if overview.total_cents.zero?
 
-        total = Chatbot::MoneyHelper.format(overview.total_cents)
+        total = Helpers::MoneyHelper.format(overview.total_cents)
 
         "Total spent (#{period_title}):\n" \
         "*#{total}*\n\n" \
@@ -37,17 +37,17 @@ module Chatbot
       end
 
       def format_detail_amount(amount, width)
-        Chatbot::MoneyHelper.format(amount, trunc_cents: false, symbol: false)
+        Helpers::MoneyHelper.format(amount, trunc_cents: false, symbol: false)
                             .rjust(width)
       end
 
       def period_range
         @period_range ||=
-          DateTimeHelper.parse_period(period, include_current: true, direction: :backward)
+          Helpers::DateTimeHelper.parse_period(period, include_current: true, direction: :backward)
       end
 
       def period_title
-        capitalize_first_letter(DateTimeHelper.format_period(period_range))
+        capitalize_first_letter(Helpers::DateTimeHelper.format_period(period_range))
       end
 
       def capitalize_first_letter(string)

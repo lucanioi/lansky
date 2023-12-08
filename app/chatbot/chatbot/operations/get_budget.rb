@@ -23,7 +23,7 @@ module Chatbot
       end
 
       def reply(budget)
-        formatted_amount = ::Chatbot::MoneyHelper.format(budget.amount_cents)
+        formatted_amount = Helpers::MoneyHelper.format(budget.amount_cents)
 
         "Budget for #{period_title(budget)} is #{formatted_amount}"
       end
@@ -32,15 +32,15 @@ module Chatbot
         return if period.blank?
 
         @period_range ||=
-          DateTimeHelper.parse_period(period, include_current: true)
+          Helpers::DateTimeHelper.parse_period(period, include_current: true)
       end
 
       def period_title(budget = nil)
         return nil unless budget || period_range
-        return DateTimeHelper.format_period(period_range) if period_range.present?
+        return Helpers::DateTimeHelper.format_period(period_range) if period_range.present?
 
         range = budget.period_start..budget.period_end
-        DateTimeHelper.format_period(range)
+        Helpers::DateTimeHelper.format_period(range)
       end
     end
   end

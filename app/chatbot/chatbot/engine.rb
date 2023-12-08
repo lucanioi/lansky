@@ -18,8 +18,8 @@ module Chatbot
 
     def router(_user)
       case mode
-      when :classic then Chatbot::Engines::Classic::Router
-      # when :ai then Chatbot::Engines::AI::Router
+      when :classic then Engines::Classic::Router
+      # when :ai then Engines::AI::Router
       end
     end
 
@@ -38,7 +38,7 @@ module Chatbot
     end
 
     def handle_error(error)
-      Chatbot::ErrorHandler.handle_error(error)
+      ErrorHandler.handle_error(error)
     end
 
     attr_accessor :user, :message

@@ -25,7 +25,7 @@ module Chatbot
       end
 
       def format(amount)
-        ::Chatbot::MoneyHelper.format(amount)
+        Helpers::MoneyHelper.format(amount)
       end
     end
   end
