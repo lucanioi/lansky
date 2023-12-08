@@ -15,6 +15,9 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "rails/test_unit/railtie"
 
+# Require lib files
+Dir[File.join(__dir__, '../lib/**/*.rb')].each { |f| require f }
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

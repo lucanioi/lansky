@@ -18,6 +18,10 @@ RSpec.describe Chatbot::Operations::Spent do
       input: 'spent 100',
       output: 'Spent €100 (uncategorized)',
     },
+    'negative amount' => {
+      input: 'spent -10.50 food',
+      output: 'Spent €10.50 on food',
+    },
     'invalid amount' => {
       input: 'spent 98oi3j',
       error: 'invalid amount',
