@@ -42,7 +42,7 @@ module Chatbot
 
       module_function
 
-      def parse_period(period_string, direction: nil, include_current: false)
+      def parse_to_period(period_string, direction: nil, include_current: false)
         raise(InvalidPeriod, 'Invalid period') if period_string.blank?
         raise(InvalidPeriod, "Invalid period: #{period_string}") unless VALID_PERIOD_NAMES.include?(period_string)
 

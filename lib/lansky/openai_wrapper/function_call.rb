@@ -91,7 +91,7 @@ module Lansky
                   ['today', 'yesterday', 'tomorrow'],
                   (1..31).to_a.map(&:to_s),
                   day_names,
-                  ['this ', 'last ', 'next '].product(day_names).map(&:join),
+                  ['prev ', 'last ', 'next '].product(day_names).map(&:join),
                 ].flatten,
               },
               week: {
@@ -104,7 +104,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  'this', 'last', 'next',
+                  'prev', 'last', 'next',
                   '1', '2', '3', '4'
                 ]
               },
@@ -118,10 +118,10 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  ['this', 'last', 'next'],
+                  ['prev', 'last', 'next'],
                   (1..12).to_a.map(&:to_s),
                   month_names,
-                  ['this ', 'last ', 'next '].product(month_names).map(&:join),
+                  ['prev ', 'last ', 'next '].product(month_names).map(&:join),
                 ].flatten,
               },
               year: {
@@ -134,7 +134,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  ['this', 'last', 'next'],
+                  ['prev', 'last', 'next'],
                 ].flatten,
               },
             },

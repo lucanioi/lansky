@@ -32,7 +32,7 @@ module Chatbot
         return if period.blank?
 
         @period_range ||=
-          Helpers::DateTimeHelper.parse_period(period, include_current: true)
+          Helpers::DateTimeHelper.parse_to_period(period, include_current: true)
       end
 
       def period_title(budget = nil)

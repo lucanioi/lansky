@@ -4,7 +4,7 @@ module Chatbot
       class Year < DateComponent
         InvalidYear = Class.new(StandardError)
 
-        NUMERIC_YEARS = /20\d{2}/
+        VALID_NUMERIC = (1900..2100)
 
         def resolve(datetime)
           return datetime.change(year: number) if valid_numeric?
@@ -18,7 +18,7 @@ module Chatbot
         end
 
         def valid_numeric?
-          NUMERIC_YEARS.match?(string)
+          VALID_NUMERIC.cover?(string.to_i)
         end
 
         private

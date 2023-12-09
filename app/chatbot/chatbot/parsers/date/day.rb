@@ -7,8 +7,8 @@ module Chatbot
         DAYS_OF_WEEK      = %w[sunday monday tuesday wednesday thursday
                             friday saturday]
         DAYS_OF_WEEK_ABBR = %w[sun mon tue wed thu fri sat]
-        NUMERIC_DAYS   = ('1'..'31').to_a
 
+        VALID_NUMERIC   = (1..31)
         DEICTIC_OPTIONS = %w[today tomorrow yesterday].freeze
 
         def resolve(datetime)
@@ -22,7 +22,7 @@ module Chatbot
         end
 
         def valid_numeric?
-          NUMERIC_DAYS.include?(string)
+          VALID_NUMERIC.cover?(string.to_i)
         end
 
         def named?

@@ -4,7 +4,7 @@ module Chatbot
       class Week < DateComponent
         InvalidWeek = Class.new(StandardError)
 
-        NUMERIC_WEEKS = ('1'..'5').to_a
+        VALID_NUMERIC = (1..5)
 
         def resolve(datetime)
           return datetime if blank?
@@ -14,7 +14,7 @@ module Chatbot
         end
 
         def valid_numeric?
-          NUMERIC_WEEKS.include?(string)
+          VALID_NUMERIC.cover?(string.to_i)
         end
 
         private

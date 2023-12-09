@@ -7,7 +7,7 @@ RSpec.describe Chatbot::Helpers::DateTimeHelper do
 
   after { Timecop.return }
 
-  describe '.parse_period' do
+  describe '.parse_to_period' do
     test_cases = {
       'yesterday' => 'Wed, 11 Oct 2023 00:00:00.000000000 UTC +00:00..Wed, 11 Oct 2023 23:59:59.999999999 UTC +00:00',
       'today'     => 'Thu, 12 Oct 2023 00:00:00.000000000 UTC +00:00..Thu, 12 Oct 2023 23:59:59.999999999 UTC +00:00',
@@ -78,9 +78,9 @@ RSpec.describe Chatbot::Helpers::DateTimeHelper do
       it "parses #{input}" do
         if input.is_a?(Array)
           input, options = input
-          expect(described_class.parse_period(input, **options).inspect).to eq(expected)
+          expect(described_class.parse_to_period(input, **options).inspect).to eq(expected)
         else
-          expect(described_class.parse_period(input).inspect).to eq(expected)
+          expect(described_class.parse_to_period(input).inspect).to eq(expected)
         end
       end
     end

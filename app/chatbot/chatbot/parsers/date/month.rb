@@ -7,7 +7,8 @@ module Chatbot
         MONTHS_OF_YEAR      = %w[january february march april may june july august
                                 september october november december]
         MONTHS_OF_YEAR_ABBR = %w[jan feb mar apr may jun jul aug sep oct nov dec]
-        NUMERIC_MONTHS = ('1'..'12').to_a
+
+        VALID_NUMERIC = (1..12)
 
         def resolve(datetime)
           return datetime.change(month: 1) if blank? && parent_present
@@ -19,7 +20,7 @@ module Chatbot
         end
 
         def valid_numeric?
-          NUMERIC_MONTHS.include?(string)
+          VALID_NUMERIC.cover?(string.to_i)
         end
 
         def named?

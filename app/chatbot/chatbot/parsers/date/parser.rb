@@ -2,11 +2,14 @@ module Chatbot
   module Parsers
     module Date
       class Parser
-        InvalidPeriod = Class.new(Lansky::DisplayableError)
-
         class << self
-          def parse_period(day: nil, week: nil, month: nil, year: nil, **options)
-            new(day:, week:, month:, year:, **options).parse_period
+          def parse_from_params(day: nil, week: nil, month: nil, year: nil, **options)
+            new(day:, week:, month:, year:, **options).parse
+          end
+
+          # This parsing is limited. It's used by the non-AI engine.
+          def parse_from_string(string:, **options)
+            parse_from_params(**StringParser.parse_to_params(string), **options)
           end
 
           private :new
@@ -17,13 +20,9 @@ module Chatbot
           @week  = Week.new  week,                                 **options
           @month = Month.new month, parent_present: year.present?, **options
           @year  = Year.new  year,                                 **options
-
-          @include_current  = options[:include_current] || false
-          @direction        = options[:direction] || :forward
-          @skip_validations = options[:skip_validations] || false
         end
 
-        def parse_period
+        def parse
           Models::Period.new(period_start:, period_end:)
         end
 
@@ -49,21 +48,7 @@ module Chatbot
 
         private
 
-        attr_reader :day, :week, :month, :year,
-                    :include_current, :direction,
-                    :result_date
-
-        def skip_validations?
-          @skip_validations
-        end
-
-        def invalid_period!(msg)
-          raise InvalidPeriod, "Invalid period: #{msg}\n\n" \
-                              "day: #{day.inspect}\n" \
-                              "week: #{week.inspect}\n" \
-                              "month: #{month.inspect}\n" \
-                              "year: #{year.inspect}"
-        end
+        attr_reader :day, :week, :month, :year
       end
     end
   end

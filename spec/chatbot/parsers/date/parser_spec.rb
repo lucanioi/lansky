@@ -7,7 +7,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
 
   after { Timecop.return }
 
-  describe '.parse_period' do
+  describe '.parse_from_params' do
     test_cases = {
       { day:  '1' } => '2023-10-01..2023-10-02',
       { day: '31' } => '2023-10-31..2023-11-01',
@@ -116,13 +116,32 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
         input = input.except(:set_date)
 
         if expected.is_a?(Class)
-          expect { described_class.parse_period(**input) }.to raise_error(expected)
+          expect { described_class.parse_from_params(**input) }.to raise_error(expected)
         else
           start_date, end_date = expected.split('..').map { |date| DateTime.parse(date) }
-          range = described_class.parse_period(**input).range
+          range = described_class.parse_from_params(**input).range
           expect(range).to eq(start_date..end_date)
         end
       end
     end
   end
+
+  # describe '.parse_from_string' do
+  #   test_cases = {
+  #     { string: '2023' } => '2023-01-01..2024-01-01',
+  #     { string: 'october' } => '2023-10-01..2023-11-01',
+  #   }
+
+  #   test_cases.each do |input, expected|
+  #     it "parses #{input}" do
+  #       if expected.is_a?(Class)
+  #         expect { described_class.parse_from_string(**input) }.to raise_error(expected)
+  #       else
+  #         start_date, end_date = expected.split('..').map { |date| DateTime.parse(date) }
+  #         range = described_class.parse_from_string(**input).range
+  #         expect(range).to eq(start_date..end_date)
+  #       end
+  #     end
+  #   end
+  # end
 end
