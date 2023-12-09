@@ -13,11 +13,12 @@ module Chatbot
 
         def resolve(datetime)
           return datetime if blank? && parent_present
-          return resolve_deictic(datetime) if deictic?
           return datetime.change(day: 1) if blank?
+          return resolve_deictic(datetime) if deictic?
           return datetime.change(day: number) if valid_numeric?
+          return resolve_named(datetime) if named?
 
-          resolve_named(datetime)
+          datetime
         end
 
         def valid_numeric?
@@ -25,7 +26,7 @@ module Chatbot
         end
 
         def named?
-          DAYS_OF_WEEK.include?(string) || DAYS_OF_WEEK_ABBR.include?(string)
+          !!string&.match?(names_regex)
         end
 
         def deictic?
@@ -66,9 +67,24 @@ module Chatbot
         def wday
           return unless named?
 
-          n = (DAYS_OF_WEEK.index(string) || DAYS_OF_WEEK_ABBR.index(string))
+          n = (DAYS_OF_WEEK_ABBR.index(normalized_name))
 
           n.zero? ? 7 : n
+        end
+
+        def names
+          DAYS_OF_WEEK + DAYS_OF_WEEK_ABBR
+        end
+
+        def normalized_name
+          name = names.find { |name| string.end_with?(name) }
+          return unless name
+
+          name[0..2]
+        end
+
+        def names_regex
+          @names_regex ||= Regexp.new(names.join('|'))
         end
 
         def validate!

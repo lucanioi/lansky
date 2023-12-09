@@ -26,4 +26,5 @@
 [ ] make operations accept Period objects
 [ ] 'ago' support
 
+[ ] improve named deictic logic — currently returns next occurance of date. eg next october, next wednesday
 [ ] status and get budget are both relying on discerning active budget. iffy.

@@ -23,8 +23,7 @@ module Chatbot
         end
 
         def named?
-          MONTHS_OF_YEAR.include?(string) ||
-            MONTHS_OF_YEAR_ABBR.include?(string)
+          !!string&.match?(names_regex)
         end
 
         private
@@ -54,10 +53,24 @@ module Chatbot
         def number
           return string.to_i if valid_numeric?
 
-          index = (MONTHS_OF_YEAR.index(string) ||
-                    MONTHS_OF_YEAR_ABBR.index(string))
+          index = MONTHS_OF_YEAR_ABBR.index(normalized_name)
 
           index && index + 1
+        end
+
+        def names_regex
+          @names_regex ||= Regexp.new(names.join('|'))
+        end
+
+        def names
+          MONTHS_OF_YEAR + MONTHS_OF_YEAR_ABBR
+        end
+
+        def normalized_name
+          name = names.find { |name| string.end_with?(name) }
+          return unless name
+
+          name[0..2]
         end
 
         def validate!

@@ -23,7 +23,9 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { day: 'today'     } => '2023-10-12..2023-10-13',
       { day: 'tomorrow'  } => '2023-10-13..2023-10-14',
       { day: 'yesterday' } => '2023-10-11..2023-10-12',
-      { day: 'thursday',  include_current: false } => '2023-10-12..2023-10-13', # include_current is only effective when direction is not :current
+      { day: 'next wednesday' } => '2023-10-18..2023-10-19',
+      { day: 'next thursday'  } => '2023-10-19..2023-10-20',
+      { day: 'thursday',  include_current: false } => '2023-10-12..2023-10-13', # include_current is ignored unless direction is :forward or :backward
       { day: 'wednesday', direction: :current  } => '2023-10-11..2023-10-12',
       { day: 'friday',    direction: :backward } => '2023-10-06..2023-10-07',
       { day: 'wednesday', direction: :forward  } => '2023-10-18..2023-10-19',
@@ -52,6 +54,9 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { month: 'this' } => '2023-10-01..2023-11-01',
       { month: 'next' } => '2023-11-01..2023-12-01',
       { month: 'prev' } => '2023-09-01..2023-10-01',
+      { month: 'next january'  } => '2024-01-01..2024-02-01',
+      { month: 'next december' } => '2023-12-01..2024-01-01',
+      { month: 'prev december' } => '2022-12-01..2023-01-01',
       { month: 'january',  direction: :forward } => '2024-01-01..2024-02-01',
       { month: 'december', direction: :backward } => '2022-12-01..2023-01-01',
       { month: 'october',  direction: :backward, include_current: false } => '2022-10-01..2022-11-01',
@@ -72,7 +77,8 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { day:  '1', month: '1'        } => '2023-01-01..2023-01-02',
       { day: '13', month: 'november' } => '2023-11-13..2023-11-14',
       { day: '13', month: 'october'  } => '2023-10-13..2023-10-14',
-      { day: '30', month: 'next' } => '2023-11-30..2023-12-01',
+      { day: '30', month: 'next'     } => '2023-11-30..2023-12-01',
+      { day: '30', month: 'next october' } => '2024-10-30..2024-10-31',
 
       { day: 'monday', week: '1' } => '2023-10-02..2023-10-03',
       { day: 'sunday', week: '4' } => '2023-10-29..2023-10-30',
@@ -88,6 +94,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       # 3 components
       { day: 'wednesday', week: '3', month: 'january'  } => '2023-01-18..2023-01-19',
       { day: 'sunday',    week: '4', month: 'december' } => '2023-12-31..2024-01-01',
+      { day: 'sunday',    week: '4', month: 'prev december' } => '2022-12-25..2022-12-26',
 
       { week: '1', month: 'february', year: '2022' } => '2022-01-31..2022-02-07',
 
