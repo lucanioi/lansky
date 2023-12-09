@@ -26,7 +26,7 @@ module Budgets
         @today_spent_amount ||=
           user.ledger_entries
               .spending
-              .where(recorded_at: Time.zone.today.bod..DateTime.current)
+              .where(recorded_at: DateTime.current.bod..DateTime.current)
               .sum(:amount_cents)
       end
 
@@ -34,7 +34,7 @@ module Budgets
         @today_recovered_amount ||=
           user.ledger_entries
               .recovery
-              .where(recorded_at: Time.zone.today.bod..DateTime.current)
+              .where(recorded_at: DateTime.current.bod..DateTime.current)
               .sum(:amount_cents)
       end
 

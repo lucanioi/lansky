@@ -104,7 +104,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  'this week', 'last week', 'next week',
+                  'this', 'last', 'next',
                   '1', '2', '3', '4'
                 ]
               },
@@ -118,7 +118,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  ['this month', 'last month', 'next month'],
+                  ['this', 'last', 'next'],
                   (1..12).to_a.map(&:to_s),
                   month_names,
                   ['this ', 'last ', 'next '].product(month_names).map(&:join),
@@ -134,7 +134,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  ['this year', 'last year', 'next year'],
+                  ['this', 'last', 'next'],
                 ].flatten,
               },
             },

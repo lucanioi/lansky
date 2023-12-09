@@ -21,4 +21,6 @@
 [o] make operations accept Period objects
 [o] create GPT layer
 
+[ ] 'ago' support
+
 [ ] status and get budget are both relying on discerning active budget. iffy.

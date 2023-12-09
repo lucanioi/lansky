@@ -137,7 +137,7 @@ RSpec.describe Chatbot::Operations::Status do
     create :budget,
            user: user,
            amount_cents: amount,
-           period_start: Time.zone.today.bom,
-           period_end: Time.zone.today.eom
+           period_start: DateTime.current.bom,
+           period_end: DateTime.current.eom
   end
 end
