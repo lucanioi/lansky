@@ -2,22 +2,43 @@ module Chatbot
   module Parsers
     module Date
       class Year < DateComponent
-        NUMERIC_YEARS = ('2000'..'2100').to_a
+        InvalidYear = Class.new(StandardError)
+
+        NUMERIC_YEARS = /20\d{2}/
 
         def resolve(datetime)
-          return datetime.change(year: number) if numeric?
+          return datetime.change(year: number) if valid_numeric?
+          return resolve_deictic(datetime) if deictic?
 
           datetime
         end
 
-        private
-
-        def number
-          string.to_i if numeric?
+        def named?
+          false
         end
 
-        def numeric?
-          NUMERIC_YEARS.include?(string)
+        def valid_numeric?
+          NUMERIC_YEARS.match?(string)
+        end
+
+        private
+
+        def resolve_deictic(datetime)
+          case string
+          when 'this' then datetime
+          when 'next' then datetime.next_year
+          when 'prev' then datetime.prev_year
+          end
+        end
+
+        def number
+          string.to_i if valid_numeric?
+        end
+
+        def validate!
+          return if valid_numeric? || deictic? || blank?
+
+          raise InvalidYear, "Invalid year: #{string}"
         end
       end
     end

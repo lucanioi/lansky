@@ -4,6 +4,8 @@ module Chatbot
       class DateComponent
         attr_reader :string, :direction, :parent_present
 
+        DEICTIC_OPTIONS = %w[this next prev].freeze
+
         def initialize(string,
                        direction: :current,
                        include_current: true,
@@ -12,6 +14,8 @@ module Chatbot
           @direction = direction
           @include_current = include_current
           @parent_present = parent_present
+
+          validate!
         end
 
         def include_current
@@ -28,7 +32,23 @@ module Chatbot
           string.blank?
         end
 
+        def valid_numeric?
+          raise NotImplementedError
+        end
+
+        def deictic?
+          DEICTIC_OPTIONS.include?(string)
+        end
+
+        def named?
+          raise NotImplementedError
+        end
+
         private
+
+        def validate!
+          raise NotImplementedError
+        end
       end
     end
   end

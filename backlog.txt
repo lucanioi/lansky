@@ -22,6 +22,7 @@
 [o] create GPT layer
 [o] ensure tests are using DateTime.current with hour and minutes
 
+[ ] date edge cases
 [ ] make operations accept Period objects
 [ ] 'ago' support
 
