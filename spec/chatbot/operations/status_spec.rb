@@ -138,6 +138,6 @@ RSpec.describe Chatbot::Operations::Status do
            user: user,
            amount_cents: amount,
            period_start: DateTime.current.bom,
-           period_end: DateTime.current.eom
+           period_end: DateTime.current.next_month.bom
   end
 end

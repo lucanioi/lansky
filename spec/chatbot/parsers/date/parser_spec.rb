@@ -54,7 +54,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       # 2 components
       { day:  '1', month: '1'        } => '2023-01-01..2023-01-02',
       { day: '13', month: 'november' } => '2023-11-13..2023-11-14',
-      { day: '13', month: 'october', include_current: true } => '2023-10-13..2023-10-14',
+      { day: '13', month: 'october'  } => '2023-10-13..2023-10-14',
 
       { day: 'monday', week: '1' } => '2023-10-02..2023-10-03',
       { day: 'sunday', week: '4' } => '2023-10-29..2023-10-30',
@@ -74,7 +74,8 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { day: '24', month: '3', year: '2024' } => '2024-03-24..2024-03-25',
 
       # 4 components
-      { day: 'monday', week: '4', month: 'june', year: '2024' } => '2024-06-24..2024-06-25',
+      { day: 'monday', week: '4', month: 'june',  year: '2024' } => '2024-06-24..2024-06-25',
+      { day: 'sunday', week: '1', month: 'april', year: '2022' } => '2022-04-10..2022-04-11',
     }
 
     test_cases.each do |input, expected|

@@ -37,7 +37,7 @@ module Budgets
       end
 
       def days_left_in_period
-        remaining_days = (period_end.to_date - DateTime.current).to_i + 1
+        remaining_days = (period_end.to_date - DateTime.current.bod).to_i
 
         [remaining_days, 0].max
       end

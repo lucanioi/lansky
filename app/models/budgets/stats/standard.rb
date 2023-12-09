@@ -2,6 +2,7 @@ module Budgets
   module Stats
     class Standard < Base
       def today_remaining_amount
+        binding.pry if $debug
         current_daily_limit - balance_today
       end
 

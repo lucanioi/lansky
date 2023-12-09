@@ -18,9 +18,11 @@
 [x] refactor into engines (classic vs ai)
 [x] new architecture
 
-[o] make operations accept Period objects
+[o] create date parser
 [o] create GPT layer
+[o] ensure tests are using DateTime.current with hour and minutes
 
+[ ] make operations accept Period objects
 [ ] 'ago' support
 
 [ ] status and get budget are both relying on discerning active budget. iffy.
