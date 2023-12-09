@@ -8,25 +8,26 @@ module Chatbot
         NUMERIC_MONTHS = ('1'..'12').to_a
 
         def resolve(datetime)
+          return datetime.change(month: 1) if blank? && parent_present
           return datetime.change(month: number) if numeric?
           return resolve_named(datetime) unless blank?
-
           datetime
         end
 
         private
 
         def resolve_named(datetime)
-          difference = (number - datetime.month) % 12
+          difference = number - datetime.month
 
-          case direction
-          when :forward
-            difference = 12 if difference.zero? && !include_current
-          when :backward
-            difference -= 12 unless difference.zero? && include_current
-          end
+          datetime + adjust_difference(difference).months
+        end
 
-          datetime + difference.months
+        def adjust_difference(diff)
+          return diff if direction == :current
+          diff %= 12
+          return diff if diff.zero? && include_current
+          return diff - 12 if direction == :backward
+          diff.zero? ? 12 : diff
         end
 
         def number

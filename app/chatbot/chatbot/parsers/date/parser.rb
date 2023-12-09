@@ -26,10 +26,10 @@ module Chatbot
         end
 
         def initialize(day:, week:, month:, year:, **options)
-          @day = Day.new(day, **options)
-          @week = week
-          @month = Month.new(month, **options)
-          @year = year
+          @day   = Day.new(day, parent_present: week.present?, **options)
+          @week  = Week.new(week, **options)
+          @month = Month.new(month, parent_present: year.present?, **options)
+          @year  = Year.new(year, **options)
 
           @include_current  = options[:include_current] || false
           @direction        = options[:direction] || :forward
@@ -43,7 +43,11 @@ module Chatbot
         def period_start
           datetime = DateTime.current
 
-          month.resolve(datetime).then { |dt| day.resolve(dt) }
+          datetime
+            .then { |dt| year.resolve(dt) }
+            .then { |dt| month.resolve(dt) }
+            .then { |dt| week.resolve(dt) }
+            .then { |dt| day.resolve(dt) }
         end
 
         def period_end
