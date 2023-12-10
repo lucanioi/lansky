@@ -28,10 +28,10 @@ RSpec.describe 'Twilio Webhooks', type: :request do
   describe 'happy path' do
     it 'responds with a message echoing the body in TwiML format' do
       send_message    'set budget this month 1000'
-      expect_response '[TEST] Budget for October 2023 set to €1,000'
+      expect_response 'Budget for October 2023 set to €1,000'
 
       send_message    'get budget this month'
-      expect_response '[TEST] Budget for October 2023 is €1,000'
+      expect_response 'Budget for October 2023 is €1,000'
 
       Timecop.freeze 1.day.ago do
         send_message    'spent 10 food'

@@ -2,8 +2,8 @@ class Period
   attr_reader :period_start, :period_end
 
   def initialize(period_start, period_end)
-    @period_start = period_start.to_time
-    @period_end = period_end.to_time
+    @period_start = period_start.to_datetime
+    @period_end = period_end.to_datetime
   end
 
   def start

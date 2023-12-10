@@ -25,7 +25,7 @@ module Chatbot
       def reply(budget)
         formatted_amount = Helpers::MoneyHelper.format(budget.amount_cents)
 
-        "[TEST] Budget for #{period_title(budget)} is #{formatted_amount}"
+        "Budget for #{period_title(budget)} is #{formatted_amount}"
       end
 
       def period_title(budget = nil)
