@@ -1,13 +1,6 @@
 module Chatbot
   module Helpers
     module DateTimeHelper
-      InvalidPeriod = Class.new(Lansky::DisplayableError)
-
-      DAY_DURATION = (1.day - 1.seconds).to_f..1.day.to_f
-      WEEK_DURATION = (1.week - 1.seconds).to_f..1.week.to_f
-      MONTH_DURATION = (28.days - 1.second).to_f..31.days.to_f
-      YEAR_DURATION = (1.year - 1.seconds).to_f..1.year.to_f
-
       module_function
 
       # in the format 'Mon, 01 Jan 2020' for specific days

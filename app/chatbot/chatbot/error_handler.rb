@@ -12,9 +12,6 @@ module Chatbot
       Engines::Classic::Parsers::InvalidAmount => {
         friendly_message: 'Invalid amount'
       },
-      Helpers::DateTimeHelper::InvalidPeriod => {
-        friendly_message: "Invalid period"
-      },
       Engines::Classic::Parsers::DateExtractor::InvalidPeriod => {
         friendly_message: "Invalid period"
       }

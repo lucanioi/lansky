@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.xdescribe 'Twilio Webhooks', type: :request do
+RSpec.describe 'Twilio Webhooks', type: :request do
   before do
     Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0))
 
