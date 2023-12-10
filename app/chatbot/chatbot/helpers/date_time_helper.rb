@@ -55,7 +55,7 @@ module Chatbot
       # in the format '2020' for years
       # in the format 'Mon, 01 Jan 2020 - Sun, 31 Jan 2020' for other periods
       def format_period(period_range)
-        case period_range.end - period_range.begin.to_time
+        case period_range.end.to_time - period_range.begin.to_time
         in duration if DAY_DURATION.cover?(duration)
           period_range.begin.strftime('%a, %d %b %Y')
         in duration if WEEK_DURATION.cover?(duration)

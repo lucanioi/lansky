@@ -28,7 +28,7 @@ module Chatbot
         end
 
         def resolve_deictic(datetime)
-          offset = case string
+          offset = case string.delete_suffix('week').strip
                    when 'this' then 0
                    when 'next' then 7
                    when 'prev' then -7

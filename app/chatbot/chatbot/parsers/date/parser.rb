@@ -7,11 +7,6 @@ module Chatbot
             new(day:, week:, month:, year:, **options).parse
           end
 
-          # This parsing is limited. It's used by the non-AI engine.
-          def parse_from_string(string:, **options)
-            parse_from_params(**StringParser.parse_to_params(string), **options)
-          end
-
           private :new
         end
 

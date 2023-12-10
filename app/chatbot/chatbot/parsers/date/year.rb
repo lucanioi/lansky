@@ -24,7 +24,7 @@ module Chatbot
         private
 
         def resolve_deictic(datetime)
-          case string
+          case string.delete_suffix('year').strip
           when 'this' then datetime
           when 'next' then datetime.next_year
           when 'prev' then datetime.prev_year

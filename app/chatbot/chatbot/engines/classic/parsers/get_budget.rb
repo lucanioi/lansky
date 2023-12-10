@@ -10,7 +10,10 @@ module Chatbot
           private
 
           def extract_period
-            argument.downcase
+            return nil if argument.blank?
+
+            date_params = DateExtractor.run(string: argument).value!
+            Chatbot::Parsers::Date::Parser.parse_from_params(**date_params)
           end
 
           def argument

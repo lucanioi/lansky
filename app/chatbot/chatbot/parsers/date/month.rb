@@ -4,15 +4,10 @@ module Chatbot
       class Month < DateComponent
         InvalidMonth = Class.new(StandardError)
 
-        MONTHS_OF_YEAR      = %w[january february march april may june july august
-                                september october november december]
-        MONTHS_OF_YEAR_ABBR = %w[jan feb mar apr may jun jul aug sep oct nov dec]
-
-        VALID_NUMERIC = (1..12)
+        MONTHS_OF_YEAR = %w[jan feb mar apr may jun jul aug sep oct nov dec]
 
         def resolve(datetime)
           return datetime.change(month: 1) if blank? && parent_present
-          return datetime.change(month: number) if valid_numeric?
           return resolve_deictic(datetime) if deictic?
           return resolve_named(datetime) unless blank?
 
@@ -20,7 +15,7 @@ module Chatbot
         end
 
         def valid_numeric?
-          VALID_NUMERIC.cover?(string.to_i)
+          false
         end
 
         def named?
@@ -30,7 +25,7 @@ module Chatbot
         private
 
         def resolve_deictic(datetime)
-          case string
+          case string.delete_suffix('month').strip
           when 'this' then datetime
           when 'next' then datetime.next_month
           when 'prev' then datetime.prev_month
@@ -54,24 +49,19 @@ module Chatbot
         def number
           return string.to_i if valid_numeric?
 
-          index = MONTHS_OF_YEAR_ABBR.index(normalized_name)
+          index = MONTHS_OF_YEAR.index(normalized_name)
 
           index && index + 1
         end
 
         def names_regex
-          @names_regex ||= Regexp.new(names.join('|'))
-        end
-
-        def names
-          MONTHS_OF_YEAR + MONTHS_OF_YEAR_ABBR
+          @names_regex ||= Regexp.new(MONTHS_OF_YEAR.join('|'))
         end
 
         def normalized_name
-          name = names.find { |name| string.end_with?(name) }
-          return unless name
+          name = string.gsub(/next|prev|this/, '').strip
 
-          name[0..2]
+          return name if MONTHS_OF_YEAR.include?(name)
         end
 
         def validate!

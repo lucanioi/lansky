@@ -30,7 +30,9 @@ module Chatbot
         end
 
         def deictic?
-          DEICTIC_OPTIONS.include?(string)
+          return false unless string
+
+          DEICTIC_OPTIONS.include?(string.delete_suffix(component_type).strip)
         end
 
         def named?
@@ -66,6 +68,10 @@ module Chatbot
           return false if string.match?(/next |prev /)
 
           parent_present ? true : include_current
+        end
+
+        def component_type
+          self.class.name.demodulize.downcase
         end
       end
     end

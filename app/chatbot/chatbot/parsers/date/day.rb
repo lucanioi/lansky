@@ -4,10 +4,7 @@ module Chatbot
       class Day < DateComponent
         InvalidDay = Class.new(StandardError)
 
-        DAYS_OF_WEEK      = %w[sunday monday tuesday wednesday thursday
-                            friday saturday]
-        DAYS_OF_WEEK_ABBR = %w[sun mon tue wed thu fri sat]
-
+        DAYS_OF_WEEK    = %w[sun mon tue wed thu fri sat]
         VALID_NUMERIC   = (1..31)
         DEICTIC_OPTIONS = %w[today tomorrow yesterday].freeze
 
@@ -65,26 +62,21 @@ module Chatbot
         end
 
         def wday
-          return unless named?
+          return unless
 
-          n = (DAYS_OF_WEEK_ABBR.index(normalized_name))
+          n = (DAYS_OF_WEEK.index(normalized_name))
 
           n.zero? ? 7 : n
         end
 
-        def names
-          DAYS_OF_WEEK + DAYS_OF_WEEK_ABBR
-        end
-
         def normalized_name
-          name = names.find { |name| string.end_with?(name) }
-          return unless name
+          name = string.gsub(/next |prev |this /, '')
 
-          name[0..2]
+          return name if DAYS_OF_WEEK.include?(name)
         end
 
         def names_regex
-          @names_regex ||= Regexp.new(names.join('|'))
+          @names_regex ||= Regexp.new(DAYS_OF_WEEK.join('|'))
         end
 
         def validate!

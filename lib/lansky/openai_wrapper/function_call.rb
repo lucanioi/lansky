@@ -91,7 +91,7 @@ module Lansky
                   ['today', 'yesterday', 'tomorrow'],
                   (1..31).to_a.map(&:to_s),
                   day_names,
-                  ['prev ', 'last ', 'next '].product(day_names).map(&:join),
+                  ['prev ', 'this ', 'next '].product(day_names).map(&:join),
                 ].flatten,
               },
               week: {
@@ -104,7 +104,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  'prev', 'last', 'next',
+                  'prev week', 'this week', 'next week',
                   '1', '2', '3', '4'
                 ]
               },
@@ -118,10 +118,9 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  ['prev', 'last', 'next'],
-                  (1..12).to_a.map(&:to_s),
+                  ['prev month', 'this month', 'next month'],
                   month_names,
-                  ['prev ', 'last ', 'next '].product(month_names).map(&:join),
+                  ['prev ', 'this ', 'next '].product(month_names).map(&:join),
                 ].flatten,
               },
               year: {
@@ -134,7 +133,7 @@ module Lansky
                   Return null if no obvious day is indicated.
                 DESC
                 enum: [
-                  ['prev', 'last', 'next'],
+                  ['prev year', 'this year', 'next year'],
                 ].flatten,
               },
             },
@@ -144,11 +143,11 @@ module Lansky
       end
 
       def day_names
-        Date::DAYNAMES.map(&:downcase)
+        %w[sun mon tue wed thu fri sat]
       end
 
       def month_names
-        Date::MONTHNAMES.compact.map(&:downcase)
+        %w[jan feb mar apr may jun jul aug sep oct nov dec]
       end
     end
   end
