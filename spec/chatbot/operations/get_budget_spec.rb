@@ -16,11 +16,11 @@ RSpec.describe Chatbot::Operations::GetBudget do
   it_behaves_like 'operation', {
     'basic' => {
       input: 'get budget october',
-      output: 'Budget for October 2023 is €1,000',
+      output: '[TEST] Budget for October 2023 is €1,000',
     },
     'this month' => {
       input: 'get budget this month',
-      output: 'Budget for October 2023 is €1,000',
+      output: '[TEST] Budget for October 2023 is €1,000',
     },
     'next month' => {
       input: 'get budget next month',
@@ -28,11 +28,11 @@ RSpec.describe Chatbot::Operations::GetBudget do
     },
     'abbreviated' => {
       input: 'budget october',
-      output: 'Budget for October 2023 is €1,000',
+      output: '[TEST] Budget for October 2023 is €1,000',
     },
     'defaults to currently active budget' => {
       input: 'budget',
-      output: 'Budget for October 2023 is €1,000',
+      output: '[TEST] Budget for October 2023 is €1,000',
     }
   }
 end

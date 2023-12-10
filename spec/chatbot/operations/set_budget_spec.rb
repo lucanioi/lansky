@@ -7,27 +7,27 @@ RSpec.describe Chatbot::Operations::SetBudget do
   it_behaves_like 'operation', {
     'this month' => {
       input: 'set budget this month 1000',
-      output: 'Budget for October 2023 set to €1,000',
+      output: '[TEST] Budget for October 2023 set to €1,000',
     },
     'next month' => {
       input: 'set budget next month 1000',
-      output: 'Budget for November 2023 set to €1,000',
+      output: '[TEST] Budget for November 2023 set to €1,000',
     },
     'january next year' => {
       input: 'set budget january 1000',
-      output: 'Budget for January 2024 set to €1,000',
+      output: '[TEST] Budget for January 2024 set to €1,000',
     },
     'money with euro sign' => {
       input: 'set budget january €1000',
-      output: 'Budget for January 2024 set to €1,000',
+      output: '[TEST] Budget for January 2024 set to €1,000',
     },
     'money with euro sign and a comma' => {
       input: 'set budget january €1,000',
-      output: 'Budget for January 2024 set to €1,000',
+      output: '[TEST] Budget for January 2024 set to €1,000',
     },
     'money with full variation' => {
       input: 'set budget january 1,000.00',
-      output: 'Budget for January 2024 set to €1,000',
+      output: '[TEST] Budget for January 2024 set to €1,000',
     },
     'invalid month' => {
       input: 'set budget foobar 1000',
