@@ -33,13 +33,14 @@ module Chatbot
           }.freeze
 
           DEICTIC_PREFIXES = ['this ', 'next ', 'prev '].freeze
-          DEICTIC_DAYS = %w[today tomorrow yesterday].freeze
-          NUMERIC_DAYS = /\b\d{1,2}\b/.freeze
+          DEICTIC_DAYS  = %w[today tomorrow yesterday].freeze
+          NUMERIC_DAYS  = /\b\d{1,2}\b/
+          NUMERIC_YEARS = /\b\d{4}\b/
 
           def run
             raise(InvalidPeriod, 'No date values detected') if attrs_absent?
 
-            { year:, month:, week:, day: }
+            { year:, month:, week:, day: }.compact
           end
 
           private
@@ -49,6 +50,7 @@ module Chatbot
           end
 
           def week
+            valid_week
           end
 
           def month
@@ -56,6 +58,7 @@ module Chatbot
           end
 
           def year
+            valid_year
           end
 
           def normalized_string
@@ -70,9 +73,9 @@ module Chatbot
             str = normalized_string.gsub(/month/, '') # since 'month' matches 'mon', remove it
 
             [
-              DAYS_OF_WEEK.values,
-              DEICTIC_DAYS,
               DEICTIC_PREFIXES.product(DAYS_OF_WEEK.values).map(&:join),
+              DEICTIC_DAYS,
+              DAYS_OF_WEEK.values,
             ].flatten.find { |day| str.include?(day) }
           end
 
@@ -81,12 +84,25 @@ module Chatbot
             m[0] if m
           end
 
+          def valid_week
+            DEICTIC_PREFIXES.product(['week']).map(&:join)
+              .find { |week| normalized_string.include?(week) }
+          end
+
           def valid_named_month
             [
-              MONTHS_OF_YEAR.values,
               DEICTIC_PREFIXES.product(MONTHS_OF_YEAR.values).map(&:join),
-              'this month', 'next month', 'prev month',
+              DEICTIC_PREFIXES.product(['month']).map(&:join),
+              MONTHS_OF_YEAR.values,
             ].flatten.find { |month| normalized_string.include?(month) }
+          end
+
+          def valid_year
+            m = string.match(NUMERIC_YEARS)
+            return m[0] if m
+
+            DEICTIC_PREFIXES.product(['year']).map(&:join)
+              .flatten.find { |year| normalized_string.include?(year) }
           end
 
           def attrs_absent?
