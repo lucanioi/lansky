@@ -30,6 +30,15 @@ RSpec.describe Chatbot::Operations::Spending do
               "```280.88``` - clothes\n" \
               "``` 42.00``` - food"
     },
+    'with some money recovered'  => {
+      input: 'spending october',
+      setup: 'create_recovery 100_00, 1.hour.ago, "food"',
+      output: "Total spent (October 2023):\n" \
+              "*€222.88*\n\n" \
+              "```280.88``` - clothes\n" \
+              "``` 42.00``` - food\n\n" \
+              "```-100.00``` - food (recovered)"
+    },
     'month after in calendar defaults to previous' => {
       input: 'spending november',
       output: "No spending found for November 2022"
@@ -56,5 +65,11 @@ RSpec.describe Chatbot::Operations::Spending do
     create :ledger_entry, user:, amount_cents:, recorded_at:,
            category: LedgerCategory.find_or_create_by(name: category),
            entry_type: :spending
+  end
+
+  def create_recovery(amount_cents, recorded_at, category)
+    create :ledger_entry, user:, amount_cents:, recorded_at:,
+           category: LedgerCategory.find_or_create_by(name: category),
+           entry_type: :recovery
   end
 end
