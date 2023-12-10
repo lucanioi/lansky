@@ -34,10 +34,14 @@ module Chatbot
 
       def period_title(budget = nil)
         return nil unless budget || period_range
-        return Helpers::DateTimeHelper.format_period(period_range) if period_range.present?
+        return Helpers::DateTimeHelper.format_period(period) if period_range.present?
 
-        range = budget.period_start..budget.period_end
-        Helpers::DateTimeHelper.format_period(range)
+        period = Models::Period.new(
+          period_start: budget.period_start,
+          period_end: budget.period_end
+        )
+
+        Helpers::DateTimeHelper.format_period(period)
       end
     end
   end

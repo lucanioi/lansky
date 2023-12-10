@@ -124,7 +124,15 @@ module Chatbot
       end
 
       def period_title
-        Helpers::DateTimeHelper.format_period(budget.period_start..budget.period_end)
+        Helpers::DateTimeHelper.format_period(Models::Period.new(period_start:, period_end:))
+      end
+
+      def period_start
+        budget.period_start
+      end
+
+      def period_end
+        budget.period_end
       end
 
       def budget

@@ -9,8 +9,8 @@ module Chatbot
       YEAR_DURATION  = (1.year - 1.seconds).to_f..1.year.to_f
 
       def initialize(period_start:, period_end:)
-        @period_start = period_start
-        @period_end = period_end
+        @period_start = period_start.to_time
+        @period_end = period_end.to_time
       end
 
       def range
@@ -18,7 +18,7 @@ module Chatbot
       end
 
       def duration
-        period_end - period_start.to_time
+        period_end - period_start
       end
 
       def day?
@@ -37,19 +37,19 @@ module Chatbot
         YEAR_DURATION.cover?(duration)
       end
 
-      def calendar_day?
+      def calender_day?
         day? && period_start.hour.zero? && period_start.min.zero?
       end
 
-      def calendar_week?
+      def calender_week?
         week? && period_start.wday == 1
       end
 
-      def calendar_month?
+      def calender_month?
         month? && period_start.day == 1
       end
 
-      def calendar_year?
+      def calender_year?
         year? && period_start.day == 1 && period_start.month == 1
       end
     end

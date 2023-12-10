@@ -14,7 +14,7 @@ module Chatbot
       private
 
       def reply(budget)
-        period_name = Helpers::DateTimeHelper.format_period(period_range)
+        period_name = Helpers::DateTimeHelper.format_period(period)
         formatted_amount = Helpers::MoneyHelper.format(budget.amount_cents)
 
         "Budget for #{period_name} set to #{formatted_amount}"

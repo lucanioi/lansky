@@ -42,11 +42,11 @@ module Chatbot
       end
 
       def period_range
-        period.range
+        period&.range
       end
 
       def period_title
-        capitalize_first_letter(Helpers::DateTimeHelper.format_period(period_range))
+        capitalize_first_letter(Helpers::DateTimeHelper.format_period(period))
       end
 
       def capitalize_first_letter(string)
