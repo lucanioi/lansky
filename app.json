@@ -8,10 +8,7 @@
         "heroku-postgresql"
       ],
       "env": {
-        "RAILS_ENV": "test",
-        "DATABASE_URL": {
-          "required": true
-        }
+        "RAILS_ENV": "test"
       }
     }
   }
