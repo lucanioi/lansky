@@ -3,8 +3,6 @@ module Chatbot
     include Runnable
 
     def run
-      raise 'test!!!'
-
       use_user_environment do
         result = router(user).run(user:, message:)
         return handle_error(result.error) if result.failure?

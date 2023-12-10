@@ -56,4 +56,7 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'timecop'
+
+  # for mocking HTTP requests
+  gem 'webmock'
 end

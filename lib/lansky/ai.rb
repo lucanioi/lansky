@@ -1,14 +1,17 @@
-require_relative 'openai_wrapper/client'
+require_relative 'open_ai_wrapper/client'
 
 module Lansky
   class AI
     attr_reader :client
-    delegate :function_call, to: :client
 
     DEFAULT_CLIENT = OpenAIWrapper::Client
 
-    def initialize(input)
-      @client = DEFAULT_CLIENT.new(input)
+    def initialize(client: nil)
+      @client = (client || DEFAULT_CLIENT).new
+    end
+
+    def function_call(input:)
+      client.function_call(input:)
     end
   end
 end

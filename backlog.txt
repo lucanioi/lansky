@@ -24,6 +24,7 @@
 
 NEXT STEP: make the new parser be used by the engines.
 
+[ ] use VCR for HTTP requests in tests
 [ ] date edge cases
 [ ] make operations accept Period objects
 [ ] 'ago' support

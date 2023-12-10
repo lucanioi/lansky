@@ -6,7 +6,7 @@ module Lansky
       include Runnable
 
       def run
-        response = client.chat(parameters:)
+        response = ai.chat(parameters:)
         message = response.dig('choices', 0, 'message')
 
         return unless message['role'] == 'assistant' && message['function_call']
@@ -149,7 +149,7 @@ module Lansky
         %w[jan feb mar apr may jun jul aug sep oct nov dec]
       end
 
-      attr_accessor :input, :client
+      attr_accessor :input, :ai
     end
   end
 end
