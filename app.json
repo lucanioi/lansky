@@ -1,0 +1,18 @@
+{
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "bundle exec rspec"
+      },
+      "addons": [
+        "heroku-postgresql"
+      ],
+      "env": {
+        "RAILS_ENV": "test",
+        "DATABASE_URL": {
+          "required": true
+        }
+      }
+    }
+  }
+}
