@@ -57,8 +57,8 @@ RSpec.describe Chatbot::Operations::SetBudget do
     it 'sets the budget period' do
       result
 
-      expect(user.budgets.last.period_start).to approx_eq(Date.today.bom)
-      expect(user.budgets.last.period_end).to approx_eq(Date.today.eom.eod)
+      expect(user.budgets.last.period_start).to approx_eq(DateTime.current.bom)
+      expect(user.budgets.last.period_end).to approx_eq(DateTime.current.eom.eod)
     end
 
     context 'when the specified month is for next year' do
@@ -67,16 +67,16 @@ RSpec.describe Chatbot::Operations::SetBudget do
       it 'sets the budget period' do
         result
 
-        expect(user.budgets.last.period_start).to approx_eq(DateTime.new(Date.today.year + 1, 1, 1))
-        expect(user.budgets.last.period_end).to approx_eq(DateTime.new(Date.today.year + 1, 1, 31).eod)
+        expect(user.budgets.last.period_start).to approx_eq(DateTime.new(DateTime.current.year + 1, 1, 1))
+        expect(user.budgets.last.period_end).to approx_eq(DateTime.new(DateTime.current.year + 1, 2, 1))
       end
     end
 
     context 'when budget already exists for the month' do
       let!(:budget) do
         create :budget,
-                period_start: Date.today.bom,
-                period_end: Date.today.eom.eod,
+                period_start: DateTime.current.bom,
+                period_end: DateTime.current.bom.next_month,
                 amount_cents: 500_00,
                 user:
       end

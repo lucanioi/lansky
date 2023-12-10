@@ -5,6 +5,8 @@ module Chatbot
         class DateExtractor
           include Runnable
 
+          InvalidPeriod = Class.new(Lansky::DisplayableError)
+
           DAYS_OF_WEEK = {
             'monday'    => 'mon',
             'tuesday'   => 'tue',
@@ -35,6 +37,8 @@ module Chatbot
           NUMERIC_DAYS = /\b\d{1,2}\b/.freeze
 
           def run
+            raise(InvalidPeriod, 'No date values detected') if attrs_absent?
+
             { year:, month:, week:, day: }
           end
 
@@ -83,6 +87,10 @@ module Chatbot
               DEICTIC_PREFIXES.product(MONTHS_OF_YEAR.values).map(&:join),
               'this month', 'next month', 'prev month',
             ].flatten.find { |month| normalized_string.include?(month) }
+          end
+
+          def attrs_absent?
+            year.nil? && month.nil? && week.nil? && day.nil?
           end
 
           attr_accessor :string

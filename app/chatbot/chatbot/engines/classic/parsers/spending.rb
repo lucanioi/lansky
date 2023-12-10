@@ -10,11 +10,12 @@ module Chatbot
           private
 
           def period
-            argument.downcase
+            date_params = DateExtractor.run(string: argument).value!
+            Chatbot::Parsers::Date::Parser.parse_from_params(**date_params, direction: :backward)
           end
 
           def argument
-            message.delete_prefix('spending').strip
+            message.delete_prefix('spending').strip.downcase
           end
         end
       end

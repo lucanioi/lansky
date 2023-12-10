@@ -15,6 +15,9 @@ module Chatbot
       Helpers::DateTimeHelper::InvalidPeriod => {
         friendly_message: "Invalid period"
       },
+      Engines::Classic::Parsers::DateExtractor::InvalidPeriod => {
+        friendly_message: "Invalid period"
+      }
     }.freeze
 
     def handle_error(error)

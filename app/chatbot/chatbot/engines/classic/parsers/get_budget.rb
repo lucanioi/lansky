@@ -4,12 +4,12 @@ module Chatbot
       module Parsers
         class GetBudget < Base
           def to_h
-            { period: extract_period }
+            { period: }
           end
 
           private
 
-          def extract_period
+          def period
             return nil if argument.blank?
 
             date_params = DateExtractor.run(string: argument).value!

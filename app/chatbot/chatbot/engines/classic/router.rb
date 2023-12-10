@@ -63,7 +63,7 @@ module Chatbot
         end
 
         def normalized_message
-          message.downcase.strip
+          message.downcase.gsub(/\s+/, ' ').strip
         end
 
         attr_accessor :user, :message

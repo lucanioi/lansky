@@ -23,12 +23,16 @@ RSpec.describe Chatbot::Operations::Spending do
               "```80.88``` - clothes\n" \
               "```42.00``` - food"
     },
-    'October' => {
+    'current month' => {
       input: 'spending october',
       output: "Total spent (October 2023):\n" \
               "*€322.88*\n\n" \
               "```280.88``` - clothes\n" \
               "``` 42.00``` - food"
+    },
+    'month after in calender defaults to previous' => {
+      input: 'spending november',
+      output: "No spending found for November 2022"
     },
     'No spending' => {
       input: 'spending last month',

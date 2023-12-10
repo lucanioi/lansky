@@ -12,7 +12,9 @@ module Chatbot
           private
 
           def period
-            argument.split(' ')[0..-2].join(' ')
+            string = argument.split(' ')[0..-2].join(' ')
+            date_params = DateExtractor.run(string:).value!
+            Chatbot::Parsers::Date::Parser.parse_from_params(**date_params, direction: :forward)
           end
 
           def amount_cents

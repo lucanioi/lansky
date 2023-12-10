@@ -21,7 +21,7 @@ module Chatbot
       end
 
       def period_range
-        @period_range ||= Helpers::DateTimeHelper.parse_to_period(period, direction: :forward)
+        period&.range
       end
     end
   end
