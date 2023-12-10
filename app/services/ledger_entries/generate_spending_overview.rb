@@ -24,13 +24,13 @@ module LedgerEntries
 
     def spending_in_period
       @spending_in_period ||=
-        user.ledger_entries.spending.where(recorded_at: period_range)
+        user.ledger_entries.spending.where(recorded_at: period.range)
     end
 
     def totals_by_category
       spending_in_period.group(:category).sum(:amount_cents)
     end
 
-    attr_accessor :user, :period_range
+    attr_accessor :user, :period
   end
 end

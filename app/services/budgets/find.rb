@@ -3,22 +3,15 @@ module Budgets
     include Runnable
 
     def run
-      return find_with_period_range if period_range.present?
+      return find_with_period if period.present?
 
       find_active_budget
     end
 
     private
 
-    # This uses the period_range to find the budget, adding a 0.01 second
-    # tolerance. This is because the postgresql precision is different from
-    # the ruby precision.
-    def find_with_period_range
-      Budget.find_by(
-        user:,
-        period_start: (period_range.begin - 0.01.second)..period_range.begin,
-        period_end: (period_range.end - 0.01.second)..period_range.end
-      )
+    def find_with_period
+      Budget.find_by(user:, period_start: period.start, period_end: period.end)
     end
 
     # This assumes that there is only one active budget at a time. If there
@@ -31,6 +24,6 @@ module Budgets
           .last
     end
 
-    attr_accessor :period_range, :user
+    attr_accessor :period, :user
   end
 end

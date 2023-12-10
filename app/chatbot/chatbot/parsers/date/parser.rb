@@ -18,7 +18,7 @@ module Chatbot
         end
 
         def parse
-          Models::Period.new(period_start:, period_end:)
+          Period.new(period_start, period_end)
         end
 
         def period_start

@@ -1,12 +1,9 @@
+require_relative '../../runnable'
+
 module Lansky
   module OpenAIWrapper
     class FunctionCall
-      attr_reader :input, :client
-
-      def initialize(input, client)
-        @input  = input
-        @client = client
-      end
+      include Runnable
 
       def run
         response = client.chat(parameters:)
@@ -19,6 +16,8 @@ module Lansky
 
         { operation:, args: }
       end
+
+      private
 
       def parameters
         {
@@ -149,6 +148,8 @@ module Lansky
       def month_names
         %w[jan feb mar apr may jun jul aug sep oct nov dec]
       end
+
+      attr_accessor :input, :client
     end
   end
 end

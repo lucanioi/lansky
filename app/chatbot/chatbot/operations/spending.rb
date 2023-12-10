@@ -4,7 +4,7 @@ module Chatbot
       params :period
 
       def run
-        result = LedgerEntries::GenerateSpendingOverview.run(user:, period_range:)
+        result = LedgerEntries::GenerateSpendingOverview.run(user:, period:)
 
         return reply(result.value) if result.success?
 
@@ -39,10 +39,6 @@ module Chatbot
       def format_detail_amount(amount, width)
         Helpers::MoneyHelper.format(amount, trunc_cents: false, symbol: false)
                             .rjust(width)
-      end
-
-      def period_range
-        period&.range
       end
 
       def period_title

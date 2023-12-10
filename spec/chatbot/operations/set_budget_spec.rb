@@ -58,7 +58,7 @@ RSpec.describe Chatbot::Operations::SetBudget do
       result
 
       expect(user.budgets.last.period_start).to approx_eq(DateTime.current.bom)
-      expect(user.budgets.last.period_end).to approx_eq(DateTime.current.eom.eod)
+      expect(user.budgets.last.period_end).to approx_eq(DateTime.current.bom.next_month)
     end
 
     context 'when the specified month is for next year' do

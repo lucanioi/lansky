@@ -13,12 +13,12 @@ module Budgets
 
     def budget
       @budget ||= Budget.find_or_initialize_by(
-        period_start: period_range.begin,
-        period_end: period_range.end,
+        period_start: period.start,
+        period_end: period.end,
         user: user
       ).tap { |budget| budget.amount_cents = amount_cents }
     end
 
-    attr_accessor :amount_cents, :period_range, :user
+    attr_accessor :amount_cents, :period, :user
   end
 end

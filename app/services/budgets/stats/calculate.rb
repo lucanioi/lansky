@@ -10,7 +10,7 @@ module Budgets
           period_spent_amount:,
           period_recovered_amount:,
           budgeted_amount: budget.amount_cents,
-          period_range: period_range,
+          period:,
         )
       end
 
@@ -42,7 +42,7 @@ module Budgets
         @period_spent_amount ||=
           user.ledger_entries
               .spending
-              .where(recorded_at: period_range)
+              .where(recorded_at: period.range)
               .sum(:amount_cents)
       end
 
@@ -50,12 +50,12 @@ module Budgets
         @period_recovered_amount ||=
         user.ledger_entries
             .recovery
-            .where(recorded_at: period_range)
+            .where(recorded_at: period.range)
             .sum(:amount_cents)
       end
 
-      def period_range
-        @period_range ||= budget.period_start..budget.period_end
+      def period
+        @period ||= Period.new(budget.period_start, budget.period_end)
       end
 
       def surplus?

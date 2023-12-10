@@ -124,7 +124,7 @@ module Chatbot
       end
 
       def period_title
-        Helpers::DateTimeHelper.format_period(Models::Period.new(period_start:, period_end:))
+        Helpers::DateTimeHelper.format_period(Period.new(period_start, period_end))
       end
 
       def period_start

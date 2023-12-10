@@ -6,20 +6,20 @@ module Budgets
                   :period_spent_amount,
                   :period_recovered_amount,
                   :budgeted_amount,
-                  :period_range
+                  :period
 
       def initialize(today_spent_amount:,
                      today_recovered_amount:,
                      period_spent_amount:,
                      period_recovered_amount:,
                      budgeted_amount:,
-                     period_range:)
+                     period:)
         @today_spent_amount      = today_spent_amount
         @today_recovered_amount  = today_recovered_amount
         @period_spent_amount     = period_spent_amount
         @period_recovered_amount = period_recovered_amount
         @budgeted_amount         = budgeted_amount
-        @period_range            = period_range
+        @period                  = period
       end
 
       def period_surplus_amount
@@ -43,7 +43,7 @@ module Budgets
       end
 
       def period_end
-        period_range.end
+        period.end
       end
     end
   end
