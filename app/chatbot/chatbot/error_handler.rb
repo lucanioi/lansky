@@ -9,7 +9,7 @@ module Chatbot
       Engines::Classic::Router::UnknownOperation => {
         friendly_message: 'Did not understand'
       },
-      Engines::Classic::Parsers::InvalidAmount => {
+      Engines::Classic::Parsers::Errors::InvalidAmount => {
         friendly_message: 'Invalid amount'
       },
       Engines::Classic::Parsers::DateExtractor::InvalidPeriod => {

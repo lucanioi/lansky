@@ -21,7 +21,7 @@ module Chatbot
             amount = argument.split(' ')[-1]
             amount = Helpers::MoneyHelper.parse_amount(amount)
 
-            amount || raise(Parsers::InvalidAmount, "Invalid amount: #{argument}")
+            amount || raise(Parsers::Errors::InvalidAmount, "Invalid amount: #{argument}")
           end
 
           def argument
