@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Lansky::AI do
   subject { described_class.new(client:) }

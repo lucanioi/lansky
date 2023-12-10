@@ -20,10 +20,9 @@
 [x] create date parser
 
 [o] create GPT layer
-[o] ensure tests are using DateTime.current with hour and minutes
+[o] make it runnable locally
 
-NEXT STEP: make the new parser be used by the engines.
-
+[ ] ensure tests are using DateTime.current with hour and minutes
 [ ] use VCR for HTTP requests in tests
 [ ] date edge cases
 [ ] make operations accept Period objects
