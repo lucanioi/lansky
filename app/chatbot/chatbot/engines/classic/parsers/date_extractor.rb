@@ -33,8 +33,9 @@ module Chatbot
           }.freeze
 
           DEICTIC_PREFIXES = ['this ', 'next ', 'prev '].freeze
-          DEICTIC_DAYS  = %w[today tomorrow yesterday].freeze
-          NUMERIC_DAYS  = /\b\d{1,2}\b/
+          DEICTIC_DAYS = %w[today tomorrow yesterday].freeze
+          NUMERIC_DAYS = /(?<!week\s)\b\d{1,2}\b/
+          NUMERIC_WEEKS = /\bweek (\d)\b/
           NUMERIC_YEARS = /\b\d{4}\b/
 
           def run
@@ -50,7 +51,7 @@ module Chatbot
           end
 
           def week
-            valid_week
+            valid_deictic_week || valid_numeric_week
           end
 
           def month
@@ -84,9 +85,14 @@ module Chatbot
             m[0] if m
           end
 
-          def valid_week
+          def valid_deictic_week
             DEICTIC_PREFIXES.product(['week']).map(&:join)
               .find { |week| normalized_string.include?(week) }
+          end
+
+          def valid_numeric_week
+            m = string.match(NUMERIC_WEEKS)
+            m[1] if m
           end
 
           def valid_named_month

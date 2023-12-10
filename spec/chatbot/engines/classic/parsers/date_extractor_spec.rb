@@ -15,6 +15,7 @@ RSpec.describe Chatbot::Engines::Classic::Parsers::DateExtractor do
     'last october' => { month: 'prev oct' },
     'next friday'  => { day: 'next fri' },
     'last month'   => { month: 'prev month' },
+    'last month week 2'   => { month: 'prev month', week: '2' },
 
     'last october 3'    => { day: '3', month: 'prev oct' },
     'last week tuesday' => { day: 'tue', week: 'prev week' },
