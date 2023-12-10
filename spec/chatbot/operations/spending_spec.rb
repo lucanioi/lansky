@@ -30,7 +30,7 @@ RSpec.describe Chatbot::Operations::Spending do
               "```280.88``` - clothes\n" \
               "``` 42.00``` - food"
     },
-    'month after in calender defaults to previous' => {
+    'month after in calendar defaults to previous' => {
       input: 'spending november',
       output: "No spending found for November 2022"
     },

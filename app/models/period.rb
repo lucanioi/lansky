@@ -23,19 +23,19 @@ class Period
     period_end - period_start
   end
 
-  def calender_day?
+  def calendar_day?
     duration == 1.day && first_hour?
   end
 
-  def calender_week?
+  def calendar_week?
     duration == 1.week && period_start.wday == 1 && first_hour?
   end
 
-  def calender_month?
+  def calendar_month?
     period_end == (period_start.next_month) && first_hour? && first_day?
   end
 
-  def calender_year?
+  def calendar_year?
     duration == 1.year && first_hour? && first_day? && first_month?
   end
 
