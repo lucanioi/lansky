@@ -12,6 +12,7 @@ RSpec.describe Lansky::AI do
     let(:input) { 'Hello, my name is' }
 
     it 'returns a string' do
+      fail 'fail'
       expect(result).to be_nil
     end
   end
