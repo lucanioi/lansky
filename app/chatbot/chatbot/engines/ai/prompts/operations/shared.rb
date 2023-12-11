@@ -4,16 +4,19 @@ module Chatbot
       module Prompts
         module Operations
           class Shared
-            VERY_IMPORTANT_MESSAGE = <<~DESC.strip
+            VERY_IMPORTANT_MESSAGE = <<~DESC.strip.freeze
               It's crucial that you get this right,
               otherwise I might lose my job. Please be careful.
             DESC
 
-            ONLY_ACCEPTED_VALUES = <<~DESC.strip
+            ONLY_ACCEPTED_VALUES = <<~DESC.strip.freeze
               ONLY the values below are accepted.
               It is strictly forbidden to use any other values.
               Return null if no obvious day is indicated.
             DESC
+
+            DAY_NAMES = %w[sun mon tue wed thu fri sat].freeze
+            MONTH_NAMES = %w[jan feb mar apr may jun jul aug sep oct nov dec].freeze
 
             DATE = {
               type: :object,
@@ -68,7 +71,7 @@ module Chatbot
                 },
               },
               required: [],
-            }
+            }.freeze
           end
         end
       end

@@ -4,7 +4,19 @@ RSpec.describe Lansky::AI do
   subject { described_class.new(client:, prompts:) }
 
   let(:response) { nil }
-  let(:prompts) { { operations: [] } }
+  let(:prompts) do
+    {
+      operations: [
+        {
+          name: 'test',
+          parameters: {
+            type: :object,
+            properties: {}
+          }
+        }
+      ]
+    }
+  end
   let(:client) { Lansky::OpenAIWrapper::Client }
 
   describe '#parse_operation', :vcr do

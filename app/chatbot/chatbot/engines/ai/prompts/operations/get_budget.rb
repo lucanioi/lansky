@@ -4,9 +4,6 @@ module Chatbot
       module Prompts
         module Operations
           class GetBudget
-            DAY_NAMES = %w[sun mon tue wed thu fri sat].freeze
-            MONTH_NAMES = %w[jan feb mar apr may jun jul aug sep oct nov dec]
-
             PROMPTS = {
               name: 'get_budget',
               description: 'Returns the user\'s budget for the given period.',

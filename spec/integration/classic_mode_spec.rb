@@ -9,14 +9,14 @@ RSpec.describe 'Classic Mode', type: :request do
   let(:user) { create :user, test_user: false }
 
   describe 'message it does not recognize' do
-    it 'responds with a message echoing the body in TwiML format' do
+    it 'responds with \'Did not understand\'' do
       send_message    'Does not recognize this message'
       expect_response 'Did not understand'
     end
   end
 
   describe 'happy path' do
-    it 'responds with a message echoing the body in TwiML format' do
+    it 'responds with correct response' do
       send_message    'set budget this month 1000'
       expect_response 'Budget for October 2023 set to €1,000'
 
