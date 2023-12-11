@@ -37,11 +37,10 @@ module Chatbot
         def params
           return unless find_operation
 
-          params = ai_response[:args]
-
-          if find_operation.params.include?(:period) && !params[:period]
-            params[:period] = :month
-          end
+          ParamPreprocessor.run(
+            params: ai_response[:args],
+            operation: operation_name
+          ).value!
         end
 
         def ai_response
@@ -50,6 +49,10 @@ module Chatbot
 
         def ai
           @ai ||= Lansky::AI.new
+        end
+
+        def operation_name
+          ai_response[:operation].to_sym
         end
 
         attr_accessor :user, :message

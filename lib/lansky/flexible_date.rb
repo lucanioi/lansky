@@ -13,6 +13,14 @@ module Lansky
       Interpreter.to_period(self, **options)
     end
 
+    def ==(other)
+      other.is_a?(self.class) &&
+        other.day == day &&
+        other.week == week &&
+        other.month == month &&
+        other.year == year
+    end
+
     def to_h
       {
         day: day,
