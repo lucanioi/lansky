@@ -6,6 +6,7 @@ module Chatbot
           operations: [
             Prompts::Operations::Spent::PROMPTS,
             Prompts::Operations::GetBudget::PROMPTS,
+            Prompts::Operations::SetBudget::PROMPTS,
           ]
         }
       end

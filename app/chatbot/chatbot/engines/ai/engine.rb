@@ -9,7 +9,7 @@ module Chatbot
 
           processed_params = process_params(route)
 
-          route.operation.run(user:, **processed_params).value!
+          route.operation.run(user:, params: processed_params).value!
         end
 
         private

@@ -39,6 +39,12 @@ module Chatbot
       def period
         flex_date&.to_period
       end
+
+      def validate_params!
+        return if flex_date.is_a? Lansky::FlexibleDate
+
+        raise InvalidParameter, "Invalid flex_date: #{flex_date.inspect}"
+      end
     end
   end
 end

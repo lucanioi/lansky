@@ -29,6 +29,12 @@ module Chatbot
       def normalized_currency
         @normalized_currency ||= Money::Currency.find(currency.upcase)&.iso_code
       end
+
+      def validate_params!
+        return if currency.is_a?(String)
+
+        raise InvalidParameter, "Invalid currency: #{currency.inspect}"
+      end
     end
   end
 end

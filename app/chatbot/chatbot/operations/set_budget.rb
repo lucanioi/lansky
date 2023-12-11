@@ -22,6 +22,16 @@ module Chatbot
       def period
         flex_date&.to_period(direction: :forward)
       end
+
+      def validate_params!
+        unless flex_date.is_a?(Lansky::FlexibleDate)
+          raise InvalidParameter, "Invalid flex_date: #{flex_date.inspect}"
+        end
+
+        unless amount_cents.is_a?(Integer)
+          raise InvalidParameter, "Invalid amount_cents: #{amount_cents.inspect}"
+        end
+      end
     end
   end
 end

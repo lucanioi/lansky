@@ -6,7 +6,10 @@ module Chatbot
           class GetBudget
             PROMPTS = {
               name: 'get_budget',
-              description: 'Returns the user\'s budget for the given period.',
+              description: <<~DESC.strip,
+                [Get Budget] Get the user\'s budget for the specified date period.
+                If no date is specified, then leave it empty.
+              DESC
               parameters: {
                 type: :object,
                 properties: {

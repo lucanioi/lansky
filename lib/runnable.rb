@@ -2,12 +2,12 @@ module Runnable
   extend ActiveSupport::Concern
 
   included do
-    def initialize(params = {})
-      define_accessor_methods(params)
+    def initialize(**args)
+      define_accessor_methods(args)
     end
 
-    def self.run(*args)
-      result = new(*args).run
+    def self.run(**args)
+      result = new(**args).run
       result.is_a?(Result) ? result : Result.new(value: result)
     rescue StandardError => e
       Result.new(error: e)
@@ -15,8 +15,8 @@ module Runnable
 
     private
 
-    def define_accessor_methods(params)
-      params.each { |k, v| send("#{k}=", v) }
+    def define_accessor_methods(args)
+      args.each { |k, v| send("#{k}=", v) }
     end
   end
 

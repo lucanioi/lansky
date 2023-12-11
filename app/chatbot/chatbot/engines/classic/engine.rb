@@ -6,7 +6,7 @@ module Chatbot
 
         def run
           route = router.run(message:).value!
-          route.operation.run(user:, **route.params).value!
+          route.operation.run(user:, params: route.params).value!
         end
 
         private

@@ -28,6 +28,16 @@ module Chatbot
       def format(amount)
         Helpers::MoneyHelper.format(amount)
       end
+
+      def validate_params!
+        if category_name && !category_name.is_a?(String)
+          raise InvalidParameter, "Invalid category_name: #{category_name.inspect}"
+        end
+
+        unless amount_cents.is_a?(Integer)
+          raise InvalidParameter, "Invalid amount_cents: #{amount_cents.inspect}"
+        end
+      end
     end
   end
 end

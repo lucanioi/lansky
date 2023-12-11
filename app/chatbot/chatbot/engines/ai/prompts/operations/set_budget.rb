@@ -6,7 +6,7 @@ module Chatbot
           class SetBudget
             PROMPTS = {
               name: 'set_budget',
-              description: 'Sets the user\'s budget for the given period.',
+              description: '[Set Budget] Sets the user\'s budget for the given period.',
               parameters: {
                 type: :object,
                 properties: {

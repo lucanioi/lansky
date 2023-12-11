@@ -34,6 +34,12 @@ module Chatbot
           ActiveSupport::TimeZone.new(timezone_name.upcase) ||
           ActiveSupport::TimeZone.new(timezone_name)
       end
+
+      def validate_params!
+        return if timezone_name.is_a?(String)
+
+        raise InvalidParameter, "Invalid timezone: #{timezone_name.inspect}"
+      end
     end
   end
 end

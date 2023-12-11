@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'AI Mode', type: :request do
   let(:mode) { :ai }
 
-  before { Timecop.freeze(DateTime.new(2024, 2, 29, 23, 25, 0)) }
+  before { Timecop.freeze(DateTime.new(2024, 2, 29, 8, 25, 0)) }
   after  { Timecop.return }
 
   let(:user) { create :user, test_user: false }
@@ -17,10 +17,11 @@ RSpec.describe 'AI Mode', type: :request do
 
   describe 'happy path', :vcr do
     it 'responds with correct response' do
-      send_message    'get budget this month 1000'
+      send_message    'get budget this month'
       expect_response 'No budget set for February 2024'
 
-      send_message   'set budget october 1000'
+      send_message   'set budget february 2500'
+      expect_response 'Budget for February 2024 set to €2,500'
     end
   end
 

@@ -39,7 +39,7 @@ module Chatbot
       ErrorHandler.handle_error(error)
     end
 
-    attr_accessor :user, :message, :mode
+    attr_accessor :user, :message
     attr_writer :mode
   end
 end

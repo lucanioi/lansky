@@ -6,7 +6,7 @@ module Chatbot
           class Spent
             PROMPTS = {
               name: 'spent',
-              description: 'Registers the user\'s spending with categories',
+              description: '[Spent] Registers the user\'s spending with categories',
               parameters: {
                 type: :object,
                 properties: {
