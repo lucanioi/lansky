@@ -6,17 +6,15 @@ module Chatbot
           class Spent
             PROMPTS = {
               name: 'spent',
-              description: 'Register the user\'s spending with categories',
+              description: 'Registers the user\'s spending with categories',
               parameters: {
                 type: :object,
                 properties: {
                   amount_cents: {
                     type: :integer,
                     description: <<~DESC.strip,
-                      The amount of money spent. Example: 10.00, 10, 10.5, etc.
-                      Always positive. 10 euros should be represented as 1000.
-                      However, some currencies without fractional cents (like JPY)
-                      should be represented as 10.
+                      The amount of money spent.
+                      #{Shared::CENTS}
                       #{Shared::VERY_IMPORTANT_MESSAGE}
                     DESC
                   },

@@ -15,6 +15,13 @@ module Chatbot
               Return null if no obvious day is indicated.
             DESC
 
+            CENTS = <<~DESC.strip.freeze
+              Example input: €10.00, 10, 10.0, $10, -10, etc.
+              Always positive. 10 euros should be represented as 1000.
+              However, some currencies without fractional cents (like JPY)
+              should be transformed to 10 if given '10' as input.
+            DESC
+
             DAY_NAMES = %w[sun mon tue wed thu fri sat].freeze
             MONTH_NAMES = %w[jan feb mar apr may jun jul aug sep oct nov dec].freeze
 
