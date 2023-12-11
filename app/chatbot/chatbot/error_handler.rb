@@ -1,5 +1,4 @@
 require_relative 'engines/classic/parsers/errors'
-require_relative 'helpers/date_time_helper'
 
 module Chatbot
   module ErrorHandler

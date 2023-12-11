@@ -5,8 +5,8 @@ RSpec.describe Lansky::AI do
 
   let(:response) { nil }
 
-  describe '#function_call', :vcr do
-    let(:result) { subject.function_call(input:) }
+  describe '#parse_operation', :vcr do
+    let(:result) { subject.parse_operation(input:) }
 
     let(:input) { 'Hello, my name is' }
 

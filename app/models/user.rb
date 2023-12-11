@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   validates :phone, presence: true, numericality: { only_integer: true }
 
+  enum chatbot_mode: { classic: 1, ai: 2 }
+
   def test_user?
     test_user
   end

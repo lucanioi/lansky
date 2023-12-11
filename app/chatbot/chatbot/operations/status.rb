@@ -124,7 +124,8 @@ module Chatbot
       end
 
       def period_title
-        Helpers::DateTimeHelper.format_period(Period.new(period_start, period_end))
+        period = Lansky::Period.new(period_start, period_end)
+        period.format
       end
 
       def period_start

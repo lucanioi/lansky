@@ -55,7 +55,7 @@ module Budgets
       end
 
       def period
-        @period ||= Period.new(budget.period_start, budget.period_end)
+        @period ||= Lansky::Period.new(budget.period_start, budget.period_end)
       end
 
       def surplus?

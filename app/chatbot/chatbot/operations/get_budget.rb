@@ -1,7 +1,7 @@
 module Chatbot
   module Operations
     class GetBudget < Base
-      params :period
+      params :flex_date
 
       def run
         result = Budgets::Find.run(user:, period:)
@@ -30,10 +30,14 @@ module Chatbot
 
       def period_title(budget = nil)
         return nil unless budget || period
-        return Helpers::DateTimeHelper.format_period(period) if period.present?
+        return period.format if period.present?
 
-        period = Period.new(budget.period_start, budget.period_end)
-        Helpers::DateTimeHelper.format_period(period)
+        period = Lansky::Period.new(budget.period_start, budget.period_end)
+        period.format
+      end
+
+      def period
+        flex_date&.to_period
       end
     end
   end

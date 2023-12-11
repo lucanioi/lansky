@@ -4,7 +4,17 @@ module Chatbot
       include Runnable
 
       class << self
-        alias_method :params, :attr_accessor
+        def params(*param_names)
+          return (@params ||= []) if param_names.empty?
+
+          if @params.nil?
+            attr_accessor *param_names
+
+            return (@params = param_names)
+          end
+
+          raise "Params already defined: #{@params}"
+        end
       end
 
       params :user

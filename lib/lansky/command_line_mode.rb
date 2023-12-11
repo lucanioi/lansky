@@ -9,7 +9,6 @@ module Lansky
 
     def run
       loop do
-        puts Rails.env
         puts 'message:'
         print '> '
         input = STDIN.gets.chomp
@@ -18,13 +17,16 @@ module Lansky
 
         reply = get_reply(input)
         puts "\nreply:\n#{reply}\n\n"
+      rescue StandardError => e
+        puts "\nerror:\n#{e}\n\n"
+        puts e.backtrace.take(10).join("\n")
       end
     end
 
     private
 
     def get_reply(message)
-      Chatbot::Engine.run(user:, message:).value!
+      Chatbot::Engine.run(user:, message:, mode:).value!
     end
 
     def user
@@ -33,6 +35,10 @@ module Lansky
 
     def normalize_input(message)
       message.downcase.gsub(/\s+/, ' ').strip
+    end
+
+    def mode
+      :ai
     end
   end
 end

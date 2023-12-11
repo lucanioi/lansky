@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Chatbot::Parsers::Date::Parser do
+RSpec.describe Lansky::FlexibleDate do
   before do
     Timecop.freeze(DateTime.parse('2023-10-12 12:34:00')) # Thu 12 Oct 2023
   end
@@ -28,7 +28,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { day: 'fri', direction: :backward } => '2023-10-06..2023-10-07',
       { day: 'wed', direction: :forward  } => '2023-10-18..2023-10-19',
       { day: 'thu', direction: :backward, include_current: true } => '2023-10-12..2023-10-13',
-      { day: 'toilet' } => Chatbot::Parsers::Date::Day::InvalidDay,
+      { day: 'toilet' } => Lansky::FlexibleDate::Day::InvalidDay,
 
       { week: '1' } => '2023-10-02..2023-10-09',
       { week: '2' } => '2023-10-09..2023-10-16',
@@ -40,7 +40,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { week: 'prev' } => '2023-10-02..2023-10-09',
       { week: 'next week' } => '2023-10-16..2023-10-23',
       { set_date: '2023-10-31', week: 'next' } => '2023-11-06..2023-11-13', # changes month
-      { week: 'toilet' } => Chatbot::Parsers::Date::Week::InvalidWeek,
+      { week: 'toilet' } => Lansky::FlexibleDate::Week::InvalidWeek,
 
       { month: 'jan'  } => '2023-01-01..2023-02-01',
       { month: 'feb'  } => '2023-02-01..2023-03-01',
@@ -65,7 +65,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { month: 'dec', direction: :backward } => '2022-12-01..2023-01-01',
       { month: 'oct', direction: :backward, include_current: false } => '2022-10-01..2022-11-01',
       { month: 'oct', direction: :forward,  include_current: false } => '2024-10-01..2024-11-01',
-      { month: 'toilet' } => Chatbot::Parsers::Date::Month::InvalidMonth,
+      { month: 'toilet' } => Lansky::FlexibleDate::Month::InvalidMonth,
 
       { year: '2020' } => '2020-01-01..2021-01-01',
       { year: '2023' } => '2023-01-01..2024-01-01',
@@ -74,7 +74,7 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
       { year: 'next' } => '2024-01-01..2025-01-01',
       { year: 'prev' } => '2022-01-01..2023-01-01',
       { year: 'prev year' } => '2022-01-01..2023-01-01',
-      { year: 'toilet' } => Chatbot::Parsers::Date::Year::InvalidYear,
+      { year: 'toilet' } => Lansky::FlexibleDate::Year::InvalidYear,
 
       # combos
 
@@ -117,34 +117,17 @@ RSpec.describe Chatbot::Parsers::Date::Parser do
         end
 
         input = input.except(:set_date)
+        day_params = input.slice(:day, :week, :month, :year)
+        options = input.slice(:direction, :include_current)
 
         if expected.is_a?(Class)
-          expect { described_class.parse_from_params(**input) }.to raise_error(expected)
+          expect { described_class.new(**day_params).to_period(**options) }.to raise_error(expected)
         else
           start_date, end_date = expected.split('..').map { |date| DateTime.parse(date) }
-          range = described_class.parse_from_params(**input).range
-          expect(range).to eq(start_date..end_date)
+          range = described_class.new(**day_params).to_period(**options).range
+          expect(range).to eq((start_date..end_date))
         end
       end
     end
   end
-
-  # describe '.parse_from_string' do
-  #   test_cases = {
-  #     { string: '2023' } => '2023-01-01..2024-01-01',
-  #     { string: 'oct' } => '2023-10-01..2023-11-01',
-  #   }
-
-  #   test_cases.each do |input, expected|
-  #     it "parses #{input}" do
-  #       if expected.is_a?(Class)
-  #         expect { described_class.parse_from_string(**input) }.to raise_error(expected)
-  #       else
-  #         start_date, end_date = expected.split('..').map { |date| DateTime.parse(date) }
-  #         range = described_class.parse_from_string(**input).range
-  #         expect(range).to eq(start_date..end_date)
-  #       end
-  #     end
-  #   end
-  # end
 end

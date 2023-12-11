@@ -4,14 +4,15 @@ module Chatbot
       module Parsers
         class Spending < Base
           def to_h
-            { period: }
+            { flex_date: }
           end
 
           private
 
-          def period
+          def flex_date
             date_params = DateExtractor.run(string: argument).value!
-            Chatbot::Parsers::Date::Parser.parse_from_params(**date_params, direction: :backward)
+
+            Lansky::FlexibleDate.new(**date_params)
           end
 
           def argument

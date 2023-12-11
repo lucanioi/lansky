@@ -1,0 +1,25 @@
+module Lansky
+  class FlexibleDate
+    attr_reader :day, :week, :month, :year
+
+    def initialize(day: nil, week: nil, month: nil, year: nil)
+      @day   = day
+      @week  = week
+      @month = month
+      @year  = year
+    end
+
+    def to_period(**options)
+      Interpreter.to_period(self, **options)
+    end
+
+    def to_h
+      {
+        day: day,
+        week: week,
+        month: month,
+        year: year
+      }
+    end
+  end
+end

@@ -1,7 +1,7 @@
 module Chatbot
   module Operations
     class Spending < Base
-      params :period
+      params :flex_date
 
       def run
         result = LedgerEntries::GenerateSpendingOverview.run(user:, period:)
@@ -56,11 +56,15 @@ module Chatbot
       end
 
       def period_title
-        capitalize_first_letter(Helpers::DateTimeHelper.format_period(period))
+        capitalize_first_letter(period.format)
       end
 
       def capitalize_first_letter(string)
         string[0].upcase + string[1..]
+      end
+
+      def period
+        flex_date&.to_period(direction: :backward)
       end
     end
   end

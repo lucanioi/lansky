@@ -4,7 +4,7 @@ module Chatbot
 
     def run
       use_user_environment do
-        result = router(user).run(user:, message:)
+        result = router.run(user:, message:)
         return handle_error(result.error) if result.failure?
         route = result.value
 
@@ -16,15 +16,17 @@ module Chatbot
 
     private
 
-    def router(_user)
+    def router
       case mode
-      when :classic then Engines::Classic::Router
-      # when :ai then Engines::AI::Router
+      when :classic, nil then Engines::Classic::Router
+      when :ai then Engines::AI::Router
+      else
+        raise "Unknown mode: #{mode}"
       end
     end
 
     def mode
-      :classic
+      ENV['CHATBOT_MODE'].to_sym
     end
 
     def use_user_environment(&block)
@@ -41,6 +43,6 @@ module Chatbot
       ErrorHandler.handle_error(error)
     end
 
-    attr_accessor :user, :message
+    attr_accessor :user, :message, :mode
   end
 end

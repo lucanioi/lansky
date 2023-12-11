@@ -10,8 +10,14 @@ module Lansky
       @client = (client || DEFAULT_CLIENT).new
     end
 
-    def function_call(input:)
-      client.function_call(input:)
+    def parse_operation(input:)
+      client.parse_operation(input: normalize_input(input))
+    end
+
+    private
+
+    def normalize_input(input)
+      input.downcase.gsub(/\s+/, ' ').strip
     end
   end
 end

@@ -6,15 +6,16 @@ module Chatbot
       module Parsers
         class SetBudget < Base
           def to_h
-            { period:, amount_cents: }
+            { flex_date:, amount_cents: }
           end
 
           private
 
-          def period
+          def flex_date
             string = argument.split(' ')[0..-2].join(' ')
             date_params = DateExtractor.run(string:).value!
-            Chatbot::Parsers::Date::Parser.parse_from_params(**date_params, direction: :forward)
+
+            Lansky::FlexibleDate.new(**date_params)
           end
 
           def amount_cents

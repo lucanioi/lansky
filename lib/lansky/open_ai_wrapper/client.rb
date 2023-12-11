@@ -7,7 +7,7 @@ module Lansky
         @ai = ::OpenAI::Client.new
       end
 
-      def function_call(input:)
+      def parse_operation(input:)
         FunctionCall.run(input:, ai:).value!
       end
     end

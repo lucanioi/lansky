@@ -1,7 +1,7 @@
 module Chatbot
   module Operations
     class SetBudget < Base
-      params :period, :amount_cents
+      params :flex_date, :amount_cents
 
       def run
         result = Budgets::Upsert.run(amount_cents:, period:, user:)
@@ -14,10 +14,13 @@ module Chatbot
       private
 
       def reply(budget)
-        period_name = Helpers::DateTimeHelper.format_period(period)
         formatted_amount = Helpers::MoneyHelper.format(budget.amount_cents)
 
-        "Budget for #{period_name} set to #{formatted_amount}"
+        "Budget for #{period.format} set to #{formatted_amount}"
+      end
+
+      def period
+        flex_date&.to_period(direction: :forward)
       end
     end
   end

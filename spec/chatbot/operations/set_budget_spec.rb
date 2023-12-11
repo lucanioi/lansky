@@ -9,6 +9,10 @@ RSpec.describe Chatbot::Operations::SetBudget do
       input: 'set budget this month 1000',
       output: 'Budget for October 2023 set to €1,000',
     },
+    'includes current' => {
+      input: 'set budget october 1000',
+      output: 'Budget for October 2023 set to €1,000',
+    },
     'next month' => {
       input: 'set budget next month 1000',
       output: 'Budget for November 2023 set to €1,000',
