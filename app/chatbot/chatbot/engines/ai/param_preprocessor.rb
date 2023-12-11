@@ -4,8 +4,6 @@ module Chatbot
       class ParamPreprocessor
         include Runnable
 
-        FLEX_DATE_OPERATIONS = [:set_budget, :get_budget, :spending].freeze
-
         def run
           convert_to_flex_date
         end
@@ -17,7 +15,7 @@ module Chatbot
         end
 
         def convert_to_flex_date
-          return params unless FLEX_DATE_OPERATIONS.include?(operation)
+          return params unless operation_accepts_flex_date?
 
           date_params = params.slice(:date)
 
@@ -25,6 +23,10 @@ module Chatbot
 
           params.except(:date)
                 .merge(flex_date: flex_date(**date_params[:date]))
+        end
+
+        def operation_accepts_flex_date?
+          operation.params.include?(:flex_date)
         end
 
         attr_accessor :params, :operation

@@ -6,10 +6,22 @@ module Chatbot
 
         def run
           route = router.run(message:).value!
-          route.operation.run(user:, **route.params).value!
+
+          processed_params = process_params(route)
+
+          route.operation.run(user:, **processed_params).value!
         end
 
         private
+
+        def process_params(route)
+          return {} if route.params.empty?
+
+          ParamPreprocessor.run(
+            params: route.params,
+            operation: route.operation,
+          ).value!
+        end
 
         def router
           Engines::AI::Router

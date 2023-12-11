@@ -31,25 +31,20 @@ module Chatbot
             OPERATIONS.fetch(operation_name) { raise UnknownOperation }
         end
 
-        def params
-          return unless operation
-
-          ParamPreprocessor.run(
-            params: ai_response[:args],
-            operation: operation_name
-          ).value!
-        end
-
         def ai_response
           @ai_response ||= ai.parse_operation(input: message)
         end
 
-        def ai
-          @ai ||= Lansky::AI.new(prompts: Prompts::PROMPTS)
+        def params
+          ai_response[:args]
         end
 
         def operation_name
           ai_response[:operation].to_sym
+        end
+
+        def ai
+          @ai ||= Lansky::AI.new(prompts: Prompts::PROMPTS)
         end
 
         attr_accessor :message

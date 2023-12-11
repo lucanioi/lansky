@@ -3,45 +3,48 @@ require 'rails_helper'
 RSpec.describe Chatbot::Engines::AI::ParamPreprocessor do
   let(:result) { described_class.run(params:, operation:) }
 
+  set_budget = Chatbot::Operations::SetBudget
+  set_timezone = Chatbot::Operations::SetTimezone
+
   test_cases = {
     'empty' => {
       input: {
-        operation: :set_budget,
+        operation: set_budget,
         params: {}
       },
       output: {},
     },
     'no dates' => {
       input: {
-        operation: :set_budget,
+        operation: set_budget,
         params: { foo: 'bar' }
       },
       output: { foo: 'bar' },
     },
     'day' => {
       input: {
-        operation: :set_budget,
+        operation: set_budget,
         params: { date: { day: 'today' }, foo: 'bar' }
       },
       output: { flex_date: Lansky::FlexibleDate.new(day: 'today'), foo: 'bar' },
     },
     'dates not in dates param' => {
       input: {
-        operation: :set_budget,
+        operation: set_budget,
         params: { foo: 'bar', week: 'this week' }
       },
       output: { foo: 'bar', week: 'this week' },
     },
     'a non-flex date operation' => {
       input: {
-        operation: :something_else,
+        operation: set_timezone,
         params: { date: { day: 'today' }, foo: 'bar' },
       },
       output: { date: { day: 'today' }, foo: 'bar' },
     },
     'full date' => {
       input: {
-        operation: :set_budget,
+        operation: set_budget,
         params: { date: { day: 'tuesday', week: 'this week', month: 'oct', year: '2024' } }
       },
       output: {

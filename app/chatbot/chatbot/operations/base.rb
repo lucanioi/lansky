@@ -15,9 +15,17 @@ module Chatbot
 
           raise "Params already defined: #{@params}"
         end
+
+        def key
+          name.demodulize.underscore.to_sym
+        end
       end
 
       params :user
+
+      def key
+        self.class.key
+      end
     end
   end
 end
