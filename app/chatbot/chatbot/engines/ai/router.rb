@@ -21,21 +21,18 @@ module Chatbot
         }.freeze
 
         def run
-          operation = find_operation
-
-          raise UnknownOperation unless operation
-
           Route.new(user:, operation:, params:)
         end
 
         private
 
-        def find_operation
-          ai_response[:operation]
+        def operation
+          @operation ||=
+            OPERATIONS.fetch(operation_name) { raise UnknownOperation }
         end
 
         def params
-          return unless find_operation
+          return unless operation
 
           ParamPreprocessor.run(
             params: ai_response[:args],

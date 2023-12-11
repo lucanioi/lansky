@@ -8,6 +8,9 @@ module Chatbot
       Engines::Classic::Router::UnknownOperation => {
         friendly_message: 'Did not understand'
       },
+      Engines::AI::Router::UnknownOperation => {
+        friendly_message: 'Did not understand'
+      },
       Engines::Classic::Parsers::Errors::InvalidAmount => {
         friendly_message: 'Invalid amount'
       },

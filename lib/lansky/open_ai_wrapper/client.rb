@@ -8,7 +8,13 @@ module Lansky
       end
 
       def parse_operation(input:)
-        FunctionCall.run(input:, ai:).value!
+        FunctionCall.run(input:, ai:).value!.tap do |result|
+          puts "OpenAI response from `function_calls`: #{result}" if verbose?
+        end
+      end
+
+      def verbose?
+        ENV['VERBOSE'] == 'true'
       end
     end
   end
