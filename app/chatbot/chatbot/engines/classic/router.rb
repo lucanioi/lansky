@@ -23,7 +23,7 @@ module Chatbot
 
           raise UnknownOperation unless operation
 
-          Route.new(user:, operation:, params:)
+          Route.new(operation:, params:)
         end
 
         private
@@ -66,7 +66,7 @@ module Chatbot
           @normalized_message ||= message.downcase.gsub(/\s+|\n+|\r+/, ' ').strip
         end
 
-        attr_accessor :user, :message
+        attr_accessor :message
       end
     end
   end

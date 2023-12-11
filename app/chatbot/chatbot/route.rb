@@ -1,9 +1,8 @@
 module Chatbot
   class Route
-    attr_reader :user, :operation, :params
+    attr_reader :operation, :params
 
-    def initialize(user:, operation:, params:)
-      @user      = user
+    def initialize(operation:, params:)
       @operation = operation
       @params    = params
     end

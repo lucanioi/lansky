@@ -21,7 +21,7 @@ module Chatbot
         }.freeze
 
         def run
-          Route.new(user:, operation:, params:)
+          Route.new(operation:, params:)
         end
 
         private
@@ -52,7 +52,7 @@ module Chatbot
           ai_response[:operation].to_sym
         end
 
-        attr_accessor :user, :message
+        attr_accessor :message
       end
     end
   end
