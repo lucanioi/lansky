@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Lansky::AI do
-  subject { described_class.new(client:) }
+  subject { described_class.new(client: Lansky::OpenAIWrapper::Client) }
 
   let(:response) { nil }
-  let(:client) { fake_client(response) }
 
-  describe '#function_call' do
+  describe '#function_call', :vcr do
     let(:result) { subject.function_call(input:) }
 
     let(:input) { 'Hello, my name is' }
@@ -14,9 +13,5 @@ RSpec.describe Lansky::AI do
     it 'returns a string' do
       expect(result).to be_nil
     end
-  end
-
-  def fake_client(response)
-    Class.new { define_method(:function_call) { |*| response } }
   end
 end

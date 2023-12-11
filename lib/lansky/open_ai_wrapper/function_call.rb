@@ -7,6 +7,7 @@ module Lansky
 
       def run
         response = ai.chat(parameters:)
+
         message = response.dig('choices', 0, 'message')
 
         return unless message['role'] == 'assistant' && message['function_call']
