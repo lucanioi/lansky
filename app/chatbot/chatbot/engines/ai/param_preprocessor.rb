@@ -19,12 +19,12 @@ module Chatbot
         def convert_to_flex_date
           return params unless FLEX_DATE_OPERATIONS.include?(operation)
 
-          date_params = params.slice(:day, :week, :month, :year)
+          date_params = params.slice(:date)
 
           return params if date_params.empty?
 
-          params.except(*date_params.keys)
-                .merge(flex_date: flex_date(**date_params))
+          params.except(:date)
+                .merge(flex_date: flex_date(**date_params[:date]))
         end
 
         attr_accessor :params, :operation

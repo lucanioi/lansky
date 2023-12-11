@@ -21,21 +21,28 @@ RSpec.describe Chatbot::Engines::AI::ParamPreprocessor do
     'day' => {
       input: {
         operation: :set_budget,
-        params: { day: 'today', foo: 'bar' }
+        params: { date: { day: 'today' }, foo: 'bar' }
       },
       output: { flex_date: Lansky::FlexibleDate.new(day: 'today'), foo: 'bar' },
+    },
+    'dates not in dates param' => {
+      input: {
+        operation: :set_budget,
+        params: { foo: 'bar', week: 'this week' }
+      },
+      output: { foo: 'bar', week: 'this week' },
     },
     'a non-flex date operation' => {
       input: {
         operation: :something_else,
-        params: { day: 'today', foo: 'bar' }
+        params: { date: { day: 'today' }, foo: 'bar' },
       },
-      output: { day: 'today', foo: 'bar' },
+      output: { date: { day: 'today' }, foo: 'bar' },
     },
     'full date' => {
       input: {
         operation: :set_budget,
-        params: { day: 'tuesday', week: 'this week', month: 'oct', year: '2024' }
+        params: { date: { day: 'tuesday', week: 'this week', month: 'oct', year: '2024' } }
       },
       output: {
         flex_date: Lansky::FlexibleDate.new(

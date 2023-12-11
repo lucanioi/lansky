@@ -17,8 +17,7 @@ module Chatbot
                       Always positive. 10 euros should be represented as 1000.
                       However, some currencies without fractional cents (like JPY)
                       should be represented as 10.
-                      It's crucial that you get this right,
-                      otherwise I might lose my job. Please be careful.
+                      #{Shared::VERY_IMPORTANT_MESSAGE}
                     DESC
                   },
                   category: {
@@ -28,8 +27,7 @@ module Chatbot
                       groceries, rent, Meggie's Bday Party, etc. When unclear,
                       do not hesitate to make it null. The language of the input
                       must be preserved.
-                      It's crucial that you get this right,
-                      otherwise I might lose my job. Please be careful.
+                      #{Shared::VERY_IMPORTANT_MESSAGE}
                     DESC
                   },
                 },
