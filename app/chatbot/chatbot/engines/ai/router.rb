@@ -45,7 +45,7 @@ module Chatbot
         end
 
         def ai
-          @ai ||= Lansky::AI.new
+          @ai ||= Lansky::AI.new(prompts: Prompts::PROMPTS)
         end
 
         def operation_name

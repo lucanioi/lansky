@@ -6,8 +6,8 @@ module Lansky
 
     DEFAULT_CLIENT = OpenAIWrapper::Client
 
-    def initialize(client: nil)
-      @client = (client || DEFAULT_CLIENT).new
+    def initialize(client: nil, prompts: {})
+      @client = (client || DEFAULT_CLIENT).new(prompts:)
     end
 
     def parse_operation(input:)
