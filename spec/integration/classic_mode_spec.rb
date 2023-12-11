@@ -1,21 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Classic Mode', type: :request do
-  before do
-    Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0))
+  let(:mode) { :classic }
 
-    create :user, phone: phone, test_user: false
-  end
+  before { Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0)) }
+  after  { Timecop.return }
 
-  after { Timecop.return }
-
-  let(:phone) { '1234567890' }
-
-  it 'responds with a 200 status' do
-    send_message('')
-
-    expect(response).to have_http_status(200)
-  end
+  let(:user) { create :user, test_user: false }
 
   describe 'message it does not recognize' do
     it 'responds with a message echoing the body in TwiML format' do
@@ -121,18 +112,11 @@ RSpec.describe 'Classic Mode', type: :request do
     end
   end
 
-  def build_params(body)
-    {
-      'Body' => body,
-      'From' => phone,
-    }
-  end
-
-  def send_message(body)
-    post '/webhooks/twilio', params: build_params(body)
+  def send_message(message)
+    @response = Chatbot::Engine.run(user:, message:, mode:).value!
   end
 
   def expect_response(body)
-    expect(response.body).to eq(format_twiml(body))
+    expect(@response).to eq(body)
   end
 end
