@@ -22,15 +22,25 @@ module Lansky
 
       def parameters
         {
-          model: 'gpt-3.5-turbo-1106',
+          model: config.function_calls.model,
           messages: [
             {
               'role': 'user',
-              'content': input,
+              'content': input_with_metadata,
             },
           ],
           functions:,
         }
+      end
+
+      def input_with_metadata
+        "#{input}\n\n" \
+        "<METADATA>\n " \
+        "current date: #{DateTime.current.to_date}"
+      end
+
+      def config
+        @config ||= Config.new
       end
 
       attr_accessor :input, :ai, :functions

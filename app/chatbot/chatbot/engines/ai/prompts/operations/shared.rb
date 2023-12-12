@@ -22,15 +22,19 @@ module Chatbot
               should be transformed to 10 if given '10' as input.
             DESC
 
+            PARAM_NAME = 'The name of this parameter is "%s"'.freeze
+
             DAY_NAMES = %w[sun mon tue wed thu fri sat].freeze
             MONTH_NAMES = %w[jan feb mar apr may jun jul aug sep oct nov dec].freeze
 
             DATE = {
               type: :object,
+              description: 'Date object which contains the day, week, month and year.',
               properties: {
                 day: {
                   type: :string,
                   description: [
+                    Shared::PARAM_NAME % :day,
                     ONLY_ACCEPTED_VALUES,
                     VERY_IMPORTANT_MESSAGE
                   ].join("\n"),
@@ -44,6 +48,7 @@ module Chatbot
                 week: {
                   type: :string,
                   description: [
+                    Shared::PARAM_NAME % :week,
                     ONLY_ACCEPTED_VALUES,
                     VERY_IMPORTANT_MESSAGE
                   ].join("\n"),
@@ -55,6 +60,7 @@ module Chatbot
                 month: {
                   type: :string,
                   description: [
+                    Shared::PARAM_NAME % :month,
                     ONLY_ACCEPTED_VALUES,
                     VERY_IMPORTANT_MESSAGE
                   ].join("\n"),
@@ -67,6 +73,7 @@ module Chatbot
                 year: {
                   type: :string,
                   description: <<~DESC.strip,
+                    #{Shared::PARAM_NAME % :year}
                     Any of the values listed under "enums" are accepted.
                     Year numbers are accepted (2020, 2021, etc.)
                     Return null if no obvious day is indicated.

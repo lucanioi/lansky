@@ -20,8 +20,15 @@ RSpec.describe 'AI Mode', type: :request do
       send_message    'get budget this month'
       expect_response 'No budget set for February 2024'
 
-      send_message   'set budget february 2500'
+      send_message    'set budget february 2500'
       expect_response 'Budget for February 2024 set to €2,500'
+
+      send_message    'Hey man, whats good. how much money do ' \
+                      'I have allocated for the current month? cheers mate.'
+      expect_response 'Budget for February 2024 is €2,500'
+
+      send_message    'yo just spent 20 on burgers'
+      expect_response 'Spent €20 on burgers'
     end
   end
 

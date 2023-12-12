@@ -15,7 +15,8 @@ module Chatbot
                 amount_cents: {
                   type: :integer,
                   description: <<~DESC.strip,
-                    The budget to be set in cents.
+                  The amount to be set in cents.
+                    #{Shared::PARAM_NAME % :amount_cents}
                     #{Shared::CENTS}
                     #{Shared::VERY_IMPORTANT_MESSAGE}
                   DESC

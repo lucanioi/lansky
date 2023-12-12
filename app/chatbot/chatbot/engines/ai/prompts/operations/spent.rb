@@ -18,13 +18,13 @@ module Chatbot
                       #{Shared::VERY_IMPORTANT_MESSAGE}
                     DESC
                   },
-                  category: {
+                  category_name: {
                     type: :string,
                     description: <<~DESC.strip,
                       Whatever category the user wants to use. Example: food,
                       groceries, rent, Meggie's Bday Party, etc. When unclear,
                       do not hesitate to make it null. The language of the input
-                      must be preserved.
+                      must be preserved. Use the exact same words as the user.
                       #{Shared::VERY_IMPORTANT_MESSAGE}
                     DESC
                   },

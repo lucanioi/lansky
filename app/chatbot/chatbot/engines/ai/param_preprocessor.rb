@@ -4,25 +4,38 @@ module Chatbot
       class ParamPreprocessor
         include Runnable
 
+        COMMON_HALLUCINATIONS = {
+          budget_cents: :amount_cents,
+        }.freeze
+
         def run
-          convert_to_flex_date
+          params
+            .then(&method(:convert_to_flex_date))
+            .then(&method(:convert_common_hallucinations))
         end
 
         private
 
-        def flex_date(**params)
-          Lansky::FlexibleDate.new(**params)
+        def flex_date(**attrs)
+          Lansky::FlexibleDate.new(**attrs)
         end
 
-        def convert_to_flex_date
-          return params unless operation_accepts_flex_date?
+        def convert_to_flex_date(_params)
+          return _params unless operation_accepts_flex_date?
 
-          date_params = params.slice(:date)
+          date_params = _params.slice(:date)
 
-          return params if date_params.empty?
+          return _params if date_params.empty?
 
-          params.except(:date)
-                .merge(flex_date: flex_date(**date_params[:date]))
+          _params.except(:date)
+                 .merge(flex_date: flex_date(**date_params[:date]))
+        end
+
+        def convert_common_hallucinations(_params)
+          _params.reduce({}) do |acc, (key, value)|
+            k = COMMON_HALLUCINATIONS.fetch(key, key)
+            acc.merge(k => value)
+          end
         end
 
         def operation_accepts_flex_date?
