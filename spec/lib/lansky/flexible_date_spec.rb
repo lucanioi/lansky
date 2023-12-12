@@ -23,11 +23,10 @@ RSpec.describe Lansky::FlexibleDate do
       { day: 'today'     } => '2023-10-12..2023-10-13',
       { day: 'tomorrow'  } => '2023-10-13..2023-10-14',
       { day: 'yesterday' } => '2023-10-11..2023-10-12',
-      { day: 'thu', include_current: false } => '2023-10-12..2023-10-13', # include_current is ignored unless direction is :forward or :backward
       { day: 'wed', direction: :current  } => '2023-10-11..2023-10-12',
       { day: 'fri', direction: :backward } => '2023-10-06..2023-10-07',
       { day: 'wed', direction: :forward  } => '2023-10-18..2023-10-19',
-      { day: 'thu', direction: :backward, include_current: true } => '2023-10-12..2023-10-13',
+      { day: 'thu', direction: :backward } => '2023-10-12..2023-10-13',
       { day: 'toilet' } => Lansky::FlexibleDate::Day::InvalidDay,
 
       { week: '1' } => '2023-10-02..2023-10-09',
@@ -63,8 +62,6 @@ RSpec.describe Lansky::FlexibleDate do
       { month: 'prev dec' } => '2022-12-01..2023-01-01',
       { month: 'jan', direction: :forward  } => '2024-01-01..2024-02-01',
       { month: 'dec', direction: :backward } => '2022-12-01..2023-01-01',
-      { month: 'oct', direction: :backward, include_current: false } => '2022-10-01..2022-11-01',
-      { month: 'oct', direction: :forward,  include_current: false } => '2024-10-01..2024-11-01',
       { month: 'toilet' } => Lansky::FlexibleDate::Month::InvalidMonth,
 
       { year: '2020' } => '2020-01-01..2021-01-01',
@@ -118,7 +115,7 @@ RSpec.describe Lansky::FlexibleDate do
 
         input = input.except(:set_date)
         day_params = input.slice(:day, :week, :month, :year)
-        options = input.slice(:direction, :include_current)
+        options = input.slice(:direction)
 
         if expected.is_a?(Class)
           expect { described_class.new(**day_params).to_period(**options) }.to raise_error(expected)

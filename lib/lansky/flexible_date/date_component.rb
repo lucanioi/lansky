@@ -5,12 +5,10 @@ module Lansky
 
       def initialize(string,
         direction: :current,
-        include_current: true,
         parent_present: false)
         @string = string
 
         @parent_present = parent_present
-        @include_current = set_include_current(include_current)
         @direction = set_direction(direction)
 
         validate!
@@ -40,7 +38,7 @@ module Lansky
 
       private
 
-      attr_reader :string, :include_current, :direction, :parent_present
+      attr_reader :string, :direction, :parent_present
 
       def direction
         case string
@@ -62,11 +60,8 @@ module Lansky
         end
       end
 
-      def set_include_current(include_current)
-        return include_current if blank?
-        return false if string.match?(/next |prev /)
-
-        parent_present ? true : include_current
+      def include_current?
+        !string.match?(/next |prev /)
       end
 
       def component_type

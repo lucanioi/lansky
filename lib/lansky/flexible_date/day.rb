@@ -51,7 +51,7 @@ module Lansky
       def adjust_difference(diff)
         return diff if direction == :current
         diff %= 7
-        return diff if diff.zero? && include_current
+        return diff if diff.zero? && include_current?
         return diff - 7 if direction == :backward
         diff.zero? ? 7 : diff
       end
