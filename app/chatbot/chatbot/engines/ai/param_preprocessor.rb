@@ -5,7 +5,10 @@ module Chatbot
         include Runnable
 
         COMMON_HALLUCINATIONS = {
-          budget_cents: :amount_cents,
+          set_budget: {
+            budget_cents: :amount_cents,
+            budget: :amount_cents,
+          }
         }.freeze
 
         def run
@@ -40,6 +43,10 @@ module Chatbot
 
         def operation_accepts_flex_date?
           operation.params.include?(:flex_date)
+        end
+
+        def common_hallucinations
+          COMMON_HALLUCINATIONS[operation.key] || {}
         end
 
         attr_accessor :params, :operation

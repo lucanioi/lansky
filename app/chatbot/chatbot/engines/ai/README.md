@@ -3,6 +3,8 @@
 #### How it works
 It uses Lansky::AI which currently uses OpenAI's GPT-3.5-turbo model to convert user input into function name and parameters. The model is far from perfect, so we need to iron out the kinks.
 
+The OpenAI configuration is saved in config/openai.yml
+
 #### Prompts
 The configurations for the function calls are found under 'prompts/operations'. May not be the best word, tbh. But it's more like a prompt than a configuration.
 

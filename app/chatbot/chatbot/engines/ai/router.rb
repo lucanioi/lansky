@@ -40,7 +40,9 @@ module Chatbot
         end
 
         def operation_name
-          ai_response[:operation].to_sym
+          return unless ai_response.present?
+
+          ai_response[:operation]&.to_sym
         end
 
         def ai

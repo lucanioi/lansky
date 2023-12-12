@@ -78,7 +78,41 @@ http_interactions:
         be represented as 1000.\nHowever, some currencies without fractional cents
         (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
         crucial that you get this right,\notherwise I might lose my job. Please be
-        careful."}}}]}'
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
     headers:
       Content-Type:
       - application/json
@@ -98,7 +132,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Dec 2023 01:20:46 GMT
+      - Tue, 12 Dec 2023 02:04:56 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -114,7 +148,7 @@ http_interactions:
       Openai-Organization:
       - user-mq4evbn0pwwgbaklllp0tywv
       Openai-Processing-Ms:
-      - '1104'
+      - '848'
       Openai-Version:
       - '2020-10-01'
       Strict-Transport-Security:
@@ -130,36 +164,36 @@ http_interactions:
       X-Ratelimit-Remaining-Tokens:
       - '159968'
       X-Ratelimit-Remaining-Tokens-Usage-Based:
-      - '159968'
+      - '158530'
       X-Ratelimit-Reset-Requests:
       - 12ms
       X-Ratelimit-Reset-Tokens:
       - 12ms
       X-Ratelimit-Reset-Tokens-Usage-Based:
-      - 12ms
+      - 551ms
       X-Request-Id:
-      - 9b5972529a6254428c878968069dfc37
+      - 927176bbc14fe899ced59aaebae38f6f
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=usI4zcKyNoUzvdjbMG.NOByFtHk64yhSUNkAGp6kyfA-1702344046-1-AeNTGJI8iUYgwl4LaMSgmCjrZ8iXqWszcepl8GtgdJFmtwan+CDOOKBiWWuU/e4z4x562Kcoi3qUJIFs8vIT04c=;
-        path=/; expires=Tue, 12-Dec-23 01:50:46 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=xq0DkIImFo91PQ_nfiHCOJyS2t9hGX1dSgKqPWwlSvo-1702346696-1-AfLXlMu9JA/OuFK1/tbr7nkbuZkdmlFv1NWctGbbdmthUfDoXza/6tUn9cUsmJGlx/tarigfn3geZszbwVY7xAk=;
+        path=/; expires=Tue, 12-Dec-23 02:34:56 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=ii3Pb3DFFvYpp5FZd6Bm59mA_4lRVv05a4vEsakJyLc-1702344046835-0-604800000;
+      - _cfuvid=xCiO405gS1lHg83BnGNjVrcN9Bd0WJHNxjgkvVuGzaE-1702346696046-0-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       Server:
       - cloudflare
       Cf-Ray:
-      - 8342258b2d5328de-BCN
+      - 8342663a28426d93-BCN
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |
         {
-          "id": "chatcmpl-8UljxFo3g01FizeKbm9GihvunBrwq",
+          "id": "chatcmpl-8UmQhZDflhdymbejtFgZ0bP9aUBeT",
           "object": "chat.completion",
-          "created": 1702344045,
+          "created": 1702346695,
           "model": "gpt-3.5-turbo-0613",
           "choices": [
             {
@@ -176,9 +210,9 @@ http_interactions:
             }
           ],
           "usage": {
-            "prompt_tokens": 1511,
+            "prompt_tokens": 2272,
             "completion_tokens": 23,
-            "total_tokens": 1534
+            "total_tokens": 2295
           },
           "system_fingerprint": null
         }
@@ -261,7 +295,41 @@ http_interactions:
         be represented as 1000.\nHowever, some currencies without fractional cents
         (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
         crucial that you get this right,\notherwise I might lose my job. Please be
-        careful."}}}]}'
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
     headers:
       Content-Type:
       - application/json
@@ -281,7 +349,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Dec 2023 01:20:49 GMT
+      - Tue, 12 Dec 2023 02:04:58 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -297,7 +365,7 @@ http_interactions:
       Openai-Organization:
       - user-mq4evbn0pwwgbaklllp0tywv
       Openai-Processing-Ms:
-      - '1722'
+      - '1382'
       Openai-Version:
       - '2020-10-01'
       Strict-Transport-Security:
@@ -313,36 +381,36 @@ http_interactions:
       X-Ratelimit-Remaining-Tokens:
       - '159967'
       X-Ratelimit-Remaining-Tokens-Usage-Based:
-      - '158995'
+      - '158511'
       X-Ratelimit-Reset-Requests:
       - 12ms
       X-Ratelimit-Reset-Tokens:
       - 12ms
       X-Ratelimit-Reset-Tokens-Usage-Based:
-      - 376ms
+      - 558ms
       X-Request-Id:
-      - 3c1e636f4b8282919e93f4185ac40acd
+      - 5a07cbf27b29f4cf533cfb215a9f7448
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=AzKQTdGdnY5MDcwpUDO6MwaQBB2ZbMciKF._ntDzO1c-1702344049-1-AWXYn3mzrJIvbLpuSqLBYvNk7H1aEemCNeGPEtwtV4IgJoK3QPSoDPtA2qOQzFKXycRLY0WOtGtltTPw7H2ygcQ=;
-        path=/; expires=Tue, 12-Dec-23 01:50:49 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=Fs2UeU2u9NW88utBHvV1H376U3E1aX_sYKWF_1_5AR8-1702346698-1-AS3QzgRdCEzVT6AWWu7fIeG4W8mAdYH5ua6EfVuN8SQgitf0oq0OTZ/Wl7L7GVexRFcN+Y+UriPhkr+7NlGyx9g=;
+        path=/; expires=Tue, 12-Dec-23 02:34:58 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=wcLHj0eRTCIhs3jRSZ7nExQBja5GtWdrOwrlGEXljUw-1702344049058-0-604800000;
+      - _cfuvid=9q6YxjdIjVo_yUXpcO0MKulqXju2Q_UMEV8GHQjYnw8-1702346698008-0-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       Server:
       - cloudflare
       Cf-Ray:
-      - 834225952f9728de-BCN
+      - 834266433fef11bf-BCN
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |
         {
-          "id": "chatcmpl-8UljzmxX0UNyBjuPpxWX757ytRukT",
+          "id": "chatcmpl-8UmQiKmvLvUbJrsIyvQrAzLfEqrOa",
           "object": "chat.completion",
-          "created": 1702344047,
+          "created": 1702346696,
           "model": "gpt-3.5-turbo-0613",
           "choices": [
             {
@@ -352,16 +420,16 @@ http_interactions:
                 "content": null,
                 "function_call": {
                   "name": "set_budget",
-                  "arguments": "{\n  \"date\": {\n    \"month\": \"this feb\",\n    \"year\": \"this year\"\n  },\n  \"amount_cents\": 250000\n}"
+                  "arguments": "{\n  \"date\": {\n    \"month\": \"this feb\"\n  },\n  \"amount_cents\": 250000\n}"
                 }
               },
               "finish_reason": "function_call"
             }
           ],
           "usage": {
-            "prompt_tokens": 1514,
-            "completion_tokens": 42,
-            "total_tokens": 1556
+            "prompt_tokens": 2275,
+            "completion_tokens": 34,
+            "total_tokens": 2309
           },
           "system_fingerprint": null
         }
@@ -445,7 +513,41 @@ http_interactions:
         be represented as 1000.\nHowever, some currencies without fractional cents
         (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
         crucial that you get this right,\notherwise I might lose my job. Please be
-        careful."}}}]}'
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
     headers:
       Content-Type:
       - application/json
@@ -465,7 +567,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Dec 2023 01:20:51 GMT
+      - Tue, 12 Dec 2023 02:04:59 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -481,7 +583,7 @@ http_interactions:
       Openai-Organization:
       - user-mq4evbn0pwwgbaklllp0tywv
       Openai-Processing-Ms:
-      - '1131'
+      - '1154'
       Openai-Version:
       - '2020-10-01'
       Strict-Transport-Security:
@@ -497,36 +599,36 @@ http_interactions:
       X-Ratelimit-Remaining-Tokens:
       - '159950'
       X-Ratelimit-Remaining-Tokens-Usage-Based:
-      - '159446'
+      - '158480'
       X-Ratelimit-Reset-Requests:
       - 12ms
       X-Ratelimit-Reset-Tokens:
       - 18ms
       X-Ratelimit-Reset-Tokens-Usage-Based:
-      - 207ms
+      - 569ms
       X-Request-Id:
-      - e789464975588d5141a3acb48397586c
+      - 4cb7205ef30b6427adafb5f40cd2bccc
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=TGBZWu5Tgbn_iYLRg2DWi7ffdZxKEGh2yWu5aPX5Bgc-1702344051-1-AZzyexVR+Ky3cAtNqegj9gnQoQF3JgEMZ+O6SHIrp7mJFhNg6LTGifIbUHNjCyYQdwDao4E/4iwLg4VzcZjoQI0=;
-        path=/; expires=Tue, 12-Dec-23 01:50:51 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=7JDeFENpMhIo9DK3iWxxDHTK251kEPD_lctlWBUTpfI-1702346699-1-AQJQ6TTAFWYsLgrZqbBfCueV0mHmSqnbC4i7vlBAXutFTkHOXw98l3nOzIeWMWvNEu6ZWZsfZrBkhQ2U7cw9dx4=;
+        path=/; expires=Tue, 12-Dec-23 02:34:59 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=S4sY42QgSjhX4za1_SAthtS9feRqYVbRdXCNRfypF0M-1702344051076-0-604800000;
+      - _cfuvid=5BjYHJbcmaivt3TK3EUDOg6hqAphME3cazavw6r4ETw-1702346699498-0-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       Server:
       - cloudflare
       Cf-Ray:
-      - 834225a37f4e11bf-BCN
+      - 8342664f6f84193e-BCN
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |
         {
-          "id": "chatcmpl-8Ulk2B8yCWZP9uw6o5cnDLxBziTPO",
+          "id": "chatcmpl-8UmQkNqL5uWZoRqaE4v0TacWpRPuZ",
           "object": "chat.completion",
-          "created": 1702344050,
+          "created": 1702346698,
           "model": "gpt-3.5-turbo-0613",
           "choices": [
             {
@@ -543,9 +645,9 @@ http_interactions:
             }
           ],
           "usage": {
-            "prompt_tokens": 1527,
+            "prompt_tokens": 2288,
             "completion_tokens": 23,
-            "total_tokens": 1550
+            "total_tokens": 2311
           },
           "system_fingerprint": null
         }
@@ -628,7 +730,41 @@ http_interactions:
         be represented as 1000.\nHowever, some currencies without fractional cents
         (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
         crucial that you get this right,\notherwise I might lose my job. Please be
-        careful."}}}]}'
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
     headers:
       Content-Type:
       - application/json
@@ -648,7 +784,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Dec 2023 01:20:52 GMT
+      - Tue, 12 Dec 2023 02:05:01 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -664,7 +800,7 @@ http_interactions:
       Openai-Organization:
       - user-mq4evbn0pwwgbaklllp0tywv
       Openai-Processing-Ms:
-      - '1103'
+      - '1292'
       Openai-Version:
       - '2020-10-01'
       Strict-Transport-Security:
@@ -680,36 +816,36 @@ http_interactions:
       X-Ratelimit-Remaining-Tokens:
       - '159966'
       X-Ratelimit-Remaining-Tokens-Usage-Based:
-      - '159116'
+      - '158592'
       X-Ratelimit-Reset-Requests:
       - 12ms
       X-Ratelimit-Reset-Tokens:
       - 12ms
       X-Ratelimit-Reset-Tokens-Usage-Based:
-      - 331ms
+      - 527ms
       X-Request-Id:
-      - 274bbb524d93bb390aab4180d575a812
+      - c1efea610d265760082a4960aa93e2ce
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=q2uavx7Uoj5uzwhZogfBrS4DZQ3hXMmoqbJFgUKAtuM-1702344052-1-Aa/KYrgVemsBynWwDZoSMI06aPGv8vOV/0e/FIKA1zldY1xLDmYyxHxPgzXB3ZsQM4bFGysMKLmm4F8wDyv6QtU=;
-        path=/; expires=Tue, 12-Dec-23 01:50:52 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=GV6QycNr6UJR.CrFBasO5NiHLvW5v8guMtZ7Kj_tnvU-1702346701-1-AX++3W0pMnj5lrBOubZOZ6znrF7oCZWQlE8Uz86I+T6gqKtVxOAmfsd5cwkh1Otqk3kaud5lUBfQhgG6azoMEic=;
+        path=/; expires=Tue, 12-Dec-23 02:35:01 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=16vVSmZrtj62CgJ37bUvNYY.3BeVJzfZtl1lxlHbD_I-1702344052497-0-604800000;
+      - _cfuvid=UBaP07cENtZpfAXujnLYThgLlRDsj_Rh9sMuwBCfxlY-1702346701158-0-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       Server:
       - cloudflare
       Cf-Ray:
-      - 834225af9c016d90-BCN
+      - 83426658fcbc194c-BCN
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |
         {
-          "id": "chatcmpl-8Ulk3zqlb2TcG1YhnYO7UtdtuT7ly",
+          "id": "chatcmpl-8UmQmk2Q695k9P87B2yxbRX4pryOp",
           "object": "chat.completion",
-          "created": 1702344051,
+          "created": 1702346700,
           "model": "gpt-3.5-turbo-0613",
           "choices": [
             {
@@ -726,9 +862,661 @@ http_interactions:
             }
           ],
           "usage": {
-            "prompt_tokens": 1514,
+            "prompt_tokens": 2275,
             "completion_tokens": 27,
-            "total_tokens": 1541
+            "total_tokens": 2302
+          },
+          "system_fingerprint": null
+        }
+  recorded_at: Thu, 29 Feb 2024 08:25:00 GMT
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo-0613","messages":[{"role":"user","content":"what
+        is my spending for today?\n\n\u003cMETADATA\u003e\n current date: 2024-02-29"}],"functions":[{"name":"spent","description":"[Spent]
+        Registers the user''s spending with categories","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money spent.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful."},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful."}},"required":["amount_cents"]}},{"name":"get_budget","description":"[Get
+        Budget] Get the user''s budget for the specified date period.\nIf no date
+        is specified, then leave it empty.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"set_budget","description":"[Set
+        Budget] Sets the user''s budget for the given period.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}},"amount_cents":{"type":"integer","description":"The
+        amount to be set in cents.\n  The name of this parameter is \"amount_cents\"\n  Example
+        input: €10.00, 10, 10.0, $10, -10, etc.\nAlways positive. 10 euros should
+        be represented as 1000.\nHowever, some currencies without fractional cents
+        (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <FILTERED_OPENAI_API_KEY>
+      Openai-Organization:
+      - org-JEicteWT2dkETiXj45OrYzjO
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2023 02:05:02 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0613
+      Openai-Organization:
+      - user-mq4evbn0pwwgbaklllp0tywv
+      Openai-Processing-Ms:
+      - '782'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '160000'
+      X-Ratelimit-Limit-Tokens-Usage-Based:
+      - '160000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '159966'
+      X-Ratelimit-Remaining-Tokens-Usage-Based:
+      - '158492'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 12ms
+      X-Ratelimit-Reset-Tokens-Usage-Based:
+      - 565ms
+      X-Request-Id:
+      - 6d4545a317b2f7dd2962787fc09dd4ef
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=vlzUWVywuV0o5h7lrImEjH6FiyPMVkdwfY5sL3rxqHc-1702346702-1-ARKYXVKd9Kybp/jzLMi5kz9tDPK1Sk1YSVjrhqlzGkgqjmvJHoNo55/FSvUvb86njaFmdE8VtiXU2UoNJzzsgoc=;
+        path=/; expires=Tue, 12-Dec-23 02:35:02 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=0Q8cfmwew7Ad8QBEtlG9BHufioaAP899AnLfdNmH1N8-1702346702323-0-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 834266633de0193e-BCN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-8UmQn94SYWbB9vxVbIPLxto1C5EiT",
+          "object": "chat.completion",
+          "created": 1702346701,
+          "model": "gpt-3.5-turbo-0613",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": null,
+                "function_call": {
+                  "name": "spending",
+                  "arguments": "{\"date\": {\"day\": \"today\"}}"
+                }
+              },
+              "finish_reason": "function_call"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 2274,
+            "completion_tokens": 15,
+            "total_tokens": 2289
+          },
+          "system_fingerprint": null
+        }
+  recorded_at: Thu, 29 Feb 2024 08:25:00 GMT
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo-0613","messages":[{"role":"user","content":"今日はどれくらい使いましたか。\n\n\u003cMETADATA\u003e\n
+        current date: 2024-02-29"}],"functions":[{"name":"spent","description":"[Spent]
+        Registers the user''s spending with categories","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money spent.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful."},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful."}},"required":["amount_cents"]}},{"name":"get_budget","description":"[Get
+        Budget] Get the user''s budget for the specified date period.\nIf no date
+        is specified, then leave it empty.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"set_budget","description":"[Set
+        Budget] Sets the user''s budget for the given period.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}},"amount_cents":{"type":"integer","description":"The
+        amount to be set in cents.\n  The name of this parameter is \"amount_cents\"\n  Example
+        input: €10.00, 10, 10.0, $10, -10, etc.\nAlways positive. 10 euros should
+        be represented as 1000.\nHowever, some currencies without fractional cents
+        (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <FILTERED_OPENAI_API_KEY>
+      Openai-Organization:
+      - org-JEicteWT2dkETiXj45OrYzjO
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2023 02:05:03 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0613
+      Openai-Organization:
+      - user-mq4evbn0pwwgbaklllp0tywv
+      Openai-Processing-Ms:
+      - '893'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '160000'
+      X-Ratelimit-Limit-Tokens-Usage-Based:
+      - '160000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '159962'
+      X-Ratelimit-Remaining-Tokens-Usage-Based:
+      - '158465'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 14ms
+      X-Ratelimit-Reset-Tokens-Usage-Based:
+      - 575ms
+      X-Request-Id:
+      - 8d4c9a79150fd468c7b6362684e0a89b
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=LADcoEXFrEAbRsmKakpsJ3fngvz_MGX0i7vMp9Y3vBY-1702346703-1-AftHWW4kbutzxktZsWMzFA5S8ZgLOzp9y9CjB3T/T73wAECs3VXXernNZAX50k+KrBCcC5uT3EhVQkmVTfH1oYI=;
+        path=/; expires=Tue, 12-Dec-23 02:35:03 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=lGL3FxrZP5qKdfop_mE9G8JeGrfGWD4WceiilvMQ83c-1702346703760-0-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8342666a4dbe6d93-BCN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-8UmQoPsRLK4BCCiggPXo2KbuKQaoq",
+          "object": "chat.completion",
+          "created": 1702346702,
+          "model": "gpt-3.5-turbo-0613",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": null,
+                "function_call": {
+                  "name": "spending",
+                  "arguments": "{\n  \"date\": {\n    \"day\": \"today\"\n  }\n}"
+                }
+              },
+              "finish_reason": "function_call"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 2280,
+            "completion_tokens": 22,
+            "total_tokens": 2302
+          },
+          "system_fingerprint": null
+        }
+  recorded_at: Thu, 29 Feb 2024 08:25:00 GMT
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo-0613","messages":[{"role":"user","content":"hello
+        darling. how much money do i have left for the month?\n\n\u003cMETADATA\u003e\n
+        current date: 2024-02-29"}],"functions":[{"name":"spent","description":"[Spent]
+        Registers the user''s spending with categories","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money spent.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful."},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful."}},"required":["amount_cents"]}},{"name":"get_budget","description":"[Get
+        Budget] Get the user''s budget for the specified date period.\nIf no date
+        is specified, then leave it empty.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"set_budget","description":"[Set
+        Budget] Sets the user''s budget for the given period.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}},"amount_cents":{"type":"integer","description":"The
+        amount to be set in cents.\n  The name of this parameter is \"amount_cents\"\n  Example
+        input: €10.00, 10, 10.0, $10, -10, etc.\nAlways positive. 10 euros should
+        be represented as 1000.\nHowever, some currencies without fractional cents
+        (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful."}}},{"name":"spending","description":"[Spending] Returns a breakdown
+        of the user''s spending in the given time period.\nIt will include:\n- Total
+        spent\n- Break down of spending per category","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.","enum":["prev month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.","enum":["prev year","this year","next year"]}},"required":[]}}}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nCurrently the period defaults to the current month,\nso
+        there''s no need to specify the date.\nIt''s crucial that you get this right,\notherwise
+        I might lose my job. Please be careful.","parameters":{"type":"object","properties":{}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <FILTERED_OPENAI_API_KEY>
+      Openai-Organization:
+      - org-JEicteWT2dkETiXj45OrYzjO
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2023 02:05:04 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0613
+      Openai-Organization:
+      - user-mq4evbn0pwwgbaklllp0tywv
+      Openai-Processing-Ms:
+      - '288'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '160000'
+      X-Ratelimit-Limit-Tokens-Usage-Based:
+      - '160000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '159958'
+      X-Ratelimit-Remaining-Tokens-Usage-Based:
+      - '158412'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 15ms
+      X-Ratelimit-Reset-Tokens-Usage-Based:
+      - 595ms
+      X-Request-Id:
+      - 9951b194a7b3d60b1334dcdf02e12502
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=SgstHI70qoHAidGuEhODe1T3Ect7mz.vdWpwWNFHetQ-1702346704-1-Ab+y5h5AnSqW+lDruHnkfN6yoL00N4/JFpjrTyU+BPwDWe8GE4nbmM1CJX5dch3ARZqsZ0QMX2CFk8StTdlX36k=;
+        path=/; expires=Tue, 12-Dec-23 02:35:04 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=3Ql1FeVQihP.hlK83LkNl4KTn9FTBcINYKnFs25ldrE-1702346704594-0-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8342667338e211b7-BCN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-8UmQqzXsXB09b23dK3TY5cmTYJ97i",
+          "object": "chat.completion",
+          "created": 1702346704,
+          "model": "gpt-3.5-turbo-0613",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": null,
+                "function_call": {
+                  "name": "status",
+                  "arguments": "{}"
+                }
+              },
+              "finish_reason": "function_call"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 2281,
+            "completion_tokens": 6,
+            "total_tokens": 2287
           },
           "system_fingerprint": null
         }

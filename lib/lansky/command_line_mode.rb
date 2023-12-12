@@ -9,17 +9,18 @@ module Lansky
 
     def run
       loop do
-        puts 'message:'
+        puts 'message:'.green
         print '> '
         input = STDIN.gets.chomp
         message = normalize_input(input)
         break if message.match?(EXIT_MESSAGE)
 
         reply = get_reply(input)
-        puts "\nreply:\n#{reply}\n\n"
+        puts "\nreply:".green
+        puts "#{reply}\n\n"
       rescue StandardError => e
-        puts "\nerror:\n#{e}\n\n"
-        puts e.backtrace.take(10).join("\n")
+        puts "\nerror:\n#{e}\n\n".light_red
+        puts e.backtrace.take(10).join("\n").red
       end
     end
 
