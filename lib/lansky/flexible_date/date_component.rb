@@ -38,7 +38,7 @@ module Lansky
 
       private
 
-      attr_reader :string, :direction, :parent_present
+      attr_reader :string, :direction
 
       def direction
         case string
@@ -52,11 +52,15 @@ module Lansky
         raise NotImplementedError
       end
 
+      def parent_present?
+        @parent_present
+      end
+
       def set_direction(direction)
         case string
         when /next / then :forward
         when /prev / then :backward
-        else parent_present ? :current : direction
+        else parent_present? ? :current : direction
         end
       end
 

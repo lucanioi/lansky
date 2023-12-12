@@ -6,7 +6,7 @@ module Lansky
       MONTHS_OF_YEAR = %w[jan feb mar apr may jun jul aug sep oct nov dec]
 
       def resolve(datetime)
-        return datetime.change(month: 1) if blank? && parent_present
+        return datetime.change(month: 1) if blank? && parent_present?
         return resolve_deictic(datetime) if deictic?
         return resolve_named(datetime) unless blank?
 

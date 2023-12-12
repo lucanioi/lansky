@@ -25,6 +25,7 @@
 
 [ ] ChatGPT retries
 
+[ ] FlexibleDate refactor
 [ ] add operation input validations
 [ ] use ChatGPT as a guidance to improve the interface and operations
 [ ] use VCR for HTTP requests in tests

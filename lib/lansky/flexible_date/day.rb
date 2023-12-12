@@ -8,7 +8,7 @@ module Lansky
       DEICTIC_OPTIONS = %w[today tomorrow yesterday].freeze
 
       def resolve(datetime)
-        return datetime if blank? && parent_present
+        return datetime if blank? && parent_present?
         return datetime.change(day: 1) if blank?
         return resolve_deictic(datetime) if deictic?
         return datetime.change(day: number) if valid_numeric?
@@ -44,8 +44,8 @@ module Lansky
       def resolve_named(datetime)
         return datetime unless named?
 
-        difference = wday - datetime.wday
-        datetime + adjust_difference(difference).days
+        diff = wday - datetime.wday
+        datetime + adjust_difference(diff).days
       end
 
       def adjust_difference(diff)

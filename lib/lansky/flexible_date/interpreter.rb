@@ -3,7 +3,7 @@ module Lansky
     class Interpreter
       class << self
         def to_period(flex_date, **options)
-          new(**flex_date.to_h, **options).parse
+          new(**flex_date.to_h, **options).to_period
         end
 
         private :new
@@ -18,7 +18,7 @@ module Lansky
         @duration = options[:duration]
       end
 
-      def parse
+      def to_period
         Lansky::Period.new(period_start, period_end)
       end
 
