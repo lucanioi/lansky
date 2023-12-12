@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Classic Mode', type: :request do
+RSpec.describe 'Classic Mode', type: :engine do
   let(:mode) { :classic }
 
   before { Timecop.freeze(DateTime.new(2023, 10, 12, 22, 30, 0)) }

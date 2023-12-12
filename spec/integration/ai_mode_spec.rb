@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'AI Mode', type: :request do
+RSpec.describe 'AI Mode', type: :engine do
   let(:mode) { :ai }
 
   before { Timecop.freeze(DateTime.new(2024, 2, 29, 8, 25, 0)) }
@@ -8,7 +8,7 @@ RSpec.describe 'AI Mode', type: :request do
 
   let(:user) { create :user, test_user: false }
 
-  describe 'message it does not recognize' do
+  describe 'message it does not recognize', :vcr do
     it 'responds with Did not understand' do
       send_message    'Does not recognize this message'
       expect_response 'Did not understand'

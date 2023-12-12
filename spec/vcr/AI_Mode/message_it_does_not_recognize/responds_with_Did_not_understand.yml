@@ -1,0 +1,503 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo-0613","messages":[{"role":"user","content":"Does
+        not recognize this message\n\u003cMETADATA\u003e\n  current_date: 2024-02-29,\n  current_currency:
+        EUR,\n  current_timezone: UTC\n\u003c/METADATA\u003e\n"}],"functions":[{"name":"get_budget","description":"[Get
+        Budget] Get the user''s budget for the specified date period.\nIf no date
+        is specified, then leave it empty.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly ","enum":["prev year","this
+        year","next year"]}}}}}},{"name":"set_budget","description":"[Set Budget]
+        Sets the user''s budget for the given period.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly ","enum":["prev year","this
+        year","next year"]}}},"amount_cents":{"type":"integer","description":"The
+        amount to be set in cents.\n  The name of this parameter is \"amount_cents\"\n  Example
+        input: €10.00, 10, 10.0, $10, -10, etc.\nAlways positive. 10 euros should
+        be represented as 1000.\nHowever, some currencies without fractional cents
+        (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly "}},"required":["amount_cents","date"]}},{"name":"get_timezone","description":"[Get
+        Timezone] Returns the user''s timezone.","parameters":{"type":"object","properties":{}}},{"name":"set_timezone","description":"[Set
+        Timezone] Sets the user''s timezone","parameters":{"type":"object","properties":{"timezone_name":{"type":"string","description":"A
+        timezone in valid string format.\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["America/Los_Angeles","America/Denver","America/Chicago","America/New_York","Pacific/Honolulu","America/Juneau","America/Phoenix","UTC","Europe/London","Europe/Berlin","Europe/Paris","Europe/Moscow","Europe/Madrid","Europe/Rome","Europe/Amsterdam","Europe/Vilnius","Asia/Shanghai","Asia/Tokyo","Asia/Seoul","Asia/Jakarta","Asia/Bangkok","Asia/Kolkata","Asia/Singapore","Australia/Sydney","Pacific/Auckland","America/Sao_Paulo"]}},"required":["timezone_name"]}},{"name":"get_currency","description":"[Get
+        Currency] Returns the user''s currency\nThis currency is used to register
+        and display amounts of money.","parameters":{"type":"object","properties":{}}},{"name":"set_currency","description":"[Set
+        Currency] Sets the user''s currency","parameters":{"type":"object","properties":{"currency":{"type":"string","description":"A
+        currency in valid 3-letter ISO format.\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["USD","EUR","JPY","GBP","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","RUB","INR","BRL","ZAR","THB","IDR","MYR","PHP","PLN","AED","SAR","ILS","DKK","TWD"]}},"required":["currency"]}},{"name":"spent","description":"[Spent]
+        Registers the user''s spending with categories","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money spent.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly "},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly "}},"required":["amount_cents"]}},{"name":"recovered","description":"[Recovered]
+        Registers the amount of money user has recovered.\nA recovery could be a reimbursement,
+        a refund, a gift, etc.","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money recovered.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly "},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly "}},"required":["amount_cents"]}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nThis is function is BUDGETING focused.\n\nCurrently the
+        period defaults to the current month,\nso there''s no need to specify the
+        date.\nIt''s crucial that you get this right,\notherwise I might lose my job.
+        Please be careful.\nThank you, I appreciate your work greatly ","parameters":{"type":"object","properties":{}}},{"name":"spending","description":"[Spending]
+        Returns a breakdown of the user''s spending in the given time period.\nIt
+        will include:\n- Total spent in period\n- Break down of spending per category\n\nThis
+        is function is SPENDING focused.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly ","enum":["prev year","this
+        year","next year"]}}}},"required":["date"]}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <FILTERED_OPENAI_API_KEY>
+      Openai-Organization:
+      - org-JEicteWT2dkETiXj45OrYzjO
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2023 12:06:41 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0613
+      Openai-Organization:
+      - user-mq4evbn0pwwgbaklllp0tywv
+      Openai-Processing-Ms:
+      - '719'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '160000'
+      X-Ratelimit-Limit-Tokens-Usage-Based:
+      - '160000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '159950'
+      X-Ratelimit-Remaining-Tokens-Usage-Based:
+      - '159950'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 18ms
+      X-Ratelimit-Reset-Tokens-Usage-Based:
+      - 18ms
+      X-Request-Id:
+      - 479cf80a0461a4a6f8dda54f15e8e777
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=X.KuC.1P2aXIZIKJeDyAh96aWhrcQjG1Hlf5AwvnvOQ-1702382801-1-AYe3f2kANtZcHDkUmDFDX2Eeq8GBuCAXXTwtqBfx9fM4q7yawyLGoq3/3VEa9eOw96BxJ8mfQ1AoBoTEClqW9mU=;
+        path=/; expires=Tue, 12-Dec-23 12:36:41 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=r4CfBlURXLu0oY6PzoPoeah25RtLa.zvcOn4F_lmwBM-1702382801758-0-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8345d7b8efc60da1-MRS
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-8Uvp3Bvwn97KdS7RDjSd6oVL7AfsN",
+          "object": "chat.completion",
+          "created": 1702382801,
+          "model": "gpt-3.5-turbo-0613",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "I apologize for not recognizing your message. How can I assist you today?"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 3278,
+            "completion_tokens": 16,
+            "total_tokens": 3294
+          },
+          "system_fingerprint": null
+        }
+  recorded_at: Thu, 29 Feb 2024 08:25:00 GMT
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo-0613","messages":[{"role":"user","content":"Does
+        not recognize this message\n\u003cMETADATA\u003e\n  current_date: 2024-02-29,\n  current_currency:
+        EUR,\n  current_timezone: UTC\n\u003c/METADATA\u003e\n"}],"functions":[{"name":"get_budget","description":"[Get
+        Budget] Get the user''s budget for the specified date period.\nIf no date
+        is specified, then leave it empty.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly ","enum":["prev year","this
+        year","next year"]}}}}}},{"name":"set_budget","description":"[Set Budget]
+        Sets the user''s budget for the given period.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly ","enum":["prev year","this
+        year","next year"]}}},"amount_cents":{"type":"integer","description":"The
+        amount to be set in cents.\n  The name of this parameter is \"amount_cents\"\n  Example
+        input: €10.00, 10, 10.0, $10, -10, etc.\nAlways positive. 10 euros should
+        be represented as 1000.\nHowever, some currencies without fractional cents
+        (like JPY)\nshould be transformed to 10 if given ''10'' as input.\n  It''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly "}},"required":["amount_cents","date"]}},{"name":"get_timezone","description":"[Get
+        Timezone] Returns the user''s timezone.","parameters":{"type":"object","properties":{}}},{"name":"set_timezone","description":"[Set
+        Timezone] Sets the user''s timezone","parameters":{"type":"object","properties":{"timezone_name":{"type":"string","description":"A
+        timezone in valid string format.\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["America/Los_Angeles","America/Denver","America/Chicago","America/New_York","Pacific/Honolulu","America/Juneau","America/Phoenix","UTC","Europe/London","Europe/Berlin","Europe/Paris","Europe/Moscow","Europe/Madrid","Europe/Rome","Europe/Amsterdam","Europe/Vilnius","Asia/Shanghai","Asia/Tokyo","Asia/Seoul","Asia/Jakarta","Asia/Bangkok","Asia/Kolkata","Asia/Singapore","Australia/Sydney","Pacific/Auckland","America/Sao_Paulo"]}},"required":["timezone_name"]}},{"name":"get_currency","description":"[Get
+        Currency] Returns the user''s currency\nThis currency is used to register
+        and display amounts of money.","parameters":{"type":"object","properties":{}}},{"name":"set_currency","description":"[Set
+        Currency] Sets the user''s currency","parameters":{"type":"object","properties":{"currency":{"type":"string","description":"A
+        currency in valid 3-letter ISO format.\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["USD","EUR","JPY","GBP","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","RUB","INR","BRL","ZAR","THB","IDR","MYR","PHP","PLN","AED","SAR","ILS","DKK","TWD"]}},"required":["currency"]}},{"name":"spent","description":"[Spent]
+        Registers the user''s spending with categories","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money spent.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly "},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly "}},"required":["amount_cents"]}},{"name":"recovered","description":"[Recovered]
+        Registers the amount of money user has recovered.\nA recovery could be a reimbursement,
+        a refund, a gift, etc.","parameters":{"type":"object","properties":{"amount_cents":{"type":"integer","description":"The
+        amount of money recovered.\nExample input: €10.00, 10, 10.0, $10, -10, etc.\nAlways
+        positive. 10 euros should be represented as 1000.\nHowever, some currencies
+        without fractional cents (like JPY)\nshould be transformed to 10 if given
+        ''10'' as input.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly "},"category_name":{"type":"string","description":"Whatever
+        category the user wants to use. Example: food,\ngroceries, rent, Meggie''s
+        Bday Party, etc. When unclear,\ndo not hesitate to make it null. The language
+        of the input\nmust be preserved. Use the exact same words as the user.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly "}},"required":["amount_cents"]}},{"name":"status","description":"[Status]
+        Returns an overview of the status of the current budget.\nIt will include:\n-
+        How much money is left for the day\n- How much money is left for the period\n-
+        How much money has been spent for the day\n- How much money per day is left
+        for the period\n\nThis is function is BUDGETING focused.\n\nCurrently the
+        period defaults to the current month,\nso there''s no need to specify the
+        date.\nIt''s crucial that you get this right,\notherwise I might lose my job.
+        Please be careful.\nThank you, I appreciate your work greatly ","parameters":{"type":"object","properties":{}}},{"name":"spending","description":"[Spending]
+        Returns a breakdown of the user''s spending in the given time period.\nIt
+        will include:\n- Total spent in period\n- Break down of spending per category\n\nThis
+        is function is SPENDING focused.","parameters":{"type":"object","properties":{"date":{"type":"object","description":"Date
+        object which contains the day, week, month and year.","properties":{"day":{"type":"string","description":"The
+        name of this parameter is \"day\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["today","yesterday","tomorrow","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","sun","mon","tue","wed","thu","fri","sat","prev
+        sun","prev mon","prev tue","prev wed","prev thu","prev fri","prev sat","this
+        sun","this mon","this tue","this wed","this thu","this fri","this sat","next
+        sun","next mon","next tue","next wed","next thu","next fri","next sat"]},"week":{"type":"string","description":"The
+        name of this parameter is \"week\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        week","this week","next week","1","2","3","4"]},"month":{"type":"string","description":"The
+        name of this parameter is \"month\"\nONLY the values below are accepted.\nIt
+        is strictly forbidden to use any other values.\nReturn null if no obvious
+        day is indicated.\nIt''s crucial that you get this right,\notherwise I might
+        lose my job. Please be careful.\nThank you, I appreciate your work greatly ","enum":["prev
+        month","this month","next month","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec","prev
+        jan","prev feb","prev mar","prev apr","prev may","prev jun","prev jul","prev
+        aug","prev sep","prev oct","prev nov","prev dec","this jan","this feb","this
+        mar","this apr","this may","this jun","this jul","this aug","this sep","this
+        oct","this nov","this dec","next jan","next feb","next mar","next apr","next
+        may","next jun","next jul","next aug","next sep","next oct","next nov","next
+        dec"]},"year":{"type":"string","description":"The name of this parameter is
+        \"year\"\nAny of the values listed under \"enums\" are accepted.\nYear numbers
+        are accepted (2020, 2021, etc.)\nReturn null if no obvious day is indicated.\nIt''s
+        crucial that you get this right,\notherwise I might lose my job. Please be
+        careful.\nThank you, I appreciate your work greatly ","enum":["prev year","this
+        year","next year"]}}}},"required":["date"]}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <FILTERED_OPENAI_API_KEY>
+      Openai-Organization:
+      - org-JEicteWT2dkETiXj45OrYzjO
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 12 Dec 2023 12:06:42 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0613
+      Openai-Organization:
+      - user-mq4evbn0pwwgbaklllp0tywv
+      Openai-Processing-Ms:
+      - '606'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '160000'
+      X-Ratelimit-Limit-Tokens-Usage-Based:
+      - '160000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '159950'
+      X-Ratelimit-Remaining-Tokens-Usage-Based:
+      - '157435'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 18ms
+      X-Ratelimit-Reset-Tokens-Usage-Based:
+      - 961ms
+      X-Request-Id:
+      - f85dd3d9a2b12e251b10a923efc98a51
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=inXf8CdoAbEewanIRC.fvHzeyrgnbbWEfHgIl2WECw0-1702382802-1-AVzpKkaa9/chmyg2DbSBJKMKKep8UMT6tpky37KS9DihOc614x7wwsfSaoQCwru7L1oqz9tEH1O9CtKA8fxwDHI=;
+        path=/; expires=Tue, 12-Dec-23 12:36:42 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=0n0Las5uhrBX35Oe4_3BDheQ00WmcV5HHrSe2rTRJmE-1702382802687-0-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8345d7bf6f690db5-MRS
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-8Uvp4Gyd3ItINL0DHv6BiDX0BPtNX",
+          "object": "chat.completion",
+          "created": 1702382802,
+          "model": "gpt-3.5-turbo-0613",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "I apologize for not recognizing your message. How may I assist you today?"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 3278,
+            "completion_tokens": 16,
+            "total_tokens": 3294
+          },
+          "system_fingerprint": null
+        }
+  recorded_at: Thu, 29 Feb 2024 08:25:00 GMT
+recorded_with: VCR 6.2.0

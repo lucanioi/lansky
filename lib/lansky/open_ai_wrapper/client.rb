@@ -17,10 +17,6 @@ module Lansky
 
       private
 
-      def verbose?
-        ENV['VERBOSE'] == 'true' && !Rails.env.production?
-      end
-
       def verbose(input, &block)
         return block.call unless verbose?
 
@@ -39,6 +35,10 @@ module Lansky
         return if result.nil?
 
         result.deep_stringify_keys.to_yaml.gsub('---', '').strip
+      end
+
+      def verbose?
+        ENV['VERBOSE'] == 'true' && !Rails.env.production?
       end
     end
   end

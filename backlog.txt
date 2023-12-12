@@ -18,15 +18,18 @@
 [x] refactor into engines (classic vs ai)
 [x] new architecture
 [x] create date parser
+[x] make it runnable locally
+[x] ensure tests are using DateTime.current with hour and minutes
+[x] make operations accept Period objects
+[x] create GPT layer
 
-[o] create GPT layer
-[o] make it runnable locally
+[ ] ChatGPT retries
 
-[ ] ensure tests are using DateTime.current with hour and minutes
+[ ] add operation input validations
+[ ] use ChatGPT as a guidance to improve the interface and operations
 [ ] use VCR for HTTP requests in tests
 [ ] date edge cases
-[ ] make operations accept Period objects
 [ ] 'ago' support
-
+[ ] undo operation
 [ ] improve named deictic logic — currently returns next occurance of date. eg next october, next wednesday
 [ ] status and get budget are both relying on discerning active budget. iffy.
