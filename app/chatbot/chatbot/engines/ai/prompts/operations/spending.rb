@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class Spending
-            PROMPTS = {
+          module Spending
+            PROMPT = {
               name: 'spending',
               description: <<~DESC.strip,
                 [Spending] Returns a breakdown of the user's spending in the given time period.

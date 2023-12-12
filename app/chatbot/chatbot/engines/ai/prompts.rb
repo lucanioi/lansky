@@ -2,18 +2,18 @@ module Chatbot
   module Engines
     module AI
       module Prompts
-        PROMPTS = {
+        PROMPT = {
           operations: [
-            Prompts::Operations::GetBudget::PROMPTS,
-            Prompts::Operations::SetBudget::PROMPTS,
-            Prompts::Operations::GetTimezone::PROMPTS,
-            Prompts::Operations::SetTimezone::PROMPTS,
-            Prompts::Operations::GetCurrency::PROMPTS,
-            Prompts::Operations::SetCurrency::PROMPTS,
-            Prompts::Operations::Spent::PROMPTS,
-            Prompts::Operations::Recovered::PROMPTS,
-            Prompts::Operations::Status::PROMPTS,
-            Prompts::Operations::Spending::PROMPTS,
+            Prompts::Operations::GetBudget::PROMPT,
+            Prompts::Operations::SetBudget::PROMPT,
+            Prompts::Operations::GetTimezone::PROMPT,
+            Prompts::Operations::SetTimezone::PROMPT,
+            Prompts::Operations::GetCurrency::PROMPT,
+            Prompts::Operations::SetCurrency::PROMPT,
+            Prompts::Operations::Spent::PROMPT,
+            Prompts::Operations::Recovered::PROMPT,
+            Prompts::Operations::Status::PROMPT,
+            Prompts::Operations::Spending::PROMPT,
           ]
         }
       end

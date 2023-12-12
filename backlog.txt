@@ -26,6 +26,9 @@
 [ ] ChatGPT retries
 
 [ ] FlexibleDate refactor
+[ ] delete budget
+[ ] allow nested budgets like budget for month, week, day separately but interconnected
+[ ] consistent config pattern
 [ ] add operation input validations
 [ ] use ChatGPT as a guidance to improve the interface and operations
 [ ] use VCR for HTTP requests in tests

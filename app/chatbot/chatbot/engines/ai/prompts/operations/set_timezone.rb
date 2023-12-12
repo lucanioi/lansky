@@ -3,7 +3,7 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class SetTimezone
+          module SetTimezone
             SUPPORTED_TIMEZONES = %w[
               America/Los_Angeles
               America/Denver
@@ -33,7 +33,7 @@ module Chatbot
               America/Sao_Paulo
             ].freeze
 
-            PROMPTS = {
+            PROMPT = {
               name: 'set_timezone',
               description: <<~DESC.strip,
                 [Set Timezone] Sets the user's timezone

@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class SetBudget
-            PROMPTS = {
+          module SetBudget
+            PROMPT = {
               name: 'set_budget',
               description: '[Set Budget] Sets the user\'s budget for the given period.',
               parameters: {

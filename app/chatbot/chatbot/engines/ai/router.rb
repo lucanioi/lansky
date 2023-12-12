@@ -46,7 +46,7 @@ module Chatbot
         end
 
         def ai
-          @ai ||= Lansky::AI.new(prompts: Prompts::PROMPTS)
+          @ai ||= Lansky::AI.new(prompts: Prompts::PROMPT)
         end
 
         attr_accessor :message

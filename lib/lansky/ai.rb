@@ -13,5 +13,9 @@ module Lansky
     def parse_operation(input:)
       client.parse_operation(input:)
     end
+
+    def generate_response(input:)
+      client.generate_response(input:)
+    end
   end
 end

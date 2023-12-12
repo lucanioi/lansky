@@ -77,7 +77,9 @@ RSpec.describe 'AI Mode', type: :engine do
   end
 
   def send_message(message)
-    @response = Chatbot::Engine.run(user:, message:, mode:).value!
+    config = { embellish_response: false }
+
+    @response = Chatbot::Engine.run(user:, message:, mode:, config:).value!
   end
 
   def expect_response(body)

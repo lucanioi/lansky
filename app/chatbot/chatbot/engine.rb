@@ -6,7 +6,7 @@ module Chatbot
 
     def run
       use_user_environment do
-        engine.run(user: user, message: message).value!
+        engine.run(user:, message:, config:).value!
       end
     rescue StandardError => error
       handle_error(error)
@@ -41,7 +41,7 @@ module Chatbot
       ErrorHandler.handle_error(error)
     end
 
-    attr_accessor :user, :message
+    attr_accessor :user, :message, :config
     attr_writer :mode
   end
 end

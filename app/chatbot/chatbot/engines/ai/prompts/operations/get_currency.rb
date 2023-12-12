@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class GetCurrency
-            PROMPTS = {
+          module GetCurrency
+            PROMPT = {
               name: 'get_currency',
               description: <<~DESC.strip,
                 [Get Currency] Returns the user\'s currency

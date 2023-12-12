@@ -3,7 +3,7 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class Shared
+          module Shared
             VERY_IMPORTANT_MESSAGE = <<~DESC.strip.freeze
               It's crucial that you get this right,
               otherwise I might lose my job. Please be careful.

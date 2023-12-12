@@ -9,18 +9,24 @@ module Lansky
       end
 
       def parse_operation(input:)
-        verbose(input) do
+        verbose(input, 'function_calls') do
           functions = prompts[:operations]
           FunctionCall.run(input:, ai:, functions:).value!
         end
       end
 
+      def generate_response(input:)
+        verbose(input, 'text generation') do
+          TextGeneration.run(input:, ai:).value!
+        end
+      end
+
       private
 
-      def verbose(input, &block)
+      def verbose(input, type, &block)
         return block.call unless verbose?
 
-        puts "input to `function_calls`:".green
+        puts "input to `#{type}`:".green
         puts "#{input}\n".light_green
 
         result = block.call
@@ -33,7 +39,9 @@ module Lansky
 
       def format_result(result)
         return if result.nil?
+        return result if result.is_a? String
 
+        return unless result.is_a? Hash
         result.deep_stringify_keys.to_yaml.gsub('---', '').strip
       end
 

@@ -135,7 +135,7 @@ RSpec.describe Chatbot::Operations::Status do
 
   def create_budget_current_month(amount)
     create :budget,
-           user: user,
+           user:,
            amount_cents: amount,
            period_start: DateTime.current.bom,
            period_end: DateTime.current.next_month.bom

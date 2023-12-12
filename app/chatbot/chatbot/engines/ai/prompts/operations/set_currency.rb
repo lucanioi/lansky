@@ -3,7 +3,7 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class SetCurrency
+          module SetCurrency
             SUPPORTED_CURRENCIES = [
               "USD",  # United States Dollar
               "EUR",  # Euro
@@ -37,7 +37,7 @@ module Chatbot
               "TWD"   # Taiwan Dollar
             ].freeze
 
-            PROMPTS = {
+            PROMPT = {
               name: 'set_currency',
               description: <<~DESC.strip,
                 [Set Currency] Sets the user's currency

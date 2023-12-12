@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class GetBudget
-            PROMPTS = {
+          module GetBudget
+            PROMPT = {
               name: 'get_budget',
               description: <<~DESC.strip,
                 [Get Budget] Get the user\'s budget for the specified date period.

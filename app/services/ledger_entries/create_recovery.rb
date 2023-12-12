@@ -15,11 +15,11 @@ module LedgerEntries
 
     def entry
       @entry ||= LedgerEntry.new(
-        category: category,
-        amount_cents: amount_cents,
+        category:,
+        amount_cents:,
         entry_type: LedgerEntry.entry_types[:recovery],
         recorded_at: DateTime.current,
-        user: user
+        user:
       )
     end
 

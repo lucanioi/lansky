@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class GetTimezone
-            PROMPTS = {
+          module GetTimezone
+            PROMPT = {
               name: 'get_timezone',
               description: <<~DESC.strip,
                 [Get Timezone] Returns the user's timezone.

@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class Status
-            PROMPTS = {
+          module Status
+            PROMPT = {
               name: 'status',
               description: <<~DESC.strip,
                 [Status] Returns an overview of the status of the current budget.

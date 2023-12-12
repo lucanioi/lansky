@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class Spent
-            PROMPTS = {
+          module Spent
+            PROMPT = {
               name: 'spent',
               description: '[Spent] Registers the user\'s spending with categories',
               parameters: {

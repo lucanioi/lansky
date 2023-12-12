@@ -5,7 +5,9 @@ module Chatbot
         include Runnable
 
         def run
-          with_retry(1) { run_engine }
+          basic_response = with_retry(1) { run_engine }
+
+          embellish_response? ? embellish_response(basic_response) : basic_response
         end
 
         private
@@ -29,6 +31,15 @@ module Chatbot
 
         def router
           Engines::AI::Router
+        end
+
+        def embellish_response(basic_response)
+          prompt = Prompts::Response::PROMPT % {
+            user_input: message,
+            basic_response: basic_response.presence || 'NULL',
+          }
+
+          ai.generate_response(input: prompt)
         end
 
         def message_with_metadata
@@ -58,7 +69,17 @@ module Chatbot
           ENV['VERBOSE'] == 'true' && !Rails.env.production?
         end
 
-        attr_accessor :user, :message
+        def embellish_response?
+          return true unless config
+
+          config.fetch(:embellish_response, true)
+        end
+
+        def ai
+          @ai ||= Lansky::AI.new(prompts: Prompts::PROMPT)
+        end
+
+        attr_accessor :user, :message, :config
       end
     end
   end

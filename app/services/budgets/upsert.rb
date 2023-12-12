@@ -15,7 +15,7 @@ module Budgets
       @budget ||= Budget.find_or_initialize_by(
         period_start: period.start,
         period_end: period.end,
-        user: user
+        user:
       ).tap { |budget| budget.amount_cents = amount_cents }
     end
 

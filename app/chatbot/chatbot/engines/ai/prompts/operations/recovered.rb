@@ -3,8 +3,8 @@ module Chatbot
     module AI
       module Prompts
         module Operations
-          class Recovered
-            PROMPTS = {
+          module Recovered
+            PROMPT = {
               name: 'recovered',
               description: <<~DESC.strip,
                 [Recovered] Registers the amount of money user has recovered.

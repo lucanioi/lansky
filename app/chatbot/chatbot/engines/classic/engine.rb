@@ -15,7 +15,7 @@ module Chatbot
           Engines::Classic::Router
         end
 
-        attr_accessor :user, :message
+        attr_accessor :user, :message, :config
       end
     end
   end
