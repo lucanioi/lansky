@@ -4,7 +4,11 @@ module Chatbot
       params :category_name, :amount_cents
 
       def run
-        result = LedgerEntries::CreateSpending.run(user:, amount_cents:, category_name:)
+        result = LedgerEntries::CreateSpending.run(
+          user:,
+          amount_cents:,
+          category_name:
+        )
 
         return reply(result.value) if result.success?
 

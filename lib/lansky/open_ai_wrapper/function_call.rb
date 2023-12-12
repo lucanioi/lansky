@@ -26,17 +26,11 @@ module Lansky
           messages: [
             {
               'role': 'user',
-              'content': input_with_metadata,
+              'content': input,
             },
           ],
           functions:,
         }
-      end
-
-      def input_with_metadata
-        "#{input}\n\n" \
-        "<METADATA>\n " \
-        "current date: #{DateTime.current.to_date}"
       end
 
       def config

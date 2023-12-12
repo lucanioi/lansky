@@ -7,6 +7,7 @@ module Chatbot
             VERY_IMPORTANT_MESSAGE = <<~DESC.strip.freeze
               It's crucial that you get this right,
               otherwise I might lose my job. Please be careful.
+              Thank you, I appreciate your work greatly 
             DESC
 
             ONLY_ACCEPTED_VALUES = <<~DESC.strip.freeze

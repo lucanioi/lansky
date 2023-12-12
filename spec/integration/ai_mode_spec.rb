@@ -38,7 +38,7 @@ RSpec.describe 'AI Mode', type: :request do
                         ```20.00``` - burgers
                       TEXT
 
-      send_message    '今日はどれくらい使いましたか。'
+      send_message    '今日はどれくらい出費しましたか。'
       expect_response <<~TEXT.strip
                         Total spent (Thu, 29 Feb 2024):
                         *€20*
@@ -55,11 +55,24 @@ RSpec.describe 'AI Mode', type: :request do
                         Current daily limit is *€2,480*.
                       TEXT
 
+      send_message    'I wanted to set my local timezone. I am currenly in ' \
+                      'Kaunus, Lithuania. I am not sure what timezone that is.'
+      expect_response 'Timezone set to Europe/Vilnius +02:00'
+
       send_message    'what is my timezone?'
-      expect_response 'Timezone: UTC +00:00'
+      expect_response 'Timezone: Europe/Vilnius +02:00'
+
+      send_message    'set my currency to JPY please'
+      expect_response 'Currency set to JPY'
 
       send_message    'whats the currency again? sorry for asking repeatedly'
-      expect_response 'Currency: EUR'
+      expect_response 'Currency: JPY'
+
+      send_message    'actually, I would like to set my currency back to EUR'
+      expect_response 'Currency set to EUR'
+
+      send_message    'I would also like to set my timezone back to UTC'
+      expect_response 'Timezone set to UTC +00:00'
     end
   end
 

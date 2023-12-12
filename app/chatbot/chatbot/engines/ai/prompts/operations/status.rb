@@ -14,6 +14,8 @@ module Chatbot
                 - How much money has been spent for the day
                 - How much money per day is left for the period
 
+                This is function is BUDGETING focused.
+
                 Currently the period defaults to the current month,
                 so there's no need to specify the date.
                 #{Shared::VERY_IMPORTANT_MESSAGE}

@@ -11,13 +11,7 @@ module Lansky
     end
 
     def parse_operation(input:)
-      client.parse_operation(input: normalize_input(input))
-    end
-
-    private
-
-    def normalize_input(input)
-      input.downcase.gsub(/\s+/, ' ').strip
+      client.parse_operation(input:)
     end
   end
 end

@@ -2,6 +2,8 @@ module Chatbot
   class Engine
     include Runnable
 
+    DEFAULT_MODE = :classic
+
     def run
       use_user_environment do
         engine.run(user: user, message: message).value!
@@ -13,7 +15,7 @@ module Chatbot
     private
 
     def engine
-      case mode
+      case mode.to_sym
       when :classic, nil then Engines::Classic::Engine
       when :ai then Engines::AI::Engine
       else
@@ -22,7 +24,7 @@ module Chatbot
     end
 
     def mode
-      @mode || ENV['CHATBOT_MODE'].to_sym
+      @mode || user.chatbot_mode || ENV['CHATBOT_MODE'] || DEFAULT_MODE
     end
 
     def use_user_environment(&block)

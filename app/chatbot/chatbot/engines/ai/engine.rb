@@ -5,7 +5,7 @@ module Chatbot
         include Runnable
 
         def run
-          route = router.run(message:).value!
+          route = router.run(message: message_with_metadata).value!
 
           processed_params = process_params(route)
 
@@ -25,6 +25,17 @@ module Chatbot
 
         def router
           Engines::AI::Router
+        end
+
+        def message_with_metadata
+          <<~MESSAGE
+            #{message}
+            <METADATA>
+              current_date: #{DateTime.current.to_date},
+              current_currency: #{Money.default_currency},
+              current_timezone: #{Time.zone.name}
+            </METADATA>
+          MESSAGE
         end
 
         attr_accessor :user, :message

@@ -9,8 +9,10 @@ module Chatbot
               description: <<~DESC.strip,
                 [Spending] Returns a breakdown of the user's spending in the given time period.
                 It will include:
-                - Total spent
+                - Total spent in period
                 - Break down of spending per category
+
+                This is function is SPENDING focused.
                 DESC
               parameters: {
                 type: :object,
