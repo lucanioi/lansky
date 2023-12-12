@@ -1,5 +1,5 @@
 VCR.configure do |c|
-  c.allow_http_connections_when_no_cassette = true
+  c.allow_http_connections_when_no_cassette = false
   c.cassette_library_dir = 'spec/vcr'
   c.hook_into :webmock
   # Rspec will generate cassete folders and files based on specs description.
