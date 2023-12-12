@@ -17,6 +17,7 @@ module Chatbot
                 properties: {
                   date: Shared::DATE,
                 },
+                required: ['date'],
               },
             }
           end

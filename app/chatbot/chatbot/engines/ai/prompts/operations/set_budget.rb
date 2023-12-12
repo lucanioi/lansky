@@ -11,16 +11,17 @@ module Chatbot
                 type: :object,
                 properties: {
                   date: Shared::DATE,
+                  amount_cents: {
+                    type: :integer,
+                    description: <<~DESC.strip,
+                    The amount to be set in cents.
+                      #{Shared::PARAM_NAME % :amount_cents}
+                      #{Shared::CENTS}
+                      #{Shared::VERY_IMPORTANT_MESSAGE}
+                    DESC
+                  },
                 },
-                amount_cents: {
-                  type: :integer,
-                  description: <<~DESC.strip,
-                  The amount to be set in cents.
-                    #{Shared::PARAM_NAME % :amount_cents}
-                    #{Shared::CENTS}
-                    #{Shared::VERY_IMPORTANT_MESSAGE}
-                  DESC
-                }
+                required: ['amount_cents', 'date'],
               },
             }
           end

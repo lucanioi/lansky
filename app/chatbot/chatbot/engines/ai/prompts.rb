@@ -9,6 +9,8 @@ module Chatbot
             Prompts::Operations::SetBudget::PROMPTS,
             Prompts::Operations::Spending::PROMPTS,
             Prompts::Operations::Status::PROMPTS,
+            Prompts::Operations::GetTimezone::PROMPTS,
+            Prompts::Operations::GetCurrency::PROMPTS,
           ]
         }
       end

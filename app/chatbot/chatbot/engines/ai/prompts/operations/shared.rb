@@ -84,8 +84,7 @@ module Chatbot
                   ].flatten,
                 },
               },
-              required: [],
-            }.freeze
+            }
           end
         end
       end

@@ -54,6 +54,12 @@ RSpec.describe 'AI Mode', type: :request do
 
                         Current daily limit is *€2,480*.
                       TEXT
+
+      send_message    'what is my timezone?'
+      expect_response 'Timezone: UTC +00:00'
+
+      send_message    'whats the currency again? sorry for asking repeatedly'
+      expect_response 'Currency: EUR'
     end
   end
 
