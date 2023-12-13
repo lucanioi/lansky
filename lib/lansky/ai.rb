@@ -2,6 +2,8 @@ require_relative 'open_ai_wrapper/client'
 
 module Lansky
   class AI
+    include Immutable
+
     attr_reader :client
 
     DEFAULT_CLIENT = OpenAIWrapper::Client

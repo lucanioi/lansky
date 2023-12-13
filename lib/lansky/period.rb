@@ -1,5 +1,7 @@
 module Lansky
   class Period
+    include Immutable
+
     class << self
       def from_params(**params)
         Chatbot::Parsers::Date::Parser.parse_from_params(**params)

@@ -1,6 +1,8 @@
 module Budgets
   module Stats
     class Base
+      include Immutable
+
       attr_reader :today_spent_amount,
                   :today_recovered_amount,
                   :period_spent_amount,

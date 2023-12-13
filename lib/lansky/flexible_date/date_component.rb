@@ -1,6 +1,8 @@
 module Lansky
   class FlexibleDate
     class DateComponent
+      include Immutable
+
       DEICTIC_OPTIONS = %w[this next prev].freeze
 
       def initialize(string,

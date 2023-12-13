@@ -1,5 +1,7 @@
 module Lansky
   class FlexibleDate
+    include Immutable
+
     attr_reader :day, :week, :month, :year
 
     def initialize(day: nil, week: nil, month: nil, year: nil)

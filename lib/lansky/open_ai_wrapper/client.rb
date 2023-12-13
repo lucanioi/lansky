@@ -1,6 +1,8 @@
 module Lansky
   module OpenAIWrapper
     class Client
+      include Immutable
+
       attr_reader :ai, :prompts
 
       def initialize(prompts:)
