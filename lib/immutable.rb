@@ -6,8 +6,8 @@ module Immutable
   end
 
   module InstanceMethods
-    def initialize(*args, &block)
-      super(*args, &block)
+    def initialize(*args, **kwargs, &block)
+      super(*args, **kwargs, &block)
 
       instance_variables.each do |var|
         instance_variable_set(var, instance_variable_get(var).freeze)
