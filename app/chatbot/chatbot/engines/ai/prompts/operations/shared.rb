@@ -7,7 +7,7 @@ module Chatbot
             VERY_IMPORTANT_MESSAGE = <<~DESC.strip.freeze
               It's crucial that you get this right,
               otherwise I might lose my job. Please be careful.
-              Thank you, I appreciate your work greatly 
+              Thank you, I appreciate your work greatly.
             DESC
 
             ONLY_ACCEPTED_VALUES = <<~DESC.strip.freeze
@@ -19,8 +19,8 @@ module Chatbot
             CENTS = <<~DESC.strip.freeze
               Example input: €10.00, 10, 10.0, $10, -10, etc.
               Always positive. 10 euros should be represented as 1000.
-              However, some currencies without fractional cents (like JPY)
-              should be transformed to 10 if given '10' as input.
+              You could assume that the user never puts cents values unless explicitly named (like 50 cents).
+              However, some currencies without fractional cents (like JPY) should be transformed to 10 if given '10' as input.
             DESC
 
             PARAM_NAME = 'The name of this parameter is "%s"'.freeze

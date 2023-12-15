@@ -23,8 +23,13 @@
 [x] make operations accept Period objects
 [x] create GPT layer
 
+<<<<<<< Updated upstream
 [ ] ChatGPT retries
 
+=======
+[ ] STORE CURRENCY WITH AMOUNTS!
+[ ] rethink category / ledger entry name (maybe use embeddings and cosine similarity for this)
+>>>>>>> Stashed changes
 [ ] FlexibleDate refactor
 [ ] delete budget
 [ ] allow nested budgets like budget for month, week, day separately but interconnected
